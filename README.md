@@ -10,6 +10,20 @@ set mysqlCredentials_1 "host=127.0.0.1; user=root; password=; dbName=ice_server;
 set mysqlCredentials_2 "host=127.0.0.1; user=root; password=; dbName=ice_server_2; port=3306"
 ```
 
+### BENCHMARK
+#### Internal benchmark
+```
+Low: 0.0783ms | Avg: 0.1029032ms | Total: 1029.073ms (10000 queries)
+```
+
+#### Round-trip-time for exports
+```
+Low: 0.1207ms | Avg: 0.1751822ms | Total: 1751.822ms (10000 queries)
+```
+**Ice_mysql** completes 10,000 queries in approximately 1751.822 ms, while **ox_mysql** takes around 2589.8800 ms to perform the same number of queries. This represents a **performance improvement of 32%**, meaning that **ice_mysql** is significantly faster compared to 'ox_mysql'."
+
+The performance data for **ox_mysql** has been obtained from its official documentation, while the performance of **ice_mysql** has been independently tested. It is important to note that the results for **ice_mysql** are based on our own measurements, and although we have taken every effort to ensure accuracy, we cannot guarantee these results. We have relied on the results obtained and the documentation of **ox_mysql** to make a comparison.
+
 ### EXPORT FUNCTION
 ```lua
 exports["ice_mysql"]:MakeQuery(db_id, query);
@@ -20,6 +34,7 @@ query = is the query that you want to execute in the db
 
 
 ### CODE EXAMPLES
+#### SYNC FUNCTIONS
 ##### SELECT
 ```lua
 Citizen.CreateThread(function()
@@ -42,4 +57,30 @@ Citizen.CreateThread(function()
 end)
 ```
 
-### Example Code
+
+#### ASYNC FUNCTIONS
+##### SELECT(Sync)
+```lua
+Citizen.CreateThread(function()
+    exports["ice_mysql"]:AsyncMakeQuery(1, "SELECT * FROM players WHERE ID=2", function(result)
+		print(json.encode(result))
+	end)
+end)
+
+-- or without db_id
+
+Citizen.CreateThread(function()
+	exports["ice_mysql"]:AsyncMakeQuery("SELECT * FROM players WHERE ID=2", function(result)
+		print(json.encode(result))
+	end)
+end)
+```
+
+##### UPDATE(Sync)
+```lua
+Citizen.CreateThread(function()
+	exports["ice_mysql"]:AsyncMakeQuery(1, "UPDATE players SET ID=4 WHERE ID=5", function(result)
+		print("Update data: "..json.encode(result))
+	end)
+end)
+```
