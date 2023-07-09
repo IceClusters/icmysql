@@ -26,13 +26,7 @@ The performance data for **ox_mysql** has been obtained from its official docume
 
 ### EXPORT FUNCTION
 ```lua
--- sync function
 exports["ice_mysql"]:MakeQuery(db_id, query);
-
--- async function
-exports["ice_mysql"]:MakeQuery(db_id, query, function(result)
-
-end);
 ```
 ##### PARAMS
 db_id = the identifier of the database, is the number that is in the server.cfg credentials. (optional) Default db_id is 1.

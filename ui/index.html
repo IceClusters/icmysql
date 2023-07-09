@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Mysql | Debug</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body class="dark">
+    <main id="main" style="display: none;">
+        <div id="mysidebar" class="sidebar">
+            <ul class="sidebar-navlink">
+                <li>
+                    <a href="#" tabSelector id="scripts" onclick="TabOpen('scripts')">
+                        <i class="fa-solid fa-scroll"></i>
+                        <span>Scripts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" tabSelector id="performance" onclick="TabOpen('performance')">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <span>Performance</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" tabSelector id="analytics" onclick="TabOpen('analytics')">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+            </ul>
+            <button onclick="toggleMneu()" id="toogleBtn" class="colleps-btn">
+                <i class="fa-solid fa-angles-up"></i>
+            </button>
+        </div>
+        <section>
+            <div onclick="toggleDark()" class="toggle-dark-theme">
+                <button>
+                    <div class="sun icon"></div>
+                </button>
+            </div>
+            <div class="content-page">
+                <div class="header-tab">
+                    <h1>Scripts</h1>
+                </div>
+                <div class="search-resource">
+                    <input id="search" type="search" placeholder="Search..." autofocus required />
+                </div>
+                <div class="divisor"></div>
+                <div class="search-results">
+                    <div class="result">
+                        <h2>Script: </h2>
+                        <h3>ice_gym</h3>
+
+                        <h2>Queries: </h2>
+                        <h3>251</h3>
+
+                        <h2>Average time: </h2>
+                        <h3>0.562ms</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="js/Theme.js"></script>
+    <script src="js/Tabs.js"></script>
+    <script src="js/DataReciver.js"></script>
+</body>
+
+</html>
