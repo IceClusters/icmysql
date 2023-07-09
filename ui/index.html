@@ -1,75 +1,235 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ice Mysql | Debug</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>ICE MYSQL | DEBUG UI</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 
-<body class="dark">
-    <main id="main" style="display: none;">
-        <div id="mysidebar" class="sidebar">
-            <ul class="sidebar-navlink">
-                <li>
-                    <a href="#" tabSelector id="scripts" onclick="TabOpen('scripts')">
-                        <i class="fa-solid fa-scroll"></i>
-                        <span>Scripts</span>
+<body id="kt_body"
+    class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed"
+    style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px;display: none;">
+    <style>
+        * {
+            font-size: 2vh;
+        }
+    </style>
+    <div class="d-flex flex-column flex-root">
+        <div class="page d-flex flex-row flex-column-fluid">
+            <div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true"
+                data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}"
+                data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}"
+                data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
+                <div class="aside-logo flex-column-auto" id="kt_aside_logo">
+                    <a href="demo1/dist/index.html"> <img alt="Logo" class="h-55px logo"
+                            src="https://media.discordapp.net/attachments/939266646571356161/1127705589133353020/Ice_Mysql_logo.png">
                     </a>
-                </li>
-                <li>
-                    <a href="#" tabSelector id="performance" onclick="TabOpen('performance')">
-                        <i class="fa-solid fa-gauge-high"></i>
-                        <span>Performance</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" tabSelector id="analytics" onclick="TabOpen('analytics')">
-                        <i class="fa-solid fa-chart-simple"></i>
-                        <span>Analytics</span>
-                    </a>
-                </li>
-            </ul>
-            <button onclick="toggleMneu()" id="toogleBtn" class="colleps-btn">
-                <i class="fa-solid fa-angles-up"></i>
-            </button>
-        </div>
-        <section>
-            <div onclick="toggleDark()" class="toggle-dark-theme">
-                <button>
-                    <div class="sun icon"></div>
-                </button>
+                    <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
+                        data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+                        data-kt-toggle-name="aside-minimize"> <span class="svg-icon svg-icon-1 rotate-180"> <svg
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <path opacity="0.5"
+                                    d="M14.2657 11.4343L18.45 7.25C18.8642 6.83579 18.8642 6.16421 18.45 5.75C18.0358 5.33579 17.3642 5.33579 16.95 5.75L11.4071 11.2929C11.0166 11.6834 11.0166 12.3166 11.4071 12.7071L16.95 18.25C17.3642 18.6642 18.0358 18.6642 18.45 18.25C18.8642 17.8358 18.8642 17.1642 18.45 16.75L14.2657 12.5657C13.9533 12.2533 13.9533 11.7467 14.2657 11.4343Z"
+                                    fill="black"></path>
+                                <path
+                                    d="M8.2657 11.4343L12.45 7.25C12.8642 6.83579 12.8642 6.16421 12.45 5.75C12.0358 5.33579 11.3642 5.33579 10.95 5.75L5.40712 11.2929C5.01659 11.6834 5.01659 12.3166 5.40712 12.7071L10.95 18.25C11.3642 18.6642 12.0358 18.6642 12.45 18.25C12.8642 17.8358 12.8642 17.1642 12.45 16.75L8.2657 12.5657C7.95328 12.2533 7.95328 11.7467 8.2657 11.4343Z"
+                                    fill="black"></path>
+                            </svg> </span> </div>
+                </div>
+                <div class="aside-menu flex-column-fluid">
+                    <div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true"
+                        data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto"
+                        data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer"
+                        data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0" style="height: 791px;">
+                        <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
+                            id="#kt_aside_menu" data-kt-menu="true">
+
+                            <div class="menu-item" id="resourcesBtn">
+                                <a id="resourcesActive" class="menu-link active" h> <span class="menu-icon"> <span
+                                            class="svg-icon svg-icon-2"> <svg width="24" height="24" viewBox="0 0 24 24"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path opacity="0.3"
+                                                    d="M18 22C19.7 22 21 20.7 21 19C21 18.5 20.9 18.1 20.7 17.7L15.3 6.30005C15.1 5.90005 15 5.5 15 5C15 3.3 16.3 2 18 2H6C4.3 2 3 3.3 3 5C3 5.5 3.1 5.90005 3.3 6.30005L8.7 17.7C8.9 18.1 9 18.5 9 19C9 20.7 7.7 22 6 22H18Z"
+                                                    fill="currentColor" />
+                                                <path d="M18 2C19.7 2 21 3.3 21 5H9C9 3.3 7.7 2 6 2H18Z"
+                                                    fill="currentColor" />
+                                                <path d="M9 19C9 20.7 7.7 22 6 22C4.3 22 3 20.7 3 19H9Z"
+                                                    fill="currentColor" />
+                                            </svg> </span> </span> <span class="menu-title">Resources</span> </a>
+                            </div>
+
+                            <div class="menu-item" id="databasesBtn">
+                                <a id="banUserListActive" class="menu-link"> <span class="menu-icon"> <span
+                                            class="svg-icon svg-icon-2"> <svg width="20" height="21" viewBox="0 0 20 21"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path opacity="0.3"
+                                                    d="M19 3.40002C18.4 3.40002 18 3.80002 18 4.40002V8.40002H14V4.40002C14 3.80002 13.6 3.40002 13 3.40002C12.4 3.40002 12 3.80002 12 4.40002V8.40002H8V4.40002C8 3.80002 7.6 3.40002 7 3.40002C6.4 3.40002 6 3.80002 6 4.40002V8.40002H2V4.40002C2 3.80002 1.6 3.40002 1 3.40002C0.4 3.40002 0 3.80002 0 4.40002V19.4C0 20 0.4 20.4 1 20.4H19C19.6 20.4 20 20 20 19.4V4.40002C20 3.80002 19.6 3.40002 19 3.40002ZM18 10.4V13.4H14V10.4H18ZM12 10.4V13.4H8V10.4H12ZM12 15.4V18.4H8V15.4H12ZM6 10.4V13.4H2V10.4H6ZM2 15.4H6V18.4H2V15.4ZM14 18.4V15.4H18V18.4H14Z"
+                                                    fill="currentColor" />
+                                                <path
+                                                    d="M19 0.400024H1C0.4 0.400024 0 0.800024 0 1.40002V4.40002C0 5.00002 0.4 5.40002 1 5.40002H19C19.6 5.40002 20 5.00002 20 4.40002V1.40002C20 0.800024 19.6 0.400024 19 0.400024Z"
+                                                    fill="currentColor" />
+                                            </svg> </span> </span> <span class="menu-title">Databases</span> </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a href="https://ice-store.gitbook.io/doc/information/welcome" class="menu-link"> <span
+                                        class="menu-icon"> <span class="svg-icon svg-icon-2"> <svg width="24"
+                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M11.2166 8.50002L10.5166 7.80007C10.1166 7.40007 10.1166 6.80005 10.5166 6.40005L13.4166 3.50002C15.5166 1.40002 18.9166 1.50005 20.8166 3.90005C22.5166 5.90005 22.2166 8.90007 20.3166 10.8001L17.5166 13.6C17.1166 14 16.5166 14 16.1166 13.6L15.4166 12.9C15.0166 12.5 15.0166 11.9 15.4166 11.5L18.3166 8.6C19.2166 7.7 19.1166 6.30002 18.0166 5.50002C17.2166 4.90002 16.0166 5.10007 15.3166 5.80007L12.4166 8.69997C12.2166 8.89997 11.6166 8.90002 11.2166 8.50002ZM11.2166 15.6L8.51659 18.3001C7.81659 19.0001 6.71658 19.2 5.81658 18.6C4.81658 17.9 4.71659 16.4 5.51659 15.5L8.31658 12.7C8.71658 12.3 8.71658 11.7001 8.31658 11.3001L7.6166 10.6C7.2166 10.2 6.6166 10.2 6.2166 10.6L3.6166 13.2C1.7166 15.1 1.4166 18.1 3.1166 20.1C5.0166 22.4 8.51659 22.5 10.5166 20.5L13.3166 17.7C13.7166 17.3 13.7166 16.7001 13.3166 16.3001L12.6166 15.6C12.3166 15.2 11.6166 15.2 11.2166 15.6Z"
+                                                    fill="currentColor" />
+                                                <path opacity="0.3"
+                                                    d="M5.0166 9L2.81659 8.40002C2.31659 8.30002 2.0166 7.79995 2.1166 7.19995L2.31659 5.90002C2.41659 5.20002 3.21659 4.89995 3.81659 5.19995L6.0166 6.40002C6.4166 6.60002 6.6166 7.09998 6.5166 7.59998L6.31659 8.30005C6.11659 8.80005 5.5166 9.1 5.0166 9ZM8.41659 5.69995H8.6166C9.1166 5.69995 9.5166 5.30005 9.5166 4.80005L9.6166 3.09998C9.6166 2.49998 9.2166 2 8.5166 2H7.81659C7.21659 2 6.71659 2.59995 6.91659 3.19995L7.31659 4.90002C7.41659 5.40002 7.91659 5.69995 8.41659 5.69995ZM14.6166 18.2L15.1166 21.3C15.2166 21.8 15.7166 22.2 16.2166 22L17.6166 21.6C18.1166 21.4 18.4166 20.8 18.1166 20.3L16.7166 17.5C16.5166 17.1 16.1166 16.9 15.7166 17L15.2166 17.1C14.8166 17.3 14.5166 17.7 14.6166 18.2ZM18.4166 16.3L19.8166 17.2C20.2166 17.5 20.8166 17.3 21.0166 16.8L21.3166 15.9C21.5166 15.4 21.1166 14.8 20.5166 14.8H18.8166C18.0166 14.8 17.7166 15.9 18.4166 16.3Z"
+                                                    fill="currentColor" />
+                                            </svg> </span> </span> <span class="menu-title">Docs</span> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="content-page">
-                <div class="header-tab">
-                    <h1>Scripts</h1>
-                </div>
-                <div class="search-resource">
-                    <input id="search" type="search" placeholder="Search..." autofocus required />
-                </div>
-                <div class="divisor"></div>
-                <div class="search-results">
-                    <div class="result">
-                        <h2>Script: </h2>
-                        <h3>ice_gym</h3>
+            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper"
+                style="padding-top: 0;margin-top: 8vh;">
+                <div style="position: relative;width: 100%;height: 100%;">
+                    <div id="resourcesTab" class="animate__animated"
+                        style="width: 100%;height: 100%;position: absolute;background-color: #f5f8fa;display: none;">
+                        <div class="post d-flex flex-column-fluid rounded border p-10" id="kt_block_ui_2_target">
+                            <div id="kt_content_container" class="container-xxl">
+                                <div class="d-flex align-items-center position-relative my-1">
+                                    <div class="input-group mb-5">
+                                        <span class="input-group-text" id="search-indicator">Resource Name:</span>
+                                        <input type="text" class="form-control" id="search-input"
+                                            placeholder="ice_gym, ice_hud...">
+                                        <button type="button" id="btnSearchUser" class="btn btn-primary"
+                                            onclick="InputSearchResource()">
+                                            <span class="indicator-label">
+                                                Search
+                                            </span>
+                                            <span class="indicator-progress">
+                                                Please wait... <span
+                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card mb-5 mb-xl-10">
+                                    <div class="table-responsive">
+                                        <table class="table table-rounded table-striped border gy-7 gs-7">
+                                            <thead>
+                                                <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                                    <th>Resource Name</th>
+                                                    <th>Date Last Query</th>
+                                                    <th>Average Execution Time</th>
+                                                    <th>DB ID</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="resourceTableContent">
 
-                        <h2>Queries: </h2>
-                        <h3>251</h3>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <h2>Average time: </h2>
-                        <h3>0.562ms</h3>
+                    <div id="databasesListTab" class="animate__animated"
+                        style="width: 100%;height: 100%;position: absolute;background-color: #f5f8fa;display: none;">
+                        <div class="post d-flex flex-column-fluid rounded border p-10" id="kt_block_ui_2_target">
+                            <div id="kt_content_container" class="container-xxl">
+
+                                <div class="row g-6 mb-6 g-xl-9 mb-xl-9" id="databasesContainer">
+
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-    <script src="js/Theme.js"></script>
-    <script src="js/Tabs.js"></script>
+        </div>
+    </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="queriesList">
+        <div class="modal-dialog" style="max-width: 1080px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="queriesTitle">Modal title</h3>
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <table class="table table-rounded table-striped border gy-7 gs-7">
+                        <thead>
+                            <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                <th>Query</th>
+                                <th>Date</th>
+                                <th>Execution Time</th>
+                                <th>Params</th>
+                            </tr>
+                        </thead>
+                        <tbody id="queriesBody">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="dbQueries">
+        <div class="modal-dialog" style="max-width: 1080px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="dbQueriesTitle">DB#1 Queries</h3>
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <table class="table table-rounded table-striped border gy-7 gs-7">
+                        <thead>
+                            <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                <th>Resource</th>
+                                <th>Query</th>
+                                <th>Date</th>
+                                <th>Execution Time</th>
+                                <th>Params</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dbQueriesBody">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/plugins/global/plugins.bundle.js"></script>
+    <script src="assets/js/scripts.bundle.js"></script>
+    <script src="js/TabManager.js"></script>
     <script src="js/DataReciver.js"></script>
 </body>
 

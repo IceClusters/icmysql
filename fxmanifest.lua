@@ -12,6 +12,11 @@ files {
     'ui/css/*.css',
     'ui/js/*.js',
     'ui/index.html',
+    'ui/assets/css/*.css',
+    'ui/assets/js/*.js',
+    'ui/assets/plugins/global/*.css',
+    'ui/assets/plugins/global/*.js',
+    'ui/assets/*.css',
 }
 
 ui_page 'ui/index.html'
