@@ -7,7 +7,7 @@ const { type } = require('os');
 let databaseCredentials = {};
 let databaseConnections = [];
 let queryLogs = [];
-let debugMode = GetConvar('mysqlDebugUI') == 1 ? true : false;
+let debugMode = GetConvar('mysqlDebugUI', "null") == 1 ? true : false;
 
 let databasesReady = false;
 
