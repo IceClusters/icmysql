@@ -11,7 +11,9 @@ let debugMode = GetConvar('mysqlDebugUI', "null") == 1 ? true : false;
 
 let databasesReady = false;
 
-ReadDatabaseCredentials()
+setTimeout(() => {
+    ReadDatabaseCredentials()
+})
 
 RegisterServerEvent('ice_mysql:getQueryLogs');
 AddEventHandler("ice_mysql:getQueryLogs", function () {
