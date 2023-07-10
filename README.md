@@ -1,4 +1,5 @@
 # ICE_MYSQL
+## [DISCORD](https://discord.gg/3DhEgXAX2U)
 
 ### CFG
 You can specify several databases to be able to query the desired database simply with the identifier.
