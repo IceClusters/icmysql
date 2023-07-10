@@ -7,6 +7,7 @@ const { type } = require('os');
 let databaseCredentials = {};
 let databaseConnections = [];
 let queryLogs = [];
+let debugMode = GetConvar('mysqlDebugUI') == 1 ? true : false;
 
 let databasesReady = false;
 
@@ -14,10 +15,16 @@ ReadDatabaseCredentials()
 
 RegisterServerEvent('ice_mysql:getQueryLogs');
 AddEventHandler("ice_mysql:getQueryLogs", function () {
-    TriggerClientEvent("ice_mysql:getDebugInfo", source, queryLogs);
+    const license = GetPlayerIdentifierByType(source, "license");
+    if (license == null) return;
+    Config.LicensesDebug.forEach(element => {
+        if (element == license) {
+            return TriggerClientEvent("ice_mysql:getDebugInfo", source, queryLogs, debugMode);
+        }
+    });
 });
 
-global.exports('MakeQuery', (db, query, params, isDebuging) => {
+global.exports('MakeQuery', (db, query, params) => {
     // To accept two or one parameter
     if (query == undefined) {
         query = db;
@@ -44,7 +51,7 @@ global.exports('MakeQuery', (db, query, params, isDebuging) => {
             await new Promise(resolve => setTimeout(resolve, 1));
         }
         try {
-            var data = await MakeQuery(db, query, params, isDebuging, resourceName);
+            var data = await MakeQuery(db, query, params, debugMode, resourceName);
             const endQuery = performance.now();
             // Warning message if the query has taken more than 500 ms
             if ((endQuery - startQuery) > 500) {
@@ -57,9 +64,10 @@ global.exports('MakeQuery', (db, query, params, isDebuging) => {
     });
 });
 
-global.exports('AsyncMakeQuery', (db, query, callback) => {
+global.exports('AsyncMakeQuery', (db, query, callback, params) => {
     // To accept two or three parameter
     if (typeof query == "function") {
+        params = callback;
         callback = query;
         query = db;
         db = 1;
@@ -90,7 +98,7 @@ global.exports('AsyncMakeQuery', (db, query, callback) => {
             await new Promise(resolve => setTimeout(resolve, 1));
         }
         try {
-            const data = await MakeQuery(db, query);
+            const data = await MakeQuery(db, query, params, debugMode, resourceName);
             const endQuery = performance.now();
             // Warning message if the query has taken more than 500 ms
             if ((endQuery - startQuery) > 500) {

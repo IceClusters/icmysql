@@ -18,7 +18,6 @@ function SetButtonsListenersTabs() {
 }
 
 function OpenTab(tabName, activeID) {
-  console.log(tabName, activeID)
   if (currentTab == tabName || changingTab) return;
   changingTab = true;
   $(`#${currentTab}`).addClass("animate__fadeOutLeft");

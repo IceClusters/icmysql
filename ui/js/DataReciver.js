@@ -1,13 +1,24 @@
 var obj = [];
+var isOpen = false;
+
+window.addEventListener("keydown", function (e) {
+    if (event.keyCode == 27) {
+        console.log("cerrar")
+        document.getElementById("kt_body").style.display = "none";
+        isOpen = false;
+        $.post("https://ice_mysql/close");
+    }
+});
 
 window.addEventListener("message", function (event) {
     switch (event.data.action) {
         case "open":
             document.getElementById("kt_body").style.display = "";
+            isOpen = true;
             break;
         case "updateData":
-            console.log(JSON.stringify(event.data.data))
             obj = event.data.data;
+            console.log(JSON.stringify(obj))
             var dbs = [];
             for (let i = 0; i < obj.length; i++) {
                 if (dbs[obj[i].dbID - 1] == undefined) {
@@ -17,7 +28,6 @@ window.addEventListener("message", function (event) {
                     dbs[obj[i].dbID - 1].response = obj[i].executionTime;
                 }
             }
-            console.log(JSON.stringify(dbs))
             $("#databasesContainer").html("")
             dbs.forEach(element => {
                 $("#databasesContainer").append(`

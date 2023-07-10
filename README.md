@@ -24,6 +24,12 @@ Low: 0.1207ms | Avg: 0.1751822ms | Total: 1751.822ms (10000 queries)
 
 The performance data for **ox_mysql** has been obtained from its official documentation, while the performance of **ice_mysql** has been independently tested. It is important to note that the results for **ice_mysql** are based on our own measurements, and although we have taken every effort to ensure accuracy, we cannot guarantee these results. We have relied on the results obtained and the documentation of **ox_mysql** to make a comparison.
 
+### DEBUG MODE
+Ice_mysql has an integrated system to be able to debug all the queries made by a script, and all the queries received by a database, all this information is grouped in a panel that includes 2 pages, the first is to search for a script and be able to see all the queries made and more information, the second page is to see a list of all the databases used by the scripts, information, and all the queries made to that database. To activate this system you simply have to write ```set mysqlDebugUI 1``` in the server.cfg, once the debug mode is activated you can write the command /mysql which will open the panel.
+![](https://media.discordapp.net/attachments/939266646571356161/1127656692386107482/image.png?width=1363&height=499)
+![](https://media.discordapp.net/attachments/939266646571356161/1127928821199425546/image.png?width=1078&height=396)
+![](https://media.discordapp.net/attachments/939266646571356161/1127929537074823299/image.png?width=417&height=317)
+
 ### EXPORT FUNCTION
 ```lua
 exports["ice_mysql"]:MakeQuery(db_id, query);
