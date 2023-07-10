@@ -1,12 +1,15 @@
 var obj = [];
 var isOpen = false;
 
+function exitWeb() {
+    document.getElementById("kt_body").style.display = "none";
+    isOpen = false;
+    $.post("https://ice_mysql/close");
+}
+
 window.addEventListener("keydown", function (e) {
     if (event.keyCode == 27) {
-        console.log("cerrar")
-        document.getElementById("kt_body").style.display = "none";
-        isOpen = false;
-        $.post("https://ice_mysql/close");
+        exitWeb()
     }
 });
 
@@ -18,7 +21,6 @@ window.addEventListener("message", function (event) {
             break;
         case "updateData":
             obj = event.data.data;
-            console.log(JSON.stringify(obj))
             var dbs = [];
             for (let i = 0; i < obj.length; i++) {
                 if (dbs[obj[i].dbID - 1] == undefined) {
@@ -137,7 +139,7 @@ function InputSearchResource() {
                 <span class="text-gray-600 fw-bold fs-6">${element.date}</span>
             </td>
             <td>
-                <span class="text-gray-600 fw-bold fs-6">${element.executionTime.toFixed(5)} ms</span>
+                <span class="text-gray-600 fw-bold fs-6">${Number.parseFloat(element.executionTime).toFixed(5)} ms</span>
             </td>
             <td>
                 <span class="text-gray-600 fw-bold fs-6">DB#${element.dbID}</span>
