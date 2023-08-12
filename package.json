@@ -1,12 +1,31 @@
 {
   "name": "ice_mysql",
   "version": "1.0.0",
-  "description": "Script that manage all connections and querys to the database.",
+  "description": "",
   "main": "src/index.js",
-  "author": "DanielGP",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql2": "^2.2.0",
-    "perf_hooks": "^0.0.1"
+    "@types/node": "^20.4.5",
+    "axios": "^1.4.0",
+    "child_process": "^1.0.2",
+    "crypto": "^1.0.1",
+    "extract-zip": "^2.0.1",
+    "fs": "^0.0.1-security",
+    "mysql2": "^2.3.3",
+    "path-browserify": "^1.0.1",
+    "perf_hooks": "^0.0.1",
+    "pg-hstore": "^2.3.4",
+    "readline": "^1.3.0",
+    "sequelize": "^6.32.1",
+    "sequelize-auto": "^0.8.8"
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.19",
+    "sequelize-cli": "^6.6.1"
   }
 }

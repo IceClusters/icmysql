@@ -1,0 +1,16 @@
+node_modules
+# Keep environment variables out of version control
+**/.env
+**/.cache
+**/.vscode
+**/.vs
+*.dll
+*.pdb
+*.json
+*.props
+*.cache
+**/dist
+**/obj
+**/bin
+*.exe
+**/models/**/*.js
