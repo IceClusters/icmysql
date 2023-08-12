@@ -2,6 +2,111 @@
 # yarn lockfile v1
 
 
+"@esbuild/android-arm64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.18.19.tgz#8735b552b8e0b9a943460d37fbc976b9d9cd4b4e"
+  integrity sha512-4+jkUFQxZkQfQOOxfGVZB38YUWHMJX2ihZwF+2nh8m7bHdWXpixiurgGRN3c/KMSwlltbYI0/i929jwBRMFzbA==
+
+"@esbuild/android-arm@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/android-arm/-/android-arm-0.18.19.tgz#efd1f33583a893c0cc57f25b1d081af8cdc6bfd9"
+  integrity sha512-1uOoDurJYh5MNqPqpj3l/TQCI1V25BXgChEldCB7D6iryBYqYKrbZIhYO5AI9fulf66sM8UJpc3UcCly2Tv28w==
+
+"@esbuild/android-x64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/android-x64/-/android-x64-0.18.19.tgz#d9f35722701a97a2ef69c7a84f1ee2aef2a306a7"
+  integrity sha512-ae5sHYiP/Ogj2YNrLZbWkBmyHIDOhPgpkGvFnke7XFGQldBDWvc/AyYwSLpNuKw9UNkgnLlB/jPpnBmlF3G9Bg==
+
+"@esbuild/darwin-arm64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/darwin-arm64/-/darwin-arm64-0.18.19.tgz#8cb81b971ee5231acc7de07225f6e18562c359e4"
+  integrity sha512-HIpQvNQWFYROmWDANMRL+jZvvTQGOiTuwWBIuAsMaQrnStedM+nEKJBzKQ6bfT9RFKH2wZ+ej+DY7+9xHBTFPg==
+
+"@esbuild/darwin-x64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/darwin-x64/-/darwin-x64-0.18.19.tgz#81024ab64232dd323f03796d449f018b59f04ca9"
+  integrity sha512-m6JdvXJQt0thNLIcWOeG079h2ivhYH4B5sVCgqb/B29zTcFd7EE8/J1nIUHhdtwGeItdUeqKaqqb4towwxvglQ==
+
+"@esbuild/freebsd-arm64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/freebsd-arm64/-/freebsd-arm64-0.18.19.tgz#9fa91e3b08d10c0adfa71b37372a7627b26e9686"
+  integrity sha512-G0p4EFMPZhGn/xVNspUyMQbORH3nlKTV0bFNHPIwLraBuAkTeMyxNviTe0ZXUbIXQrR1lrwniFjNFU4s+x7veQ==
+
+"@esbuild/freebsd-x64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/freebsd-x64/-/freebsd-x64-0.18.19.tgz#ef6f5a85c1bb029fb0076da5b223e50b353e615c"
+  integrity sha512-hBxgRlG42+W+j/1/cvlnSa+3+OBKeDCyO7OG2ICya1YJaSCYfSpuG30KfOnQHI7Ytgu4bRqCgrYXxQEzy0zM5Q==
+
+"@esbuild/linux-arm64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-arm64/-/linux-arm64-0.18.19.tgz#0cef913dcdc1efb1bb04406a8e5f5668b721d89e"
+  integrity sha512-X8g33tczY0GsJq3lhyBrjnFtaKjWVpp1gMq5IlF9BQJ3TUfSK74nQnz9mRIEejmcV+OIYn6bkOJeUaU1Knrljg==
+
+"@esbuild/linux-arm@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-arm/-/linux-arm-0.18.19.tgz#39ea874c8e5177b83903bec1883a43f3c163627a"
+  integrity sha512-qtWyoQskfJlb9MD45mvzCEKeO4uCnDZ7lPFeNqbfaaJHqBiH9qA5Vu2EuckqYZuFMJWy1l4dxTf9NOulCVfUjg==
+
+"@esbuild/linux-ia32@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-ia32/-/linux-ia32-0.18.19.tgz#283cd3c3d8380e8fab90583fa86ca1fcc9b9ec57"
+  integrity sha512-SAkRWJgb+KN+gOhmbiE6/wu23D6HRcGQi15cB13IVtBZZgXxygTV5GJlUAKLQ5Gcx0gtlmt+XIxEmSqA6sZTOw==
+
+"@esbuild/linux-loong64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.18.19.tgz#1c69d7928a55b26326398d31d2ac9c82d2297f1b"
+  integrity sha512-YLAslaO8NsB9UOxBchos82AOMRDbIAWChwDKfjlGrHSzS3v1kxce7dGlSTsrb0PJwo1KYccypN3VNjQVLtz7LA==
+
+"@esbuild/linux-mips64el@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-mips64el/-/linux-mips64el-0.18.19.tgz#b25b352e7645885fa1d01182116c506a78fe4733"
+  integrity sha512-vSYFtlYds/oTI8aflEP65xo3MXChMwBOG1eWPGGKs/ev9zkTeXVvciU+nifq8J1JYMz+eQ4J9JDN0O2RKF8+1Q==
+
+"@esbuild/linux-ppc64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-ppc64/-/linux-ppc64-0.18.19.tgz#568b5a051f47af732c4314e697bb559a14b3d811"
+  integrity sha512-tgG41lRVwlzqO9tv9l7aXYVw35BxKXLtPam1qALScwSqPivI8hjkZLNH0deaaSCYCFT9cBIdB+hUjWFlFFLL9A==
+
+"@esbuild/linux-riscv64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-riscv64/-/linux-riscv64-0.18.19.tgz#020729b47ca63321667297d1610bab81cd08a65c"
+  integrity sha512-EgBZFLoN1S5RuB4cCJI31pBPsjE1nZ+3+fHRjguq9Ibrzo29bOLSBcH1KZJvRNh5qtd+fcYIGiIUia8Jw5r1lQ==
+
+"@esbuild/linux-s390x@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-s390x/-/linux-s390x-0.18.19.tgz#ed5cca8dac130d2f736914f9efad5fa15c238c20"
+  integrity sha512-q1V1rtHRojAzjSigZEqrcLkpfh5K09ShCoIsdTakozVBnM5rgV58PLFticqDp5UJ9uE0HScov9QNbbl8HBo6QQ==
+
+"@esbuild/linux-x64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-x64/-/linux-x64-0.18.19.tgz#f8023a38ae02b46c60a134ccbc7ae377b3bec66f"
+  integrity sha512-D0IiYjpZRXxGZLQfsydeAD7ZWqdGyFLBj5f2UshJpy09WPs3qizDCsEr8zyzcym6Woj/UI9ZzMIXwvoXVtyt0A==
+
+"@esbuild/netbsd-x64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/netbsd-x64/-/netbsd-x64-0.18.19.tgz#8fd667c535db0a5b346afa2d74ff1fb53477427f"
+  integrity sha512-3tt3SOS8L3D54R8oER41UdDshlBIAjYhdWRPiZCTZ1E41+shIZBpTjaW5UaN/jD1ENE/Ok5lkeqhoNMbxstyxw==
+
+"@esbuild/openbsd-x64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/openbsd-x64/-/openbsd-x64-0.18.19.tgz#354d5b54a6bffa381cb513e878880192e07004be"
+  integrity sha512-MxbhcuAYQPlfln1EMc4T26OUoeg/YQc6wNoEV8xvktDKZhLtBxjkoeESSo9BbPaGKhAPzusXYj5n8n5A8iZSrA==
+
+"@esbuild/sunos-x64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/sunos-x64/-/sunos-x64-0.18.19.tgz#e2de98bd961e04f76f6acf5970263efc7051def5"
+  integrity sha512-m0/UOq1wj25JpWqOJxoWBRM9VWc3c32xiNzd+ERlYstUZ6uwx5SZsQUtkiFHaYmcaoj+f6+Tfcl7atuAz3idwQ==
+
+"@esbuild/win32-arm64@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/win32-arm64/-/win32-arm64-0.18.19.tgz#9dca55f0dcbbdb50bf36353d1114f5f71c269275"
+  integrity sha512-L4vb6pcoB1cEcXUHU6EPnUhUc4+/tcz4OqlXTWPcSQWxegfmcOprhmIleKKwmMNQVc4wrx/+jB7tGkjjDmiupg==
+
+"@esbuild/win32-ia32@0.18.19":
+  version "0.18.19"
+  resolved "https://registry.yarnpkg.com/@esbuild/win32-ia32/-/win32-ia32-0.18.19.tgz#db6ea4467e87e6d3fc2177dea35e81f26f7a061d"
+  integrity sha512-rQng7LXSKdrDlNDb7/v0fujob6X0GAazoK/IPd9C3oShr642ri8uIBkgM37/l8B3Rd5sBQcqUXoDdEy75XC/jg==
+
 "@esbuild/win32-x64@0.18.19":
   version "0.18.19"
   resolved "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.18.19.tgz"
@@ -161,7 +266,7 @@ crypto@^1.0.1:
   resolved "https://registry.npmjs.org/crypto/-/crypto-1.0.1.tgz"
   integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
 
-d@^1.0.1, d@1:
+d@1, d@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/d/-/d-1.0.1.tgz"
   integrity sha512-m62ShEObQ39CfralilEQRjH6oAMtNCV1xJyEx5LpRYUVN+EviphDgUc/F3hnYbADmkiNs67Y+3ylmlG7Lnu+FA==
@@ -522,17 +627,17 @@ mime-types@^2.1.12:
   dependencies:
     mime-db "1.52.0"
 
-minimatch@^5.0.1:
-  version "5.1.6"
-  resolved "https://registry.npmjs.org/minimatch/-/minimatch-5.1.6.tgz"
-  integrity sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==
-  dependencies:
-    brace-expansion "^2.0.1"
-
 minimatch@9.0.1:
   version "9.0.1"
   resolved "https://registry.npmjs.org/minimatch/-/minimatch-9.0.1.tgz"
   integrity sha512-0jWhJpD/MdhPXwPuiRkCbfYfSKp2qnn2eOc279qI7f+osl/l+prKSrvhg157zSYvx/1nmgn2NqdT6k2Z7zSH9w==
+  dependencies:
+    brace-expansion "^2.0.1"
+
+minimatch@^5.0.1:
+  version "5.1.6"
+  resolved "https://registry.npmjs.org/minimatch/-/minimatch-5.1.6.tgz"
+  integrity sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==
   dependencies:
     brace-expansion "^2.0.1"
 
@@ -579,7 +684,7 @@ named-placeholders@^1.1.2:
   dependencies:
     lru-cache "^7.14.1"
 
-next-tick@^1.1.0, next-tick@1:
+next-tick@1, next-tick@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/next-tick/-/next-tick-1.1.0.tgz"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
@@ -722,7 +827,7 @@ sequelize-pool@^7.1.0:
   resolved "https://registry.npmjs.org/sequelize-pool/-/sequelize-pool-7.1.0.tgz"
   integrity sha512-G9c0qlIWQSK29pR/5U2JF5dDQeqqHRragoyahj/Nx4KOOQ3CPPfzxnfqFPCSB7x5UgjOgnZ61nSxz+fjDpRlJg==
 
-sequelize@^6.32.1, sequelize@>3.30.0:
+sequelize@^6.32.1:
   version "6.32.1"
   resolved "https://registry.npmjs.org/sequelize/-/sequelize-6.32.1.tgz"
   integrity sha512-3Iv0jruv57Y0YvcxQW7BE56O7DC1BojcfIrqh6my+IQwde+9u/YnuYHzK+8kmZLhLvaziRT1eWu38nh9yVwn/g==

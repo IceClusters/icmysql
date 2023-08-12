@@ -13,4 +13,4 @@ node_modules
 **/obj
 **/bin
 *.exe
-**/models/**/*.js
+**/models/*/
