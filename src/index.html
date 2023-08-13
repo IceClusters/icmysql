@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ice mysql</title>
+    <link rel="stylesheet" href="./debug/styles/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script
+            src="https://kit.fontawesome.com/1c4b4851e0.js"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="container">
+        <div class="menu">
+            <video src="./debug/assets/bg.mp4" autoplay muted loop></video>            
+            <main class="main">
+                <section class="section__buttons">
+                    <div class="grid">
+                        <div class="resources__section button__style">
+                            <i class="fa-solid fa-scroll"></i> 
+                            <p>Resources</p>
+                        </div>
+
+                        <div class="dbs__section button__style">
+                            <i class="fa-solid fa-database"></i> 
+                            <p>DBS</p>
+                        </div>
+
+                        <div class="logs__section button__style">
+                            <i class="fa-solid fa-list"></i> 
+                            <p>Logs</p>
+                        </div>
+                        
+                        <div class="cache__section button__style">
+                            <i class="fa-solid fa-clock-rotate-left"></i> 
+                            <p>Cache</p>
+                        </div>
+
+                        <div class="backups__section button__style">
+                            <i class="fa-solid fa-memory"></i> 
+                            <p>backups</p>
+                        </div>
+
+                    </div>
+                </section>
+            </main>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.expandable-button');
+    buttons.forEach(btn => {
+        
+        btn.addEventListener('click', function() {
+            console.log(btn)
+            btn.classList.add('expanded');
+            // Si quieres que solo un botón se expanda a la vez, remueve la clase expanded de los demás botones
+            buttons.forEach(otherBtn => {
+                if (otherBtn !== btn) {
+                    otherBtn.classList.remove('expanded');
+                }
+            });
+        });
+    });
+});
+    </script>
+</body>
+</html>
+
+
+<!-- <button class="button__style home"><i class="fas fa-home"></i> Home</button>
+<button class="button__style resources"><i class="fa-solid fa-scroll"></i> Resources</button>
+<button class="button__style dbs"><i class="fa-solid fa-database"></i> Dbs</button>
+<button class="button__style logs"><i class="fa-solid fa-list"></i> Logs</button>
+<button class="button__style backups"><i class="fa-solid fa-clock-rotate-left"></i> Backups</button>
+<button class="button__style cache"><i class="fas fa-memory"></i> Cache</button> -->
