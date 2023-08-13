@@ -1,71 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ice mysql</title>
     <link rel="stylesheet" href="./debug/styles/app.css">
+    <link rel="stylesheet" href="./debug/styles/input.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script
-            src="https://kit.fontawesome.com/1c4b4851e0.js"
-            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1c4b4851e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 </head>
+
 <body>
     <section class="container">
         <div class="menu">
-            <video src="./debug/assets/bg.mp4" autoplay muted loop></video>            
+            <video src="./debug/assets/bg.mp4" autoplay muted loop></video>
             <main class="main">
                 <section class="section__buttons">
                     <div class="grid">
                         <div class="resources__section button__style">
-                            <i class="fa-solid fa-scroll"></i> 
+                            <i class="fa-solid fa-scroll"></i>
                             <p>Resources</p>
                         </div>
 
                         <div class="dbs__section button__style">
-                            <i class="fa-solid fa-database"></i> 
+                            <i class="fa-solid fa-database"></i>
                             <p>DBS</p>
                         </div>
 
                         <div class="logs__section button__style">
-                            <i class="fa-solid fa-list"></i> 
+                            <i class="fa-solid fa-list"></i>
                             <p>Logs</p>
                         </div>
-                        
+
                         <div class="cache__section button__style">
-                            <i class="fa-solid fa-clock-rotate-left"></i> 
+                            <i class="fa-solid fa-clock-rotate-left"></i>
                             <p>Cache</p>
                         </div>
 
                         <div class="backups__section button__style">
-                            <i class="fa-solid fa-memory"></i> 
+                            <i class="fa-solid fa-memory"></i>
                             <p>backups</p>
                         </div>
+
+                    </div>
+                </section>
+
+                <section class="section__resources">
+                    <div class="rs--grid">
+                        <div class="container__title">
+                            <h1>Resources</h1>
+                            <div class="inputBox_container">
+                                <lord-icon class="search_icon" src="https://cdn.lordicon.com/rlizirgt.json"
+                                    trigger="hover" colors="primary:#494a4d">
+                                </lord-icon>
+                                <input class="inputBox" id="inputBox" type="text" placeholder="Search resources...">
+                            </div>
+                        </div>
+                        <div class="container__content">
+                            <div class="scroll">
+                                <div class="box">
+                                    <div class="grid--box">
+                                        <div class="adjust">
+                                            <div class="flex">
+                                                <p style="margin: 0;">ice_vehicleshop</p>
+                                                <p class="desc">Script that manage all connections and querys to the
+                                                    database. </p>
+                                            </div>
+                                        </div>
+                                        <div class="right--icon">
+                                            <lord-icon class="icon--box" src="https://cdn.lordicon.com/svpxtchp.json"
+                                                trigger="hover" colors="primary:#858585">
+                                            </lord-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <div class="grid--box">
+                                        <div class="adjust">
+                                            <div class="flex">
+                                                <p style="margin: 0;">ice_callback</p>
+                                                <p class="desc">Script that manage all connections and querys to the
+                                                    database. </p>
+                                            </div>
+                                        </div>
+                                        <div class="right--icon">
+                                            <lord-icon class="icon--box" src="https://cdn.lordicon.com/svpxtchp.json"
+                                                trigger="hover" colors="primary:#858585">
+                                            </lord-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <div class="grid--box">
+                                        <div class="adjust">
+                                            <div class="flex">
+                                                <p style="margin: 0;">ice_trophies</p>
+                                                <p class="desc">Script that manage all connections and querys to the
+                                                    database. </p>
+                                            </div>
+                                        </div>
+                                        <div class="right--icon">
+                                            <lord-icon class="icon--box" src="https://cdn.lordicon.com/svpxtchp.json"
+                                                trigger="hover" colors="primary:#858585">
+                                            </lord-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rs--grid stats">
 
                     </div>
                 </section>
             </main>
         </div>
     </section>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.expandable-button');
-    buttons.forEach(btn => {
-        
-        btn.addEventListener('click', function() {
-            console.log(btn)
-            btn.classList.add('expanded');
-            // Si quieres que solo un botón se expanda a la vez, remueve la clase expanded de los demás botones
-            buttons.forEach(otherBtn => {
-                if (otherBtn !== btn) {
-                    otherBtn.classList.remove('expanded');
-                }
-            });
-        });
-    });
-});
-    </script>
 </body>
+
 </html>
 
 

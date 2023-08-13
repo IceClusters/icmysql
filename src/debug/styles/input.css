@@ -1,0 +1,44 @@
+.inputBox_container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    max-width: 14em;
+    width: fit-content;
+    height: fit-content;
+    margin-right: 1vh;
+    padding: 0.5vh;
+    background-color: rgb(24, 24, 24);
+    border-top: 2px solid #ffffff05;
+    border-radius: 5px;
+    transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    overflow: hidden;
+  }
+
+  .inputBox_container:hover {
+    background-color: rgb(28, 28, 28);
+  }
+
+  .inputBox_container:focus-within {
+    background-color: rgb(28, 28, 28);
+  }
+  
+  .search_icon {
+    height: 1.6em;
+    padding: 0 0.5em 0 0.0em;
+    fill: #494a4d;
+  }
+  
+  .inputBox {
+    background-color: transparent;
+    color: #adadad;
+    outline: none;
+    width: 100%;
+    border: 0;
+    line-height: 10px;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    font-size: 0.88rem;
+  }
+  
+  ::placeholder {
+    color: #808080;
+  }
