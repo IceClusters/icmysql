@@ -1,0 +1,6 @@
+# Error Handling
+### Description
+We've put a lot of effort into making sure that the API is as robust as possible. We've tried to make sure that the API is as informative as possible when it comes to errors. If you get an error, you should be able to figure out what went wrong and how to fix it. If you get an error that you don't understand, please let us know and we'll try to fix it.
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/*```

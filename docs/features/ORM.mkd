@@ -1,0 +1,45 @@
+# ORM(Object Relational Mapping)
+### Description
+ORM, or Object-Relational Mapping, is a technique that helps software developers work smoothly with databases. It acts as a translator between the object-oriented code we write and the tables in a relational database. Instead of dealing with complex database queries, we define our data as programming objects, and ORM takes care of converting them into database operations. This simplifies coding, improves readability, and makes database interaction more intuitive. It's like having a helper that understands both programming and databases, making our work easier and more efficient.
+
+### How it works
+The ORM system that we have is bassed in [sequelize](https://www.npmjs.com/package/sequelize) package from nodejs, this package is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
+When the script first load find all connections in the server.cfg when the script test that the connection is establish it will dump all the database structure in ```src/db/orm/models``` folder, for example if you have a database with id 3, the folder will be created in ```src/db/orm/models/3```, in that folder you don't have to touch anything, but make sure that when the database structure change the models need to be updated, you can do it by removing the folder and restarting the script, the script will create the folder again with the new structure.
+Once the script have writed correctly the sctructure in that folder you can use all the functions that we provide to make the queries, the script will take care of the rest.
+Here we're going to give to you an example of how it works.
+![](../assets/ORM.drawio.png)
+
+
+### Use
+To use this system make sure that you have enabled in config.js at ```Config.ORM``` once you have enabled this the script at the first start it will print some messages noticing you how many databases have been found and how many models have been created, once the script have created the models you can use the functions that we provide to make the queries, here we're going to give to you all the list of functions.
+- ```MySQL.ORM.FindAll(databaseID, table, options, callback)```
+- ```MySQL.ORM.FindOne(databaseID, table, options, callback)```
+- ```MySQL.ORM.FindById(databaseID, table, id, callback)```
+- ```MySQL.ORM.FindAndCountAll(databaseID, table, options, callback)```
+- ```MySQL.ORM.Create(databaseID, table, options, callback)```
+- ```MySQL.ORM.Modify(databaseID, table, values, options, callback)```
+- ```MySQL.ORM.Destroy(databaseID, table, options, callback)```
+- ```MySQL.ORM.Count(databaseID, table, options, callback)```
+- ```MySQL.ORM.Max(databaseID, table, field, options, callback)```
+- ```MySQL.ORM.Min(databaseID, table, field, options, callback)```
+- ```MySQL.ORM.Sum(databaseID, table, field, options, callback)```
+- ```MySQL.ORM.Increment(databaseID, field, table, options, callback)```
+- ```MySQL.ORM.Decrement(databaseID, field, table, options, callback)```
+- ```MySQL.ORM.BulkCreate(databaseID, table, values, options, callback)```
+In all the functions we provide callbacks if you want to use the function as synchronous you just need to remove the callback and the function will return the result, for example:
+```js
+const result = MySQL.ORM.FindAll(1, "users", {
+    where: {
+        name: "Daniel"
+    }
+});
+```
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/Query.js```
+- ```src/db/orm/index.js```
+- ```src/db/orm/models/index.js```
+
+### Warn
+I am **not a professional developer** so some explanations may not be 100% correct but I have made an effort to document myself and make these schematics so that you can understand how ORM system of sequelize work. If you have any suggestion to improve the explanation, or anything, it will be well received.

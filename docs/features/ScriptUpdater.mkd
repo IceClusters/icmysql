@@ -1,0 +1,13 @@
+# Auto Update
+### Description
+The ice mysql have a system to auto update if there is a new available version it will download the script and replace the necessary files, the config.js will be kipped and not will be replaced.
+
+### Use
+If you want to use the system you only have to enable these options in the config.js file: ```Config.CheckForUpdates``` and ```Config.AutoUpdate```.
+
+### Warn
+Make sure that the FXServer process has permission to create directories and rename directories by default you will not have any problem with this.
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/utils/Updater.js```

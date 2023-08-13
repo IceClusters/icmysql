@@ -1,0 +1,37 @@
+# Named and placeholder parameters
+### Description
+This make possible to use named and placeholder parameters in the queries.
+This approach offers several benefits, such as preventing SQL injection attacks and improving code readability.
+
+### Use
+
+##### Examples
+**Example 1**: Using "@" as a prefix for named placeholders:
+In this example, "@" is used as a prefix for named placeholders. The query retrieves the name of a player with ID 3.
+```lua
+MySQL.Select("SELECT name FROM players WHERE id = @id", {
+    ["@id"] = 3
+})
+```
+**Example 2**: Using ":" as a prefix for named placeholders:
+
+Here, ":" is used as a prefix for named placeholders. The query also retrieves the name of a player with ID 3.
+```lua
+MySQL.Select("SELECT name FROM players WHERE id = :id", {
+    ["id"] = 3
+})
+```
+**Example 3**: Using "?" as anonymous placeholders:
+
+In this example, anonymous placeholders "?" are used instead of named placeholders. The values are then provided in the same order as they appear in the query. The query retrieves the name of a player with ID 3 and the name "Daniel".
+```lua
+MySQL.Select("SELECT name FROM players WHERE id = ? AND name = ?", {
+    3,
+    "Daniel"
+})
+```
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/Queries.js```
+- ```src/db/Params.js```

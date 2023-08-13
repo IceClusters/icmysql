@@ -1,0 +1,62 @@
+# Lua, JS, C# library support
+### Description
+We made compatible the ice mysql script compatible with Lua, JS and C# libraries, so you can use the same script in any of these languages.
+Obviously, you can call the script exports from any language, but this feature is to make it easier to use and read. 
+
+### Use
+#### Lua
+fxmanifest.lua
+```lua
+server_script '@ice_mysql/library/MySQL.lua'
+```
+server.lua
+```lua
+MySQL.Select()...
+```
+#### JS
+fxmanifest.lua
+```lua
+server_script '@ice_mysql/library/MySQL.js'
+```
+server.js
+```js
+MySQL.Select()...
+```
+#### C#
+In the server project you have to add a dependency to the MySQL.net.dll file, path: ```ice_mysql/library/MySQL.net.dll```
+```cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CitizenFX.Core;
+using MySQL.Server;
+using Newtonsoft.Json;
+
+namespace test_csharp.Server
+{
+    public class ServerMain : BaseScript
+    {
+        public MySQL.Server.MySQL mySqlInstance;
+        public ServerMain()
+        {
+            mySqlInstance = new MySQL.Server.MySQL();
+        }
+
+        public async Task PruebaSelect()
+        {
+            var result = await mySqlInstance.AwaitSelect(1, "SELECT name FROM players WHERE id=@id", new Dictionary<string, object> { { "@id", 3 } }, true);
+            string json = JsonConvert.SerializeObject(result);
+
+            Debug.WriteLine(json);
+        }
+    }
+}
+```
+
+### How it works
+We've just maded a dependency for each language, in the case of C# we've made a small lib that make the same as the other language, call the exports of the script and return the result.
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/errors/Parser.js```
+- ```src/errors/List.js```

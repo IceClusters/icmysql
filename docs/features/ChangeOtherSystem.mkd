@@ -1,0 +1,17 @@
+# Change to our functions
+### Description
+We have made a small program to replace other systems functions to our functions, this is to make easier to a developer to change from other system to our system.
+
+### Warn
+Make sure to **make a backup** of the resources folder before use this program, we are not responsible for any damage that this program can do to your files. Obviously the program isn't going to delete your server but probably some functions don't work because the program probably don't replace functions correctly.
+
+### Use
+To use you have to open a command prompt in this path: ```ice_mysql/library``` when you're in that dir, you can type ```library-changer.exe <resources-path>``` and it will change all the functions to our functions.
+Example:```library-changer.exe "C:\Users\DanielGP\Desktop\FivemServer\resources"```.
+
+### How it works
+The program iterates all the files in the path that you have given, and it will be finding all funtions from other system and replace with our functions.
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```library/library-changer/*```

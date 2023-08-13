@@ -1,0 +1,37 @@
+# Ice MySQL
+An sophisticated encapsulation of the mysql2 and sequelize libraries, ingeniously designed to empower CFX scripts with seamless capabilities for accessing and manipulating data within relational databases.
+### Why?
+We created this database connection system because, even though there are good solutions out there, we wanted to bring something new to the table for the FiveM community. We've added some cool features that are missing in other systems, and we hope you find it useful!
+### Features
+- [Multiple DB Connections](docs/features/MultipleDB.mkd)
+- [Cache system for frequent queries](docs/features/CacheSystem.mkd)
+- [Basic connections cache](docs/features/BasicCache.mkd)
+- [Await and Async support for all functions](docs/features/AwaitAsync.mkd)
+- [Backup system](docs/features/BackupSystem.mkd)
+- [Discord Logs for relevant information.](docs/features/DiscordLogs.mkd)
+- [ORM(Object Relation Mapping) support](docs/features/ORM.mkd)
+- [Script auto updater](docs/features/ScriptUpdater.mkd)
+- [Logs system](docs/features/LogsSystem.mkd)
+- [Basic system to give a solution for each error](docs/features/BasicErrorSystem.mkd)
+- [Support Lua, JS, C# library](docs/features/SupportLuaJS.mkd)
+- [Library to change other mysql system functions to ice](docs/features/ChangeOtherSystem.mkd)
+- [Named and unnamed parameters support](docs/features/NamedParameters.mkd)
+- [Debug UI](docs/features/DebugUI.mkd)
+- [Error handling](docs/features/ErrorHandling.mkd)
+### Installation
+1. Download the latest release from [here](https://github.com/IceSystem/ice_mysql/releases/latest)
+2. Extract the resource in your resources folder
+3. Add `ensure ice_mysql` at the top of your server.cfg
+4. In the server.cfg add your databases connections like this:
+```cfg
+set mysqlCredentials_1 "host=127.0.0.1;user=root; password=1234; database=fxserver; port=3306"
+set mysqlCredentials_2 "host=127.0.0.1;user=root; password=1234; database=fxserver; port=3306"
+...
+```
+5. Enjoy! and thanks for trusting in Ice MySQL
+### Known Issues
+We're going to list some known issues here, so you don't have to worry about them. Or you don't have to report them, because we already know about them. If you find any other issues, please report them in our [Discord Server](https://discord.gg/3DhEgXAX2U). 
+- First query after a restart is slow(because we wait to make the connection to the database)
+- Thread hitch warning when starting the resource(don't worry, it's normal)
+### Support
+Right now we only give support in our [Discord Server](https://discord.gg/3DhEgXAX2U). Anyway you can open an issue in our [GitHub](https://github.com/IceSystem/ice_mysql/issues), if you ask in the forum we will try to answer you as soon as possible but to make sure to get an answer join our [Discord Server](https://discord.gg/3DhEgXAX2U).

@@ -1,0 +1,11 @@
+# Backup System
+### Description
+System that allows you to backup your database in a simple way, it will create a folder in the specified path in the config.js with the value of ```Config.BackupDirPath```, then it will create a file with the current date, time and database name, the file will contain the database backup in sql format.
+
+### Use
+To use this system you have to enable this options ```Config.BackupEnabled``` in the config.js, specify the mysqldump.exe path in ```Config.MysqlDumpPath``` and the backup directory path in ```Config.BackupDirPath``` respective to the FXServer.exe file. Then you have to set the days in an array format, for example: if you want to set to make the backup the 2, 5, 10 days of each month you have to set: ```Config.Days = [2, 5, 10];```.
+To set the hour you have to make sure to type in 24h format, for example: if you want to set the backup to 2:00 AM you have to set ```Config.Hour = "02:00";```.
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/backup/index.js```

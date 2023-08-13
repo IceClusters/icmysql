@@ -1,0 +1,11 @@
+# Log System
+### Description
+This is a simple log system that will log all the relevant information and save in a file in the ```IceMySQL/Logs``` folder by default, the file will be named with the current date and time, so you can have a log file for each server restart.
+In the log file at the first you could see some relevent component information about the hardware so if you have any problem related to the mysql script you can provide this information to the developer to help him to understand what is going on.
+
+### Use
+This is always in use, you don't have to make anything.
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/utils/Logger.js```

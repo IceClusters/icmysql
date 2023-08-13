@@ -1,0 +1,16 @@
+# Error System
+### Description
+We made this system thinking about the person that have an error that don't understand why it happens, so we made this system to help them to understand what is happening and giving a possible solution before they ask for help.
+
+### Use
+To enable this system you have to set the ```Config.ShowErrorSolution``` variable to ```true``` in the ```src/config.js``` file. If you want the description of the error to be shown in the console, you have to set the ```Config.ShowErrorDescription``` variable to ```true``` in the ```src/config.js``` file.
+
+### How it works
+When a error happens in any part of the code, the ```ErrorParser()``` function will search in the ```ErrorList``` a solution for that error, before that it will send a warn to discord webhook then a log error will be saved in the log file.
+Here there's an example of bad user specified, and in the right you can see what the user will see in the console or in the discord webhook:
+![](../assets/ErrorSystem.drawio.png)
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/errors/Parser.js```
+- ```src/errors/List.js```

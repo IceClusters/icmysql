@@ -1,0 +1,35 @@
+# Await and Async Support
+### Description
+In the functions that make queries to the database, you can now use the ```await``` keyword to wait for the query to finish and get the result, this is useful when you want to make a query and get the result in the same function, without having to use callbacks or promises.
+
+### Asynchronous Scheme
+This scheme is going to explain how asynchronous queries work in the script. This explication is based on JS so probably it's not going to be 100% accurate but it's going to be enough to understand how it works.
+![](../assets/Async.drawio.png)
+##### Steps
+1. First we declare some vars to use later in the code.
+2. We execute the console.log function.
+3. We execute the query function, and we send a param as the callback function to be executed later.
+4. We execute another console.log function.
+##### Call Stack
+The call stack is like a list of tasks that a computer keeps track of while running a program. When a function is called, it gets added to the top of the stack. As the function completes, it's removed from the top. 
+In this case as you can see the first step is an anonymous function because JS don't have a main function so all the code is executed inside an anonymous function. Then we have the console.log function, then the query function that register a callback in C++ APIs and when the query is finished the callback is added to the event loop that wait for the call stack to be empty to add the callback to the main thread and execute it. Then we have another console.log function and finally the anonymous function is removed from the call stack.
+##### Conclusion
+So as we see the async functions execute in the main thread, but the callback is executed in another thread, so the main thread is not blocked while the query is being executed. That explains why the console.log function is execute before the query callback that is previous at the function.
+
+### Synchronous Scheme
+This scheme is going to explain how synchronous queries work in the script. This explication is based on JS so probably it's not going to be 100% accurate but it's going to be enough to understand how it works.
+![](../assets/Sync.drawio.png)
+##### Call Stack
+As you can see in this scheme the call stack is the same as the async scheme, but in this case the main thread is blocked while the query is being executed, so the console.log function is executed after the query callback.
+
+### Use
+You don't have to make anything special to use this feature as this is already implmented in the script, you just have to make the queries as you would do normally, the script will take care of the rest.
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/Query.js```
+- ```src/db/[Select, Insert, Delete...].lua```
+- ```src/db/Params.lua```
+
+### Warn
+I am **not a professional developer** so some explanations may not be 100% correct but I have made an effort to document myself and make these schematics so that you can understand how synchronous and asynchronous functions work. If you have any suggestion to improve the explanation, or anything, it will be well received.
