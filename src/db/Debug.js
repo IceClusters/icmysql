@@ -74,15 +74,17 @@ function GetQueryCache() {
 }
 
 function CheckPermission(src) {
+    if (!Config.Enabled) return false;
+    if (Config.DebugLicenses.length === 0) return false;
     const license = GetPlayerIdentifierByType(src, "license");
-    if (license == null) return;
-    Config.LicensesDebug.forEach(element => {
+    for (const element of Config.DebugLicenses) {
         if (element == license) {
             return true;
         }
-    });
+    }
     return false;
 }
+
 
 RegisterNetEvent("ice_mysql:getresources");
 AddEventHandler("ice_mysql:getresources", function () {
@@ -108,6 +110,13 @@ AddEventHandler("ice_mysql:getbackup", async function () {
     if (await DirExist(Config.BackupDirPath))
         console.log(await ReadDir(Config.BackupDirPath));
 });
+
+if (Config.Enabled) {
+    RegisterCommand("debug_ui", (source) => {
+        if (!CheckPermission(source)) return;
+        TriggerClientEvent("ice_mysql:openDebugUI", source);
+    });
+}
 
 
 module.exports = { AddQuery, AddDebugCache, DeleteCache, AddDB, SetDBORM }

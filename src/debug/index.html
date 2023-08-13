@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ice mysql</title>
-    <link rel="stylesheet" href="./debug/styles/app.css">
-    <link rel="stylesheet" href="./debug/styles/input.css">
+    <link rel="stylesheet" href="./styles/app.css">
+    <link rel="stylesheet" href="./styles/input.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://kit.fontawesome.com/1c4b4851e0.js" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 </head>
 
-<body>
-    <section class="container">
+<body id="body">
+    <section class="container" id="main-container">
         <div class="menu">
-            <video src="./debug/assets/bg.mp4" autoplay muted loop></video>
+            <video src="./assets/bg.mp4" autoplay muted loop></video>
             <main class="main">
                 <section class="section__buttons">
                     <div class="grid">
@@ -55,12 +55,13 @@
                                 <lord-icon class="search_icon" src="https://cdn.lordicon.com/rlizirgt.json"
                                     trigger="hover" colors="primary:#494a4d">
                                 </lord-icon>
-                                <input class="inputBox" id="inputBox" type="text" placeholder="Search resources...">
+                                <input class="inputBox" id="search-resource-input" type="text"
+                                    placeholder="Search resources...">
                             </div>
                         </div>
                         <div class="container__content">
-                            <div class="scroll">
-                                <div class="box">
+                            <div class="scroll" id="resources-content">
+                                <!-- <div class="box">
                                     <div class="grid--box">
                                         <div class="adjust">
                                             <div class="flex">
@@ -107,8 +108,8 @@
                                             </lord-icon>
                                         </div>
                                     </div>
-                                </div>
-                                
+                                </div> -->
+
                             </div>
                         </div>
                     </div>
@@ -119,6 +120,10 @@
             </main>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

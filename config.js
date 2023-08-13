@@ -39,7 +39,7 @@ Config.DefaultDB = 1; // The default database that will be used if the database 
 
 // Debug UI
 Config.Enabled = true; // Enable the debug UI
-Config.DebugLicenses = [""] // The licenses of the players that will be able to use the debug UI.
+Config.DebugLicenses = ["license:0ca0dfbead8e22c4235769d9380d1fb9d6f32d5a"] // The licenses of the players that will be able to use the debug UI.
 
 // ORM
 Config.ORM = true; // Enable the ORM queries
