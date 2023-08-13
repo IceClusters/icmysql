@@ -65,7 +65,7 @@ async function MakeBackup() {
     var times = [];
     for (let i = 0; i < pendingBackup.length; i++) {
         const start = performance.now();
-        const backupName = `${pendingBackup[i].database}-${GetDate().replace("/", "-").replace("/", "-")}`;
+        const backupName = `${pendingBackup[i].database}_${GetDate().replace("/", "-").replace("/", "-")}`;
         var passwordString = "";
         if (pendingBackup[i].password) {
             passwordString = `-p${pendingBackup[i].password}`;

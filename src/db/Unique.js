@@ -12,7 +12,8 @@ async function Unique(dbId, query, values, callback, cache) {
     const data = await ParseArgs(dbId, query, values, callback, cache);
     if (data === undefined) return null;
     // if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
-    await ExecuteQuery(global.QueryTypes.Unique, data.dbId, data.query, data.values, data.callback, data.cache);
+    const invokingResource = GetInvokingResource();
+    await ExecuteQuery(invokingResource, global.QueryTypes.Unique, data.dbId, data.query, data.values, data.callback, data.cache);
 }
 
 global.exports("AwaitUnique", AwaitUnique);

@@ -37,6 +37,10 @@ Config.MaxConnectionLimit = 15; // The max count of connections that can be crea
 Config.QueueLimit = 100; // The max count of queries that can be queued per database(recomend to not alter this value too much)
 Config.DefaultDB = 1; // The default database that will be used if the database is not specified in the query
 
+// Debug UI
+Config.Enabled = true; // Enable the debug UI
+Config.DebugLicenses = [""] // The licenses of the players that will be able to use the debug UI.
+
 // ORM
 Config.ORM = true; // Enable the ORM queries
 Config.DefaultORMDB = 1; // The default database that will be used if the database is not specified in the orm query

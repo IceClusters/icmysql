@@ -8,6 +8,10 @@ var errors = [];
 var quickFix = [];
 var unknowErrors = [];
 
+function GetErrors() {
+    return { "quickFix": quickFix, "unknowErrors": unknowErrors };
+}
+
 function ParseError(error, replaceParams = []) {
     errors.push(error);
     var errorData = null;
@@ -67,4 +71,4 @@ function ParseError(error, replaceParams = []) {
     }
 }
 
-module.exports = { ParseError }
+module.exports = { ParseError, GetErrors }

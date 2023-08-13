@@ -12,7 +12,8 @@ async function Update(dbId, query, values, callback) {
     const data = await ParseArgs(dbId, query, values, callback, true);
     if (data == undefined) return null;
     // if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
-    await ExecuteQuery(QueryTypes.Update, data.dbId, data.query, data.values, data.callback, data.cache);
+    const invokingResource = GetInvokingResource();
+    await ExecuteQuery(invokingResource, QueryTypes.Update, data.dbId, data.query, data.values, data.callback, data.cache);
 }
 
 global.exports("AwaitUpdate", AwaitUpdate);

@@ -5,10 +5,11 @@ const { ReplaceNamedParams, ReplaceDotParams } = require('./Params.js');
 const { QueryTypes } = require('sequelize');
 const { IsConnecting, GetConnection, ReleaseConnection } = require('./Connections.js');
 const { performance } = require('perf_hooks');
+const { AddDebugCache, DeleteCache, AddQuery } = require('./Debug.js');
 
 global.QueryTypes = Object.freeze({ "Query": "QUERY", "Select": "SELECT", "Insert": "INSERT", "Update": "UPDATE", "Delete": "DELETE", "Unique": "UNIQUE", "Scalar": "SCALAR", "Single": "SINGLE", "Raw": "RAW" });
 
-const queryCache = new LRU(1000)
+global.queryCache = new LRU(1000)
 
 function generateQueryHash(dbId, type, query, values) {
     const hash = crypto.createHash("sha1");
@@ -114,26 +115,22 @@ async function ParseArgs(dbId, query, values, callback, cache) {
     return { dbId: dbId, query: query, values: values, callback: callback, cache: cache };
 }
 
-async function ExecuteQuery(type, dbId, query, values, callback, cache) {
+async function ExecuteQuery(resourceName, type, dbId, query, values, callback, cache) {
     const start = performance.now();
-    const start2 = performance.now();
     ScheduleResourceTick(GetCurrentResourceName())
     const table = ExtractTable(query);
     const hash = generateQueryHash(dbId, type, query, values);
     if (cache && type != "UNIQUE" && type != "SCALAR") {
-        if (queryCache.has(table) && queryCache.get(table).has(hash)) {
-            const cachedResult = queryCache.get(table).get(hash);
+        if (global.queryCache.has(table) && global.queryCache.get(table).has(hash)) {
+            const cachedResult = global.queryCache.get(table).get(hash);
             return callback ? callback(cachedResult) : cachedResult;
         }
 
-        if (!queryCache.has(table)) {
-            queryCache.set(table, new LRU(100));
+        if (!global.queryCache.has(table)) {
+            global.queryCache.set(table, new LRU(100));
         }
     }
-    const end2 = performance.now();
-    const star3 = performance.now();
     const connection = await GetConnection(dbId);
-    const end3 = performance.now();
     try {
         if (values == undefined) values = null;
         if (query.includes("@")) {
@@ -144,9 +141,11 @@ async function ExecuteQuery(type, dbId, query, values, callback, cache) {
             query = ReplaceDotParams(query, values);
             values = null;
         }
-        const start4 = performance.now();
         const [rows, fields] = await connection.execute(query, values);
-        const end4 = performance.now();
+        const end = performance.now();
+        AddQuery(resourceName, type.toString(), dbId, query, values, rows, (end - start).toFixed(3));
+        if (cache)
+            AddDebugCache(table, hash, rows)
         if (cache && table && type != "UNIQUE" && type != "SCALAR") {
             var data = null;
             if (type == "SELECT" && rows.length === 1) {
@@ -165,52 +164,47 @@ async function ExecuteQuery(type, dbId, query, values, callback, cache) {
                 data = rows;
             }
             if (data != null)
-                queryCache.get(table).set(hash, data);
+                global.queryCache.get(table).set(hash, data);
         }
-        // if (type == "UNIQUE") {
-        //     if (rows.length <= 0)
-        //         return callback ? callback(null) : null;
-        //     else
-        //         return callback ? callback(rows[0][Object.keys(rows[0])[0]]) : rows[0][Object.keys(rows[0])[0]];
-        // }
-        // else if (type == "INSERT") {
-        //     if (rows.length === 0) {
-        //         return null;
-        //     }
-        //     return callback ? callback(rows["insertId"]) : rows["insertId"];
-        // }
-        // else if (type == "SELECT") {
-        //     if (rows.length === 0) {
-        //         return callback ? callback(null) : null;
-        //     }
-        //     if (rows.length === 1) {
-        //         if (Object.entries(rows[0]).length === 1) {
-        //             return callback ? callback(rows[0][Object.keys(rows[0])[0]]) : rows[0][Object.keys(rows[0])[0]];
-        //         }
-        //         return callback ? callback(rows[0]) : rows[0];
-        //     }
-        //     return callback ? callback(rows) : rows;
-        // }
-        // else if (type == "SCALAR") {
-        //     if (rows.length > 0 && fields.length > 0) {
-        //         return callback ? callback(rows[0][fields[0].name]) : rows[0][fields[0].name];
-        //     }
-        //     return callback ? callback(null) : null;
-        // }
-        // else if (type == "SINGLE") {
-        //     if (rows.length > 0 && fields.length > 0) {
-        //         return callback ? callback(rows[0]) : rows[0];
-        //     }
-        //     return callback ? callback(null) : null;
-        // }
-        // else if (type == "UPDATE") {
-        //     return callback ? callback(rows["affectedRows"]) : rows["affectedRows"];
-        // }
-        const end = performance.now();
-        console.log(end2 - start2)
-        console.log(end3 - star3)
-        console.log(end4 - start4)
-        console.log(end - start);
+        if (type == "UNIQUE") {
+            if (rows.length <= 0)
+                return callback ? callback(null) : null;
+            else
+                return callback ? callback(rows[0][Object.keys(rows[0])[0]]) : rows[0][Object.keys(rows[0])[0]];
+        }
+        else if (type == "INSERT") {
+            if (rows.length === 0) {
+                return null;
+            }
+            return callback ? callback(rows["insertId"]) : rows["insertId"];
+        }
+        else if (type == "SELECT") {
+            if (rows.length === 0) {
+                return callback ? callback(null) : null;
+            }
+            if (rows.length === 1) {
+                if (Object.entries(rows[0]).length === 1) {
+                    return callback ? callback(rows[0][Object.keys(rows[0])[0]]) : rows[0][Object.keys(rows[0])[0]];
+                }
+                return callback ? callback(rows[0]) : rows[0];
+            }
+            return callback ? callback(rows) : rows;
+        }
+        else if (type == "SCALAR") {
+            if (rows.length > 0 && fields.length > 0) {
+                return callback ? callback(rows[0][fields[0].name]) : rows[0][fields[0].name];
+            }
+            return callback ? callback(null) : null;
+        }
+        else if (type == "SINGLE") {
+            if (rows.length > 0 && fields.length > 0) {
+                return callback ? callback(rows[0]) : rows[0];
+            }
+            return callback ? callback(null) : null;
+        }
+        else if (type == "UPDATE") {
+            return callback ? callback(rows["affectedRows"]) : rows["affectedRows"];
+        }
         return callback ? callback(rows) : rows;
     } catch (err) {
         ParseError(`Error while executing query: ${err.message} `);
@@ -218,8 +212,9 @@ async function ExecuteQuery(type, dbId, query, values, callback, cache) {
     } finally {
         ReleaseConnection(dbId, connection)
         var query = query.toLowerCase();
-        if ((query.includes("update") || query.includes("delete") || query.includes("insert")) && table && queryCache.has(table)) {
-            queryCache.del(table);
+        if ((query.includes("update") || query.includes("delete") || query.includes("insert")) && table && global.queryCache.has(table)) {
+            global.queryCache.del(table);
+            AddDebugCache(table, hash)
         }
     }
 }
@@ -260,8 +255,8 @@ async function ExecuteTransaction(dbId, queries, callback) {
         await connection.rollback();
         connection.release();
         modifiedTables.forEach((table) => {
-            if (queryCache.has(table)) {
-                queryCache.del(table);
+            if (global.queryCache.has(table)) {
+                global.queryCache.del(table);
             }
         });
     }
@@ -278,49 +273,53 @@ async function Query(dbId, query, values, callback, cache) {
     const data = await ParseArgs(dbId, query, values, callback, cache);
     if (data === undefined) return null;
     // if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
-    await ExecuteQuery(global.QueryTypes.Query, data.dbId, data.query, data.values, data.callback, data.cache);
+    const invokingResource = GetInvokingResource();
+    await ExecuteQuery(invokingResource, global.QueryTypes.Query, data.dbId, data.query, data.values, data.callback, data.cache);
 }
 
 async function AwaitScalar(dbId, query, values, cache) {
     const data = await ParseArgs(dbId, query, values, cache);
     if (data === undefined) return null;
-
-    return await ExecuteQuery(global.QueryTypes.Scalar, data.dbId, data.query, data.values, null, data.cache);
+    const invokingResource = GetInvokingResource();
+    return await ExecuteQuery(invokingResource, global.QueryTypes.Scalar, data.dbId, data.query, data.values, null, data.cache);
 }
 
 async function Scalar(dbId, query, values, callback, cache) {
     const data = await ParseArgs(dbId, query, values, callback, cache);
     if (data === undefined) return null;
     // if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
-    await ExecuteQuery(global.QueryTypes.Scalar, data.dbId, data.query, data.values, data.callback, data.cache);
+    const invokingResource = GetInvokingResource();
+    await ExecuteQuery(invokingResource, global.QueryTypes.Scalar, data.dbId, data.query, data.values, data.callback, data.cache);
 }
 
 async function AwaitSingle(dbId, query, values, cache) {
     const data = await ParseArgs(dbId, query, values, cache);
     if (data === undefined) return null;
-
-    return await ExecuteQuery(global.QueryTypes.Single, data.dbId, data.query, data.values, null, data.cache);
+    const invokingResource = GetInvokingResource();
+    return await ExecuteQuery(invokingResource, global.QueryTypes.Single, data.dbId, data.query, data.values, null, data.cache);
 }
 
 async function Single(dbId, query, values, callback, cache) {
     const data = await ParseArgs(dbId, query, values, callback, cache);
     if (data === undefined) return null;
     // if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
-    await ExecuteQuery(global.QueryTypes.Single, data.dbId, data.query, data.values, data.callback, data.cache);
+    const invokingResource = GetInvokingResource();
+    await ExecuteQuery(invokingResource, global.QueryTypes.Single, data.dbId, data.query, data.values, data.callback, data.cache);
 }
 
 async function AwaitRaw(dbId, query, values, cache) {
     const data = await ParseArgs(dbId, query, values, cache);
     if (data === undefined) return null;
-
-    return await ExecuteQuery(global.QueryTypes.Raw, data.dbId, data.query, data.values, null, data.cache);
+    const invokingResource = GetInvokingResource();
+    return await ExecuteQuery(invokingResource, global.QueryTypes.Raw, data.dbId, data.query, data.values, null, data.cache);
 }
 
 async function Raw(dbId, query, values, callback, cache) {
     const data = await ParseArgs(dbId, query, values, callback, cache);
     if (data === undefined) return null;
     // if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
-    await ExecuteQuery(global.QueryTypes.Raw, data.dbId, data.query, data.values, data.callback, data.cache);
+    const invokingResource = GetInvokingResource();
+    await ExecuteQuery(invokingResource, global.QueryTypes.Raw, data.dbId, data.query, data.values, data.callback, data.cache);
 }
 
 global.exports("Query", Query);

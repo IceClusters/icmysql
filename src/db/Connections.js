@@ -5,6 +5,7 @@ const { DirExist } = require('../utils/Files.js')
 const { RegisterORMConnection, GenerateModels } = require('./orm/index.js')
 const { Log, LogTypes } = require('../utils/Logger.js')
 const { PrepareBackup } = require('../db/backup/index.js')
+const { AddDB, SetDBORM } = require('./Debug.js')
 
 var connecting = true;
 global.pools = {};
@@ -32,9 +33,11 @@ async function RegisterConnection(index, credentials) {
     const pool = mysql.createPool(credentials, { connectionLimit: Config.ConnectionLimit, queueLimit: Config.QueueLimit });
     const end = performance.now();
     global.pools[index] = pool;
+    AddDB(index);
     if (Config.ORM) {
         if (await DirExist(path.join(GetResourcePath(GetCurrentResourceName()), `src/db/orm/models/${index}`))) {
             RegisterORMConnection(index, credentials);
+            SetDBORM(index, true)
         } else {
             GenerateModels(credentials, index).then(function () {
                 RegisterORMConnection(index, credentials).then();
