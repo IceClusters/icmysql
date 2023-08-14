@@ -284,5 +284,18 @@ module.exports = [
             'en': 'Make sure that the query parameters are correct and that they are within an object.',
             'fr': 'Assurez-vous que les parametres de la requete sont corrects et qu\'ils se trouvent dans un objet.'
         }
+    },
+    {
+        tags: ["Error in nested ref call"],
+        description: {
+            'es': 'Ha ocurrido un error al intentar ejecutar el callback proporcioando a la query.',
+            'en': 'An error occurred while trying to execute the callback provided to the query.',
+            'fr': 'Une erreur s\'est produite lors de la tentative d\'execution du rappel fourni a la requete.'
+        },
+        solution: {
+            'es': 'Revisa de que el codigo del callback tenga una sintaxis correcta y que no estes intentando acceder a un parametro nil.',
+            'en': 'Check that the callback code has a correct syntax and that you are not trying to access a nil parameter.',
+            'fr': 'Verifiez que le code de rappel a une syntaxe correcte et que vous n\'essayez pas d\'acceder a un parametre nil.'
+        }
     }
 ]

@@ -210,7 +210,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         return callback ? callback(rows) : rows;
     } catch (err) {
         ParseError(`Error while executing query: ${err} `);
-        return typeof callback === "function" ? callback(null) : null;
+        return null;
     } finally {
         ReleaseConnection(dbId, connection)
         var query = query.toLowerCase();
