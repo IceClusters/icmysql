@@ -17,6 +17,7 @@
         <div class="menu">
             <video src="./assets/bg.mp4" autoplay muted loop></video>
             <main class="main">
+                <!-- HOME -->
                 <section class="section__buttons">
                     <div class="grid">
                         <div class="resources__section button__style">
@@ -47,21 +48,21 @@
                     </div>
                 </section>
 
+                <!-- RESOURCES -->
                 <section class="section__resources">
-                    <div class="rs--grid">
+                    <div class="rs--grid adj">
                         <div class="container__title">
                             <h1>Resources</h1>
                             <div class="inputBox_container">
                                 <lord-icon class="search_icon" src="https://cdn.lordicon.com/rlizirgt.json"
                                     trigger="hover" colors="primary:#494a4d">
                                 </lord-icon>
-                                <input class="inputBox" id="search-resource-input" type="text"
-                                    placeholder="Search resources...">
+                                <input class="inputBox" id="inputBox" type="text" placeholder="Find Resources">
                             </div>
                         </div>
                         <div class="container__content">
                             <div class="scroll" id="resources-content">
-                                <!-- <div class="box">
+                                <div class="box">
                                     <div class="grid--box">
                                         <div class="adjust">
                                             <div class="flex">
@@ -108,13 +109,33 @@
                                             </lord-icon>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
                             </div>
                         </div>
                     </div>
                     <div class="rs--grid stats">
+                        <div class="rs--grid">
+                            <div class="container__title">
+                                <h1>Stats</h1>
+                            </div>
+                            <div class="container__content --stats">
+                                <div class="rs--grid">
+                                    <div class="tags--wrapper">
+                                        <div class="tags">Queries: 200</div>
+                                        <div class="tags">Slow queries: 120</div>
+                                        <div class="tags">Time queries: 10</div>
+                                        <div class="tags">Time querying: 10</div>
+                                        <div class="tags">Scripts: 10</div>
+                                        <div class="tags">Databases used: 10</div>
+                                        <div class="tags">Failed queries: 100</div>
+                                    </div>
+                                    <div class="container__content --graphic">
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </main>

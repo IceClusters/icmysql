@@ -183,6 +183,11 @@ body {
 	overflow: hidden;
 }
 
+.rs--grid.adj {
+	margin-right: 2vh;
+}
+
+
 .rs--grid.stats {
 	display: flex;
 	justify-content: center;
@@ -299,4 +304,39 @@ body {
 	margin-bottom: auto;
 	width: 30%;
 	height: 100%;
+}
+
+.--stats {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: 3.5vh;
+}
+
+.tags--wrapper {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(4, 0.2fr);
+	gap: 0.5vh;
+	width: 100%;
+	height: 55%;
+	overflow: hidden;
+}
+
+.tags {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 2vh;
+	/* padding: 1vh 1vh; */
+	text-align: center;
+	background-color: #ffffff05;
+	border-radius: 5px;
+	font-size: 0.7rem;
+	color: #353535;
+}
+
+.--graphic {
+	height: 45%;
 }
