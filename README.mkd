@@ -6,6 +6,7 @@ We created this database connection system because, even though there are good s
 - [Multiple DB Connections](docs/features/MultipleDB.mkd)
 - [Cache system for frequent queries](docs/features/CacheSystem.mkd)
 - [Basic connections cache](docs/features/BasicCache.mkd)
+- [MongoDB Support](docs/features/MongoDB.mkd)
 - [Await and Async support for all functions](docs/features/AwaitAsync.mkd)
 - [Backup system](docs/features/BackupSystem.mkd)
 - [Discord Logs for relevant information.](docs/features/DiscordLogs.mkd)
