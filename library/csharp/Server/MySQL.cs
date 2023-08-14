@@ -134,5 +134,50 @@ namespace MySQL
         {
             return await Exports["ice_mysql"].AwaitTransaction(args[0], args[1], args[2], args[3]);
         }
+
+        public async Task<object> Unique(params object[] args)
+        {
+            return await Exports["ice_mysql"].Unique(args[0], args[1], args[2], args[3]);
+        }
+
+        public async Task<object> AwaitUnique(params object[] args)
+        {
+            return await Exports["ice_mysql"].AwaitUnique(args[0], args[1], args[2], args[3]);
+        }
+
+        public async Task<object> Single(params object[] args)
+        {
+            return await Exports["ice_mysql"].Single(args[0], args[1], args[2], args[3]);
+        }
+
+        public async Task<object> AwaitSingle(params object[] args)
+        {
+            return await Exports["ice_mysql"].AwaitSingle(args[0], args[1], args[2], args[3]);
+        }
+
+        public async Task<object> MongoInsert(params object[] args)
+        {
+            return await Exports["ice_mysql"].MongoInsert(args[0], args[1], args[2], args[3]);
+        }
+
+        public async Task<object> MongoFind(params object[] args)
+        {
+            return await Exports["ice_mysql"].MongoFind(args[0], args[1], args[2], args[3]);
+        }
+
+        public async Task<object> MongoUpdate(params object[] args)
+        {
+            return await Exports["ice_mysql"].MongoUpdate(args[0], args[1], args[2], args[3]);
+        }
+
+        public async Task<object> MongoCount(params object[] args)
+        {
+            return await Exports["ice_mysql"].MongoCount(args[0], args[1], args[2], args[3]);
+        }
+
+        public async Task<object> MongoDelete(params object[] args)
+        {
+            return await Exports["ice_mysql"].MongoDelete(args[0], args[1], args[2], args[3]);
+        }
     }
 }

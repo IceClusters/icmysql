@@ -21,8 +21,8 @@ function ParseMongoCrendentials(credentials, index) {
     try {
         const client = new MongoClient(credentials, {
             useUnifiedTopology: true,
-            connectTimeoutMS: 5000,
-            serverSelectionTimeoutMS: 5000
+            connectTimeoutMS: Config.ConnectiTimout,
+            serverSelectionTimeoutMS: Config.ConnectiTimout
         });
 
         client.connect()

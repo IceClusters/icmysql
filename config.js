@@ -40,6 +40,7 @@ Config.DefaultDB = 1; // The default database that will be used if the database 
 // MongoDB
 Config.MongoDB = true; // Enable the MongoDB support
 Config.DefaultMongoDB = 1;
+Config.ConnectiTimout = 5000; // The time in milliseconds that the MongoDB will wait for a connection to be available in the pool, if the time is exceeded a error will be thrown
 
 // Debug UI
 Config.Enabled = true; // Enable the debug UI
