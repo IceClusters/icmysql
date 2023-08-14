@@ -1,5 +1,6 @@
 # Mongo DB Support
 <img src="../assets/MongoDB_Logo.png" width=250>
+
 ### Description
 We've added the support to Mongo DB, so you can use it as a database, you can mix it with other SQL & non-SQL databases. The multi-database support is a feature that you can use in SQL & non-SQL databases.
 
