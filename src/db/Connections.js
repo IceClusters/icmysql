@@ -10,6 +10,7 @@ const { AddDB, SetDBORM } = require('./Debug.js')
 var connecting = true;
 global.pools = {};
 global.poolsORM = Config.ORM ? {} : null;
+global.mongoConnetions = {};
 
 async function CheckConnection(credentials) {
     try {
@@ -78,7 +79,6 @@ async function GetConnection(index) {
         return connection;
     }
 
-    console.log("Cache hit");
     return connectionCache[index][0];
 }
 

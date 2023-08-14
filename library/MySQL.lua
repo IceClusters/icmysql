@@ -24,24 +24,12 @@ end
 
 local ORMFunctions = {"FindAll", "FindOne", "FindById", "Modify", "FindAndCountAll", "Create", "Destroy", "Count", "Max", "Min", "Sum", "Increment", "Decrement", "BulkCreate"}
 local QueryFunctions = {"Query", "AwaitQuery", "Select", "AwaitSelect", "Insert", "AwaitInsert", "Update", "AwaitUpdate", "Delete", "AwaitDelete", "Transaction", "AwaitTransaction", "Unique", "AwaitUnique", "Single", "AwaitSingle"}
+local MongoFunctions = {"MongoInsert", "MongoFind", "MongoUpdate", "MongoCount", "MongoDelete"}
+Mongo = {}
 MySQL = {
     ORM = {},
-}
 
-for _, func in ipairs(ORMFunctions) do
-    MySQL.ORM[func] = function(...)
-        return ice_mysql[func](...)
-    end
-end
-
-for _, func in ipairs(QueryFunctions) do
-    MySQL[func] = function(...)
-        return ice_mysql[func](nil, ...)
-    end
-end
-
-MySQL = {
-    -- To replace oxmysql functions
+    -- Replace OxMySQL functions
     Sync = {
         insert = function(...) 
             return ice_mysql.AwaitInsert(nil, ...)
@@ -148,6 +136,27 @@ MySQL = {
             return ice_mysql.Update(nil, ...)
         end
     }),
+}
+
+for _, func in ipairs(ORMFunctions) do
+    MySQL.ORM[func] = function(...)
+        return ice_mysql[func](...)
+    end
+end
+
+for _, func in pairs(QueryFunctions) do
+    MySQL[func] = function(...)
+        return ice_mysql[func](nil, ...)
+    end
+end
+
+for _, func in pairs(MongoFunctions) do
+    Mongo[func] = function(...)
+        return ice_mysql[func](nil, ...)
+    end
+end
+
+-- MySQL = {
 
     -- Other functions
     -- JSON = {
@@ -164,6 +173,6 @@ MySQL = {
     --         return ice_mysql.SaveData(nil)
     --     end,
     -- }
-}
+-- }
 
 setmetatable(MySQL, MySQLData)

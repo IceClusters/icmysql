@@ -16,6 +16,7 @@
     "crypto": "^1.0.1",
     "extract-zip": "^2.0.1",
     "fs": "^0.0.1-security",
+    "mongodb": "^5.7.0",
     "mysql2": "^2.3.3",
     "path-browserify": "^1.0.1",
     "perf_hooks": "^0.0.1",

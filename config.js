@@ -37,6 +37,10 @@ Config.MaxConnectionLimit = 15; // The max count of connections that can be crea
 Config.QueueLimit = 100; // The max count of queries that can be queued per database(recomend to not alter this value too much)
 Config.DefaultDB = 1; // The default database that will be used if the database is not specified in the query
 
+// MongoDB
+Config.MongoDB = true; // Enable the MongoDB support
+Config.DefaultMongoDB = 1;
+
 // Debug UI
 Config.Enabled = true; // Enable the debug UI
 Config.DebugLicenses = ["license:0ca0dfbead8e22c4235769d9380d1fb9d6f32d5a"] // The licenses of the players that will be able to use the debug UI.
