@@ -27,6 +27,11 @@ namespace library_changer
             public static string AwaitUnique = "MySQL.AwaitUnique";
             public static string Single = "MySQL.Single";
             public static string AwaitSingle = "MySQL.AwaitSingle";
+            public static string MongoInsert = "MySQL.Mongo.MongoInsert";
+            public static string MongoFind = "MySQL.Mongo.MongoFind";
+            public static string MongoUpdate = "MySQL.Mongo.MongoUpdate";
+            public static string MongoCount = "MySQL.Mongo.MongoCount";
+            public static string MongoDelete = "MySQL.Mongo.MongoDelete";
             public static class Exports
             {
                 public static string Query = "exports['ice_mysql']:Query";
@@ -45,6 +50,11 @@ namespace library_changer
                 public static string AwaitUnique = "exports['ice_mysql']:AwaitUnique";
                 public static string Single = "exports['ice_mysql']:Single";
                 public static string AwaitSingle = "exports['ice_mysql']:AwaitSingle";
+                public static string MongoInsert = "exports['ice_mysql']:MongoInsert";
+                public static string MongoFind = "exports['ice_mysql']:MongoFind";
+                public static string MongoUpdate = "exports['ice_mysql']:MongoUpdate";
+                public static string MongoCount = "exports['ice_mysql']:MongoCount";
+                public static string MongoDelete = "exports['ice_mysql']:MongoDelete";
             }
         }
     }

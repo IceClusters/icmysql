@@ -34,11 +34,24 @@ namespace LibChanger
                     Console.WriteLine("You have inserted a bad path");
                     return;
                 }
+                Console.WriteLine("¿Have you maded a resources backup? (Y/N): ");
+                char respuesta = Console.ReadKey().KeyChar;
+                bool canContinue = false;
+                if (respuesta == 'Y' || respuesta == 'y')
+                {
+                    canContinue = true;
+                    Console.WriteLine("\nConverting functions...");
+                }
+                else if (respuesta == 'N' || respuesta == 'n')
+                {
+                    Console.WriteLine("\nPlease first make a backup of your resources folder and then try this tool.");
+                }
+                if (!canContinue) return;
                 IEnumerable<string> Files = Directory.EnumerateFiles(args[0], "*", SearchOption.AllDirectories);
-                foreach(string file in Files)
+                foreach (string file in Files)
                 {
                     bool ignore = false;
-                    foreach(string keyword in ignoreFiles)
+                    foreach (string keyword in ignoreFiles)
                     {
                         if (file.Contains(keyword))
                         {
@@ -47,19 +60,19 @@ namespace LibChanger
                         }
                     }
                     bool handled = false;
-                    foreach(string extension in handledExtensions)
+                    foreach (string extension in handledExtensions)
                     {
-                        if(file.Contains(extension)) { handled = true; break; }
+                        if (file.Contains(extension)) { handled = true; break; }
                     }
-                    foreach(string extension in ignoreExtensions)
+                    foreach (string extension in ignoreExtensions)
                     {
-                        if(file.Contains(extension))
+                        if (file.Contains(extension))
                         {
                             ignore = true;
                             break;
                         }
                     }
-                    if(handled && !ignore)
+                    if (handled && !ignore)
                     {
                         if (file.Contains("fxmanifest.lua"))
                             HandleManifetst(file);
@@ -79,7 +92,7 @@ namespace LibChanger
             if (path.Contains("oxmysql") || path.Contains("ice_mysql") || path.Contains("mysql-async") || path.Contains("ghmattimysql")) return;
             string content = File.ReadAllText(path);
             Console.WriteLine(path);
-            if(content.Contains("oxmysql") || content.Contains("ghmattimysql") || content.Contains("mysql-async") || content.Contains("MySQL"))
+            if (content.Contains("oxmysql") || content.Contains("ghmattimysql") || content.Contains("mysql-async") || content.Contains("MySQL") || content.Contains("mongo"))
             {
                 var replacements = new (string pattern, string replacement)[]
                 {
@@ -101,8 +114,13 @@ namespace LibChanger
                     ("MySQL.single|exports.oxmysql.single|exports.oxmysql:single|exports\\['oxmysql'\\].single|exports\\['oxmysql'\\]:single|exports\\[\"oxmysql\"\\].single|exports\\[\"oxmysql\"\\]:single", Functions.Queries.Exports.Single),
                     ("MySQL.rawExecute.await|exports.oxmysql.rawExecute_async|exports.oxmysql:rawExecute_async|exports\\['oxmysql'\\].rawExecute_async|exports\\['oxmysql'\\]:rawExecute_async|exports\\[\"oxmysql\"\\].rawExecute_async|exports\\[\"oxmysql\"\\]:rawExecute_async", Functions.Queries.Exports.AwaitQuery),
                     ("MySQL.rawExecute|exports.oxmysql.rawExecute|exports.oxmysql:rawExecute|exports\\['oxmysql'\\].rawExecute|exports\\['oxmysql'\\]:rawExecute|exports\\[\"oxmysql\"\\].rawExecute|exports\\[\"oxmysql\"\\]:rawExecute", Functions.Queries.Exports.Query),
+                    ("exports.mongodb.insert|exports.mongodb.insertOne", Functions.Queries.MongoInsert),
+                    ("exports.mongodb.find|exports.mongodb.findOne", Functions.Queries.MongoFind),
+                    ("exports.mongodb.update|exports.mongodb.updateOne", Functions.Queries.MongoUpdate),
+                    ("exports.mongodb.count|exports.mongodb.countOne", Functions.Queries.MongoCount),
+                    ("exports.mongodb.delete|exports.mongodb.deleteOne", Functions.Queries.MongoDelete),
                 };
-                    
+
                 foreach (var (pattern, replacement) in replacements)
                 {
                     content = Regex.Replace(content, pattern, replacement);
@@ -117,12 +135,12 @@ namespace LibChanger
             content = content.Replace("@oxmysql/lib/MySQL", "@ice_mysql/library/MySQL");
             content = content.Replace("@mysql-async/lib/MySQL", "@ice_mysql/library/MySQL");
             content = content.Replace("@ghmattimysql/lib/MySQL", "@ice_mysql/library/MySQL");
-            if(content.Contains("ice_mysql"))
+            if (content.Contains("ice_mysql"))
             {
                 string directoryName = Path.GetDirectoryName(path);
                 string[] parts = directoryName.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
                 string resourceName = parts[parts.Length - 1];
-                //Console.WriteLine("Resource manifest of " +  resourceName + " has been updated to use ice_mysql.");
+                Console.WriteLine("Resource manifest of " + resourceName + " has been updated to use ice_mysql.");
                 File.WriteAllText(path, content);
             }
         }
