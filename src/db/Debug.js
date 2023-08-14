@@ -86,35 +86,36 @@ function CheckPermission(src) {
 }
 
 
-RegisterNetEvent("ice_mysql:getresources");
-AddEventHandler("ice_mysql:getresources", function () {
+RegisterNetEvent("ice_mysql:server:getresources");
+AddEventHandler("ice_mysql:server:getresources", function () {
     if (!CheckPermission(source)) return;
-    console.log(GetResources());
+    TriggerClientEvent("ice_mysql:client:getbackup", source, GetResources())
 });
 
-RegisterNetEvent("ice_mysql:getresources");
-AddEventHandler("ice_mysql:getquerycache", function () {
+RegisterNetEvent("ice_mysql:server:getquerycache");
+AddEventHandler("ice_mysql:server:getquerycache", function () {
     if (!CheckPermission(source)) return;
-    console.log(GetQueryCache());
+    TriggerClientEvent("ice_mysql:client:getbackup", source, GetQueryCache())
 });
 
-RegisterNetEvent("ice_mysql:geterrors");
-AddEventHandler("ice_mysql:geterrors", function () {
+RegisterNetEvent("ice_mysql:server:geterrors");
+AddEventHandler("ice_mysql:server:geterrors", function () {
     if (!CheckPermission(source)) return;
-    console.log(GetErrors());
+    TriggerClientEvent("ice_mysql:client:getbackup", source, GetErrors())
 });
 
-RegisterNetEvent("ice_mysql:getbackup");
-AddEventHandler("ice_mysql:getbackup", async function () {
-    if (!CheckPermission(source)) return;
+RegisterNetEvent("ice_mysql:server:getbackup");
+AddEventHandler("ice_mysql:server:getbackup", async function (source) {
+    const src = source
+    if (!CheckPermission(src)) return;
     if (await DirExist(Config.BackupDirPath))
-        console.log(await ReadDir(Config.BackupDirPath));
+        TriggerClientEvent("ice_mysql:client:getbackup", src, await ReadDir(Config.BackupDirPath))
 });
 
 if (Config.Enabled) {
     RegisterCommand("debug_ui", (source) => {
         if (!CheckPermission(source)) return;
-        TriggerClientEvent("ice_mysql:openDebugUI", source);
+        TriggerClientEvent("ice_mysql:client:openDebugUI", source);
     });
 }
 

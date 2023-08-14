@@ -143,9 +143,11 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         }
         const [rows, fields] = await connection.execute(query, values);
         const end = performance.now();
-        AddQuery(resourceName, type.toString(), dbId, query, values, rows, (end - start).toFixed(3));
-        if (cache)
-            AddDebugCache(table, hash, rows)
+        if (Config.Enabled && resourceName != null) {
+            AddQuery(resourceName, type.toString(), dbId, query, values, rows, (end - start).toFixed(3));
+            if (cache)
+                AddDebugCache(table, hash, rows)
+        }
         if (cache && table && type != "UNIQUE" && type != "SCALAR") {
             var data = null;
             if (type == "SELECT" && rows.length === 1) {
@@ -168,7 +170,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         }
         if (type == "UNIQUE") {
             if (rows.length <= 0)
-                return callback ? callback(null) : null;
+                return callback ? callback() : null;
             else
                 return callback ? callback(rows[0][Object.keys(rows[0])[0]]) : rows[0][Object.keys(rows[0])[0]];
         }
@@ -180,7 +182,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         }
         else if (type == "SELECT") {
             if (rows.length === 0) {
-                return callback ? callback(null) : null;
+                return callback ? callback() : null;
             }
             if (rows.length === 1) {
                 if (Object.entries(rows[0]).length === 1) {
@@ -194,20 +196,20 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             if (rows.length > 0 && fields.length > 0) {
                 return callback ? callback(rows[0][fields[0].name]) : rows[0][fields[0].name];
             }
-            return callback ? callback(null) : null;
+            return callback ? callback() : null;
         }
         else if (type == "SINGLE") {
             if (rows.length > 0 && fields.length > 0) {
                 return callback ? callback(rows[0]) : rows[0];
             }
-            return callback ? callback(null) : null;
+            return callback ? callback() : null;
         }
         else if (type == "UPDATE") {
             return callback ? callback(rows["affectedRows"]) : rows["affectedRows"];
         }
         return callback ? callback(rows) : rows;
     } catch (err) {
-        ParseError(`Error while executing query: ${err.message} `);
+        ParseError(`Error while executing query: ${err} `);
         return typeof callback === "function" ? callback(null) : null;
     } finally {
         ReleaseConnection(dbId, connection)

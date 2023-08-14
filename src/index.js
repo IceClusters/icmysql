@@ -9,6 +9,7 @@ require('./db/Insert.js');
 require('./db/Delete.js');
 require('./db/Transactions.js');
 require('./db/Unique.js');
+if (Config.MongoDB) require('./db/mongo/Connections.js');
 
 setTimeout(async () => {
     try {
