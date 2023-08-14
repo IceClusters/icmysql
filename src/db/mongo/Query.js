@@ -22,27 +22,24 @@ async function MongoMiddleware(dbId, params) {
 
 async function MongoInsert(dbId, params, callback) {
     try {
+        if (typeof callback !== "function") callback = null;
         const data = await MongoMiddleware(dbId, params);
         if (typeof data !== "object") return null;
 
         const documents = PrepareObject(data.params.documents);
         const options = PrepareObject(data.params.options);
-        console.log(`DOCS ${JSON.stringify(documents)}`)
         const collection = global.MongoConnections[dbId].collection(params.collection)
         const result = await collection.insertOne(documents, options);
-        return result;
+        return callback ? callback(result) : result;
     } catch (error) {
-        if (callback) {
-            callback(error);
-        } else {
-            console.log("MongoDB find error catched:", error);
-            return null;
-        }
+        ParseError("MongoDB find error catched:", error.message);
+        return callback ? callback(null) : null;
     }
 }
 
 async function MongoFind(dbId, params, callback) {
     try {
+        if (typeof callback !== "function") callback = null;
         const data = await MongoMiddleware(dbId, params);
         if (typeof data !== "object") return null;
 
@@ -51,19 +48,16 @@ async function MongoFind(dbId, params, callback) {
 
         const collection = global.MongoConnections[dbId].collection(params.collection)
         const result = await collection.findOne(query, options);
-        return result;
+        return callback ? callback(result) : result;
     } catch (error) {
-        if (callback) {
-            callback(error);
-        } else {
-            console.log("MongoDB find error catched:", error);
-            return null;
-        }
+        ParseError("MongoDB find error catched:", error.message);
+        return callback ? callback(null) : null;
     }
 }
 
 async function MongoUpdate(dbId, params, callback) {
     try {
+        if (typeof callback !== "function") callback = null;
         const data = await MongoMiddleware(dbId, params);
         if (typeof data !== "object") return null;
 
@@ -73,19 +67,16 @@ async function MongoUpdate(dbId, params, callback) {
 
         const collection = global.MongoConnections[dbId].collection(params.collection)
         const result = await collection.updateOne(query, update, options);
-        return result;
+        return callback ? callback(result) : result;
     } catch (error) {
-        if (callback) {
-            callback(error);
-        } else {
-            console.log("MongoDB find error catched:", error);
-            return null;
-        }
+        ParseError("MongoDB find error catched:", error.message);
+        return callback ? callback(null) : null;
     }
 }
 
 async function MongoCount(dbId, params, callback) {
     try {
+        if (typeof callback !== "function") callback = null;
         const data = await MongoMiddleware(dbId, params);
         if (typeof data !== "object") return null;
 
@@ -94,19 +85,16 @@ async function MongoCount(dbId, params, callback) {
 
         const collection = global.MongoConnections[dbId].collection(params.collection)
         const result = await collection.countDocuments(query, options);
-        return result;
+        return callback ? callback(result) : result;
     } catch (error) {
-        if (callback) {
-            callback(error);
-        } else {
-            console.log("MongoDB find error catched:", error);
-            return null;
-        }
+        ParseError("MongoDB find error catched:", error.message);
+        return callback ? callback(null) : null;
     }
 }
 
 async function MongoDelete(dbId, params, callback) {
     try {
+        if (typeof callback !== "function") callback = null;
         const data = await MongoMiddleware(dbId, params);
         if (typeof data !== "object") return null;
 
@@ -115,14 +103,10 @@ async function MongoDelete(dbId, params, callback) {
 
         const collection = global.MongoConnections[dbId].collection(params.collection)
         const result = await collection.deleteOne(query, options);
-        return result;
+        return callback ? callback(result) : result;
     } catch (error) {
-        if (callback) {
-            callback(error);
-        } else {
-            console.log("MongoDB find error catched:", error);
-            return null;
-        }
+        ParseError("MongoDB find error catched:", error.message);
+        return callback ? callback(null) : null;
     }
 }
 
