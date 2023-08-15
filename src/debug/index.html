@@ -50,28 +50,26 @@
 
                 <!-- RESOURCES -->
                 <section class="section__resources">
-                    <div class="modal_container --active">
+                    <div class="modal_container" id="resourceModal">
                         <div class="modal--style animate__animated">
                             <div class="modal--title">
-                                <h1 class="txt--title">ice core</h1>
-                                <i class="icon--modal fa-solid fa-times"></i>
+                                <h1 class="txt--title" id="resourceModalTitle">ice core</h1>
+                                <i onclick="CloseResourceModal()" class="icon--modal fa-solid fa-times"></i>
                             </div>
                             <div class="container__content --modal">
                                 <div class="shadow-sm rounded p-4 table__container">
                                     <table class="tablaContent">
                                         <thead>
                                             <tr>
-                                                <th style="width:70%">Query</th>
-                                                <th>Time(ms)</th>
+                                                <th style="width:10%">DB</th>
+                                                <th style="width: 50% !important;">Query</th>
+                                                <th style="width:20%">Values</th>
+                                                <th style="width:13%;">Time</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td id="query">pepe</td>
-                                                <td id="time">1000</td>
-                                            </tr>
-                                        </tbody>
+                                        <tbody id="resourceModalBody">
 
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -101,13 +99,13 @@
                             <div class="container__content --stats">
                                 <div class="rs--grid">
                                     <div class="tags--wrapper">
-                                        <div class="tags">Queries: 200</div>
-                                        <div class="tags">Slow queries: 120</div>
-                                        <div class="tags">Time queries: 10</div>
-                                        <div class="tags">Time querying: 10</div>
-                                        <div class="tags">Scripts: 10</div>
-                                        <div class="tags">Databases used: 10</div>
-                                        <div class="tags">Failed queries: 100</div>
+                                        <div class="tags" id="statsQueries">Queries: 200</div>
+                                        <div class="tags" id="statsSlowQueries">Slow queries: 120</div>
+                                        <div class="tags" id="statsAverageQueries">Average queries: 10</div>
+                                        <div class="tags" id="statsTimeQuerying">Time querying: 10</div>
+                                        <div class="tags" id="statsScripts">Scripts: 10</div>
+                                        <div class="tags" id="statsDBCount">Databases used: 10</div>
+                                        <div class="tags" id="statsFailedQueries">Failed queries: 100</div>
                                     </div>
                                     <div class="container__content --graphic"></div>
                                 </div>
@@ -115,9 +113,9 @@
                         </div>
                     </div>
                     <!-- modal -->
-                    
+
                 </section>
-                
+
             </main>
         </div>
     </section>
@@ -127,4 +125,5 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./js/app.js"></script>
 </body>
+
 </html>
