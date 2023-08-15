@@ -5,12 +5,20 @@ function ParseCredentials(credentials) {
     if (!credentials || credentials === "null") return ParseError(`^3Can't find credentials in server.cfg.^0`);
 
     const values = {};
-
-    credentials.split(';').forEach((item) => {
-        const [key, value] = item.split('=');
-        if (key && value)
-            values[key.trim()] = value.trim();
-    });
+    if (!credentials.includes("mysql://"))
+        credentials.split(';').forEach((item) => {
+            const [key, value] = item.split('=');
+            if (key && value)
+                values[key.trim()] = value.trim();
+        });
+    else {
+        const urlParts = new URL(credentials);
+        values.user = urlParts.username;
+        values.password = urlParts.password;
+        values.host = urlParts.hostname;
+        values.port = urlParts.port;
+        values.database = urlParts.pathname.slice(1);
+    }
 
     if (!values.host || !values.user || !values.database) {
         ParseError(`^1Invalid credentials provided in server.cfg.^0`);
