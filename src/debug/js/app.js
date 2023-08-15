@@ -74,8 +74,8 @@ function OpenUI(state) {
     isOpen = state;
 }
 
-// LoadResources(["ice_gym", "ice_core", "ice_hud", "ice_callbacks", "ice_vehicleshop"]);
-// ListenSearchInput();
+LoadResources(["ice_gym", "ice_core", "ice_hud", "ice_callbacks", "ice_vehicleshop"]);
+ListenSearchInput();
 
 $(document).ready(function () {
     window.addEventListener("message", function (event) {

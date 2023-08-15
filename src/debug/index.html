@@ -50,6 +50,33 @@
 
                 <!-- RESOURCES -->
                 <section class="section__resources">
+                    <div class="modal_container --active">
+                        <div class="modal--style animate__animated">
+                            <div class="modal--title">
+                                <h1 class="txt--title">ice core</h1>
+                                <i class="icon--modal fa-solid fa-times"></i>
+                            </div>
+                            <div class="container__content --modal">
+                                <div class="shadow-sm rounded p-4 table__container">
+                                    <table class="tablaContent">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:70%">Query</th>
+                                                <th>Time(ms)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="query">pepe</td>
+                                                <td id="time">1000</td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="rs--grid adj">
                         <div class="container__title">
                             <h1>Resources</h1>
@@ -62,54 +89,6 @@
                         </div>
                         <div class="container__content">
                             <div class="scroll" id="resources-content">
-                                <div class="box">
-                                    <div class="grid--box">
-                                        <div class="adjust">
-                                            <div class="flex">
-                                                <p style="margin: 0;">ice_vehicleshop</p>
-                                                <p class="desc">Script that manage all connections and querys to the
-                                                    database. </p>
-                                            </div>
-                                        </div>
-                                        <div class="right--icon">
-                                            <lord-icon class="icon--box" src="https://cdn.lordicon.com/svpxtchp.json"
-                                                trigger="hover" colors="primary:#858585">
-                                            </lord-icon>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="grid--box">
-                                        <div class="adjust">
-                                            <div class="flex">
-                                                <p style="margin: 0;">ice_callback</p>
-                                                <p class="desc">Script that manage all connections and querys to the
-                                                    database. </p>
-                                            </div>
-                                        </div>
-                                        <div class="right--icon">
-                                            <lord-icon class="icon--box" src="https://cdn.lordicon.com/svpxtchp.json"
-                                                trigger="hover" colors="primary:#858585">
-                                            </lord-icon>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="grid--box">
-                                        <div class="adjust">
-                                            <div class="flex">
-                                                <p style="margin: 0;">ice_trophies</p>
-                                                <p class="desc">Script that manage all connections and querys to the
-                                                    database. </p>
-                                            </div>
-                                        </div>
-                                        <div class="right--icon">
-                                            <lord-icon class="icon--box" src="https://cdn.lordicon.com/svpxtchp.json"
-                                                trigger="hover" colors="primary:#858585">
-                                            </lord-icon>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -130,29 +109,22 @@
                                         <div class="tags">Databases used: 10</div>
                                         <div class="tags">Failed queries: 100</div>
                                     </div>
-                                    <div class="container__content --graphic">
-
-                                    </div>
+                                    <div class="container__content --graphic"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- modal -->
+                    
                 </section>
+                
             </main>
         </div>
     </section>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./js/app.js"></script>
 </body>
-
 </html>
-
-
-<!-- <button class="button__style home"><i class="fas fa-home"></i> Home</button>
-<button class="button__style resources"><i class="fa-solid fa-scroll"></i> Resources</button>
-<button class="button__style dbs"><i class="fa-solid fa-database"></i> Dbs</button>
-<button class="button__style logs"><i class="fa-solid fa-list"></i> Logs</button>
-<button class="button__style backups"><i class="fa-solid fa-clock-rotate-left"></i> Backups</button>
-<button class="button__style cache"><i class="fas fa-memory"></i> Cache</button> -->
