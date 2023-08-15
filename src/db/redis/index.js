@@ -74,9 +74,9 @@ global.exports('RedisExpire', async (key, seconds, callback) => {
     }
 });
 
-global.exports('RedisUpdate', async (key, value, newData, callback) => {
+global.exports('RedisUpdate', async (key, value, callback) => {
     try {
-        const result = await client.update(key, value, newData);
+        const result = await client.update(key, value, "XX");
         return callback ? callback(result) : result;
     } catch (err) {
         Log(LogTypes.Error, "Redis error while updating data: " + err.message);

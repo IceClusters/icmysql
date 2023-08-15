@@ -12,6 +12,7 @@ We created this database connection system because, even though there are good s
 - [Discord Logs for relevant information.](docs/features/DiscordLogs.mkd)
 - [ORM(Object Relation Mapping) support](docs/features/ORM.mkd)
 - [Script auto updater](docs/features/ScriptUpdater.mkd)
+- [Redis Support](docs/features/Redis.mkd)
 - [Logs system](docs/features/LogsSystem.mkd)
 - [Basic system to give a solution for each error](docs/features/BasicErrorSystem.mkd)
 - [Support Lua, JS, C# library](docs/features/SupportLuaJS.mkd)

@@ -5,7 +5,12 @@
 We've added the support to Mongo DB, so you can use it as a database, you can mix it with other SQL & non-SQL databases. The multi-database support is a feature that you can use in SQL & non-SQL databases.
 
 ### Use
-To use is the same as the other databases, you just need to change the functions name and enable this option in the config.js ```Config.MongoDB``` and the database will be connected automatically on the server start.
+To use is the same as the other databases, you just need to enable this option in the config.js ```Config.MongoDB``` and provide the credentials in the server.cfg like this: 
+```cfg
+set mongoCredentials_1 "mongodb://localhost:27017/test"
+```
+As you can see is the same structure like mysql you have to specify the id of the database because we've provided multiple database support here, then the database will be connected automatically on the server start.
+**Function list:**
 ```lua
 Mongo.MongoInsert(dbID, options, callback);
 Mongo.MongoFind(dbID, options, callback);

@@ -1,0 +1,64 @@
+# Redis Support
+<img src="../assets/Redis_Logo.png" width=250>
+
+### Description
+We've added the support for Redis, this is a database that works with key-value, it's very fast and it's used for cache, we've added the support for this database because it's very useful for some things like save in memory data that need to be accessed very fast.
+
+### Use
+To use this feature you need to enable the ```Config.Redis``` option in the ```config.js``` file, then you have to provide the redis credentials in the server.cfg file like this: 
+```cfg
+set redisCredentials "redis://user:password@127.0.0.1:6379/0"
+```
+When the server start if the credentials are correct the resource will connect to the database and it will be ready to use.
+**Functions List:**
+
+```lua
+Redis.Get(key, callback);
+Redis.Set(key, values, callback);
+Redis.Del(key, callback);
+Redis.Exist(key, callback);
+Redis.Expire(key, seconds, callback);
+Redis.Update(key, value, callback);
+Redis.Flush(callback);
+Redis.Keys(pattern, callback);
+Redis.MGet(keys, callback);
+Redis.Close();
+Redis.Open();
+Redis.Reload();
+```
+
+#### Params
+- ```key/s(*)``` is the key or keys that you want to use in the query, if you want to use more than one key you have to use an array of keys.
+- ```values(depending)``` is the value or values that you want to set in an entry, if you want to use more than one value you have to use an array of values.
+- ```callback(optional)``` is the function that will be called when the data or function is finished, if the callback is not specified the query will be executed and it will be as an await function.
+
+#### Examples
+##### Set
+```lua
+local result = exports["ice_mysql"]:RedisSet("name", "Daniel");
+-- OK
+```
+##### Update
+```lua
+local result = exports["ice_mysql"]:RedisUpdate("name", "Daniel3");
+-- OK
+```
+##### Get
+```lua
+local result = exports["ice_mysql"]:RedisGet("name");
+-- Daniel3
+```
+##### Delete
+```lua
+local result = exports["ice_mysql"]:RedisDel("name");
+-- OK
+```
+##### Flush
+```lua
+local result = exports["ice_mysql"]:RedisFlush();
+-- OK
+```
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/redis/index.js```
