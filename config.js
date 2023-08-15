@@ -56,6 +56,9 @@ Config.ConnectionsORM = [0, 10] // Minimum and maximum count of connections that
 Config.ORMConnectionTimout = 15000 // The time in milliseconds that the ORM will wait for a connection to be available in the pool, if the time is exceeded a error will be thrown
 Config.LogORMConnections = false; // Show in the console when a connection is created or released by the ORM
 
+// Redis
+Config.Redis = true; // Enable the Redis support
+
 // Update
 Config.CheckForUpdates = true; // Check for updates when the server starts
 Config.AutoUpdate = true; // If there is a new version, the resource will be updated automatically in the next server restart

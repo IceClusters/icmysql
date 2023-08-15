@@ -10,6 +10,7 @@ require('./db/Delete.js');
 require('./db/Transactions.js');
 require('./db/Unique.js');
 if (Config.MongoDB) require('./db/mongo/Connections.js');
+if (Config.Redis) require('./db/redis/index.js');
 
 setTimeout(async () => {
     try {
