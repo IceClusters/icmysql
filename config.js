@@ -28,14 +28,16 @@ Config.BackupEnabled = true; // Enable the backup system
 Config.MysqlDumpPath = "C:/Program Files/MariaDB 11.2/bin/mysqldump.exe"; // The path of the mysqldump.exe file, in this case is the path of the xampp mysql dump
 Config.BackupDirPath = "IceMysql/Backups"; // Path respective to the FXServer.exe file
 Config.MaxBackups = 4; // The max count of backups that will be saved, the oldest will be deleted
-Config.Days = [12, 14, 23, 29]; // The days that the backup will be executed, if the array is empty the backup will be executed every day
-Config.Hour = "19:46" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
+Config.Days = [5, 14, 23, 29]; // The days that the backup will be executed, if the array is empty the backup will be executed every day
+Config.Hour = "20:00" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
 
 // DATABASE
 Config.MaxDB = 10; // The max count of databases that can be readed in the server.cfg file
 Config.MaxConnectionLimit = 15; // The max count of connections that can be created per database(recomend to not alter this value too much)
 Config.QueueLimit = 100; // The max count of queries that can be queued per database(recomend to not alter this value too much)
 Config.DefaultDB = 1; // The default database that will be used if the database is not specified in the query
+Config.SlowQueryWarn = 500; // The time in milliseconds that the query will be considered slow and will be logged in the console
+Config.CacheMaxSize = 50; // The time of the cache in megabytes that will be used to store the queries, if the cache is full the oldest query will be deleted, please don't increase a lot this value because the cache is stored in the RAM
 
 // MongoDB
 Config.MongoDB = true; // Enable the MongoDB support

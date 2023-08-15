@@ -1,15 +1,18 @@
 const { ParseError } = require('../errors/Parser.js');
 const crypto = require("crypto");
 const LRU = require('lru-cache');
-const { ReplaceNamedParams, ReplaceDotParams } = require('./Params.js');
+const { ReplaceNamedParams, ReplaceDotParams, ConvertNilParams } = require('./Params.js');
 const { QueryTypes } = require('sequelize');
 const { IsConnecting, GetConnection, ReleaseConnection } = require('./Connections.js');
 const { performance } = require('perf_hooks');
 const { AddDebugCache, DeleteCache, AddQuery } = require('./Debug.js');
+const { Log, LogTypes } = require('../utils/Logger.js');
 
 global.QueryTypes = Object.freeze({ "Query": "QUERY", "Select": "SELECT", "Insert": "INSERT", "Update": "UPDATE", "Delete": "DELETE", "Unique": "UNIQUE", "Scalar": "SCALAR", "Single": "SINGLE", "Raw": "RAW" });
 
-global.queryCache = new LRU(1000)
+global.queryCache = new LRU({
+    max: 50 * 1024 * 1024,
+})
 
 function generateQueryHash(dbId, type, query, values) {
     const hash = crypto.createHash("sha1");
@@ -132,7 +135,11 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
     }
     const connection = await GetConnection(dbId);
     try {
-        if (values == undefined) values = null;
+        if (values) {
+            values = ConvertNilParams(values)
+        } else {
+            values = null;
+        }
         if (query.includes("@")) {
             query = ReplaceNamedParams(query, values)
             values = null;
@@ -143,8 +150,12 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         }
         const [rows, fields] = await connection.execute(query, values);
         const end = performance.now();
+        const time = (end - start).toFixed(3);
+        if (time <= Config.SlowQueryWarn) {
+            Log(LogTypes.Warning, `Slow query detected: ${query} - ${time}ms`)
+        }
         if (Config.Enabled && resourceName != null) {
-            AddQuery(resourceName, type.toString(), dbId, query, values, rows, (end - start).toFixed(3));
+            AddQuery(resourceName, type.toString(), dbId, query, values, rows, time);
             if (cache)
                 AddDebugCache(table, hash, rows)
         }
