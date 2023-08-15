@@ -4,6 +4,7 @@ game 'gta5'
 author 'DanielGP'
 description 'Script that manage all connections and querys to the database.'
 version '1.0.0'
+is_release 'yes'
 
 client_scripts {
     'debug.lua'
@@ -11,6 +12,7 @@ client_scripts {
 
 server_scripts {
     'config.js',
+    'src/server/main.lua',
     'dist/build.js'
 }
 

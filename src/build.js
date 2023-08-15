@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { build } = require('esbuild');
 
 build({
@@ -7,3 +8,4 @@ build({
     platform: 'node',
     logLevel: 'info',
 });
+fs.writeFileSync('dist/metabuild.js', '', 'utf-8');
