@@ -1,4 +1,10 @@
 var isOpen = false;
+var Colors = {
+    "danger": "#ca0a0a1c",
+    "warn": "#ffb3001c",
+    "success": "#8bff001c",
+    "info": "#0034ff1c"
+}
 
 var resources = [];
 
@@ -117,21 +123,34 @@ var queries = [
 
 function LoadStats() {
     var data = {
-        queries: 150,
-        slowQueries: 10,
-        timeQueries: 0.74,
-        timeQuerying: 9.28,
-        scripts: 10,
+        queries: 700,
+        slowQueries: 40,
+        timeQueries: 800,
+        timeQuerying: 50,
+        scripts: 20,
         databasesUsed: 2,
-        failedQueries: 1
+        failedQueries: 5
     }
     $("#statsQueries").html("Queries: " + data.queries);
+    $("#statsQueries").css("border-color", data.queries >= 1000 ? Colors.danger : data.queries >= 500 ? Colors.warn : Colors.success)
+
     $("#statsSlowQueries").html("Slow queries: " + data.slowQueries);
+    $("#statsSlowQueries").css("border-color", data.slowQueries >= 40 ? Colors.danger : data.slowQueries >= 15 ? Colors.warn : Colors.success)
+
     $("#statsAverageQueries").html("Average queries: " + data.timeQueries + "ms");
+    $("#statsAverageQueries").css("border-color", data.timeQueries >= 1000 ? Colors.danger : data.timeQueries >= 300 ? Colors.warn : Colors.success)
+
     $("#statsTimeQuerying").html("Time querying: " + data.timeQuerying + " s");
+    $("#statsTimeQuerying").css("border-color", data.timeQuerying >= 100 ? Colors.danger : data.timeQuerying >= 50 ? Colors.warn : Colors.success)
+
     $("#statsScripts").html("Scripts: " + data.scripts);
+    $("#statsScripts").css("border-color", data.scripts >= 40 ? Colors.danger : data.scripts >= 30 ? Colors.warn : Colors.success)
+
     $("#statsDBCount").html("Databases used: " + data.databasesUsed);
+    $("#statsDBCount").css("border-color", data.databasesUsed >= 4 ? Colors.danger : data.databasesUsed > 2 ? Colors.warn : Colors.success)
+
     $("#statsFailedQueries").html("Failed queries: " + data.failedQueries);
+    $("#statsFailedQueries").css("border-color", data.failedQueries >= 10 ? Colors.danger : data.failedQueries >= 5 ? Colors.warn : Colors.success)
 }
 
 function CloseResourceModal() {
