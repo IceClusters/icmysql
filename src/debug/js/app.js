@@ -261,7 +261,12 @@ function GoBack() {
     sections.forEach(element => {
         $(`#${element}`).css("display", "none");
     });
-    $(`#${mainSection}`).css("display", "block");
+    $(`#${mainSection}`).css("display", "flex");
+}
+
+function OpenSection(sec) {
+    $(`#${mainSection}`).css("display", "none");
+    $(`#${sec}`).css("display", "flex");
 }
 
 function OpenUI(state) {
@@ -286,6 +291,10 @@ ListenSearchInput();
 
 $(document).ready(function () {
     LoadStats();
+
+    // Only for testing
+    OpenSection("section__resources")
+
     window.addEventListener("message", function (event) {
         if (event.data.action == undefined) return;
         switch (event.data.action) {

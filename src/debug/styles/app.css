@@ -71,7 +71,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	display: none;
+	/* display: none; */
 }
 
 .grid {
@@ -166,16 +166,16 @@ body {
 }
 
 .section__resources {
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	width: calc(100% - 50px);
 	height: calc(100% - 50px);
-	/* display: none; */
+	display: none;
 }
 
-.row{
+.row {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -183,7 +183,7 @@ body {
 	height: 100%;
 }
 
-.return{
+.return {
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
