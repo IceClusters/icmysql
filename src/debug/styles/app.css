@@ -409,7 +409,7 @@ body {
 	width: 90%;
 	height: 80%;
 	border-radius: 8px;
-	background-color: rgba(10, 10, 10, 1);
+	background-color: rgb(18, 18, 18);
 	z-index: 4;
 }
 
@@ -456,6 +456,7 @@ body {
 	background-color: transparent !important;
 	overflow: auto;
 	scrollbar-width: none;
+	border-radius: 5px;
 	transition: ease-in-out 0.3s all;
 	width: 95%;
 	height: 95%;
@@ -476,6 +477,10 @@ body {
 	color: #d1d1d1;
 	padding: .1vh .5vw;
 
+}
+
+#resourceModalBody{
+	background-color: rgb(20, 20, 20);
 }
 
 .tablaContent tbody tr td:first-child {
@@ -499,18 +504,18 @@ body {
 	position: sticky;
 	top: 0;
 	padding: 1vh .5vw;
-	background-color: rgba(13, 13, 13, 1);
+	background-color: rgba(23, 23, 23, 1);
 }
 
 
 
 
 .tablaContent thead tr {
-	background: transparent !important;
 	font-family: 'Montserrat' !important;
 }
 
 .tablaContent tbody td {
+	background-color: red;
 	text-align: center;
 }
 
