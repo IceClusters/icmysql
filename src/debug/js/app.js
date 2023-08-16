@@ -1,9 +1,9 @@
 var isOpen = false;
 const Colors = {
-    "danger": "#ca0a0a1c",
-    "warn": "#ffb3001c",
-    "success": "#8bff001c",
-    "info": "#0034ff1c"
+    // "danger": "#ca0a0a1c",
+    // "warn": "#ffb3001c",
+    // "success": "#8bff001c",
+    // "info": "#0034ff1c"
 }
 const mainSection = "section__buttons"
 const sections = [
