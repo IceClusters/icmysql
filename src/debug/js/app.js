@@ -173,17 +173,17 @@ function ListenSearchInput() {
     $("#inputBox").on("input", () => {
         const input = $("#inputBox").val();
         if (input.length < 0) return;
-        const filtered = resources.filter(resource => resource.toLowerCase().includes(input.toLowerCase()));
+        // console.log(resources)
+        const filtered = resources.filter(resource => resource.name.toLowerCase().includes(input.toLowerCase()));
         $("#resources-content").html("");
         filtered.forEach(resource => {
             $("#resources-content").append(`
-            <div class="box" id="resource-list-${resource}">
+            <div class="box" id="resource-list-${resource.name}">
                 <div class="grid--box">
                     <div class="adjust">
                         <div class="flex">
-                            <p style="margin: 0;">${resource}</p>
-                            <p class="desc">Script that manage all connections and querys to the
-                                database. </p>
+                            <p style="margin: 0;">${resource.name}</p>
+                            <p class="desc">${resource.description}</p>
                         </div>
                     </div>
                     <div class="right--icon">
@@ -194,8 +194,8 @@ function ListenSearchInput() {
                 </div>
             </div>`);
 
-            $("#resource-list-" + resource).click(() => {
-                OpenResource(resource);
+            $("#resource-list-" + resource.name).click(() => {
+                OpenResource(resource.name);
             });
         });
     });
@@ -205,13 +205,12 @@ function LoadResources(rscs) {
     resources = rscs;
     rscs.forEach(resource => {
         $("#resources-content").append(`
-        <div class="box" id="resource-list-${resource}">
+        <div class="box" id="resource-list-${resource.name}">
             <div class="grid--box">
                 <div class="adjust">
                     <div class="flex">
-                        <p style="margin: 0;">${resource}</p>
-                        <p class="desc">Script that manage all connections and querys to the
-                            database. </p>
+                        <p style="margin: 0;">${resource.name}</p>
+                        <p class="desc">${resource.description}</p>
                     </div>
                 </div>
                 <div class="right--icon">
@@ -222,8 +221,8 @@ function LoadResources(rscs) {
             </div>
         </div>`);
 
-        $("#resource-list-" + resource).click(() => {
-            OpenResource(resource);
+        $("#resource-list-" + resource.name).click(() => {
+            OpenResource(resource.name);
         });
     });
 }
@@ -236,7 +235,12 @@ function OpenUI(state) {
     isOpen = state;
 }
 
-LoadResources(["ice_gym", "ice_core", "ice_hud", "ice_callbacks", "ice_vehicleshop", "ice_asd", "ice_asd", "ice_asd", "ice_asd", "ice_asd", "ice_asd"]);
+LoadResources([
+    {
+        "name": "testing-mysql",
+        "description": "Script that manage all connections and querys to the database."
+    }
+]);
 ListenSearchInput();
 
 $(document).ready(function () {

@@ -151,7 +151,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         const [rows, fields] = await connection.execute(query, values);
         const end = performance.now();
         const time = (end - start).toFixed(3);
-        if (time <= Config.SlowQueryWarn) {
+        if (time >= Config.SlowQueryWarn) {
             Log(LogTypes.Warning, `Slow query detected: ${query} - ${time}ms`)
         }
         if (Config.Enabled && resourceName != null) {

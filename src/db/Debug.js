@@ -22,7 +22,6 @@ function SetDBORM(db, orm) {
 function AddQuery(resourceName, type, db, query, values, result, time) {
     queries.push({
         resourceName: resourceName,
-        description: GetResourceMetadata(resourceName, "description", 0),
         type: type,
         db: db,
         query: query,
@@ -53,7 +52,7 @@ function GetResources() {
     var resources = [];
     queries.forEach(query => {
         if (!resources.includes(query.resourceName)) {
-            resources.push(query.resourceName);
+            resources.push({ name: query.resourceName, description: GetResourceMetadata(query.resourceName, "description", 0) });
         }
     });
     return resources;
@@ -85,6 +84,9 @@ function CheckPermission(src) {
     return false;
 }
 
+RegisterCommand("resourcesDani", function () {
+    console.log(JSON.stringify(GetResources(), null, 2))
+});
 
 RegisterNetEvent("ice_mysql:server:getresources");
 AddEventHandler("ice_mysql:server:getresources", function () {

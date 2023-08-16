@@ -40,7 +40,7 @@ Config.SlowQueryWarn = 500; // The time in milliseconds that the query will be c
 Config.CacheMaxSize = 50; // The time of the cache in megabytes that will be used to store the queries, if the cache is full the oldest query will be deleted, please don't increase a lot this value because the cache is stored in the RAM
 
 // MongoDB
-Config.MongoDB = true; // Enable the MongoDB support
+Config.MongoDB = false; // Enable the MongoDB support
 Config.DefaultMongoDB = 1;
 Config.ConnectiTimout = 5000; // The time in milliseconds that the MongoDB will wait for a connection to be available in the pool, if the time is exceeded a error will be thrown
 
@@ -57,7 +57,7 @@ Config.ORMConnectionTimout = 15000 // The time in milliseconds that the ORM will
 Config.LogORMConnections = false; // Show in the console when a connection is created or released by the ORM
 
 // Redis
-Config.Redis = true; // Enable the Redis support
+Config.Redis = false; // Enable the Redis support
 
 // Update
 Config.CheckForUpdates = true; // Check for updates when the server starts
