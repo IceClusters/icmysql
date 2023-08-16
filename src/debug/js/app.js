@@ -1,10 +1,14 @@
 var isOpen = false;
-var Colors = {
+const Colors = {
     "danger": "#ca0a0a1c",
     "warn": "#ffb3001c",
     "success": "#8bff001c",
     "info": "#0034ff1c"
 }
+const mainSection = "section__buttons"
+const sections = [
+    "section__resources"
+]
 
 var resources = [];
 
@@ -251,6 +255,13 @@ function LoadResources(rscs) {
             OpenResource(resource.name);
         });
     });
+}
+
+function GoBack() {
+    sections.forEach(element => {
+        $(`#${element}`).css("display", "none");
+    });
+    $(`#${mainSection}`).css("display", "block");
 }
 
 function OpenUI(state) {

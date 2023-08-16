@@ -18,7 +18,7 @@
             <video src="./assets/bg.mp4" autoplay muted loop></video>
             <main class="main">
                 <!-- HOME -->
-                <section class="section__buttons">
+                <section class="section__buttons" id="section__buttons">
                     <div class="grid">
                         <div class="resources__section button__style">
                             <i class="fa-solid fa-scroll"></i>
@@ -49,7 +49,7 @@
                 </section>
 
                 <!-- RESOURCES -->
-                <section class="section__resources">
+                <section class="section__resources" id="section__resources">
                     <div class="modal_container" id="resourceModal">
                         <div class="modal--style popup_container animate__animated">
                             <div class="modal--title">
@@ -75,12 +75,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="return">
+                    <div class="return" onclick="GoBack()">
                         <a class="icon btn__style">Back</a>
                     </div>
                     <div class="row">
                         <div class="rs--grid adj">
-                        
+
                             <div class="container__title">
                                 <h1>Resources</h1>
                                 <div class="inputBox_container">
@@ -92,7 +92,7 @@
                             </div>
                             <div class="container__content">
                                 <div class="scroll" id="resources-content">
-    
+
                                 </div>
                             </div>
                         </div>
