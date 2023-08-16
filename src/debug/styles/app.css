@@ -517,7 +517,7 @@ body {
 @keyframes bg-hide {
 	0% {
 		backdrop-filter: blur(10px);
-		background-color: #000000d8;
+		background-color: rgba(5, 5, 5, 0.5);
 	}
 
 	100% {
