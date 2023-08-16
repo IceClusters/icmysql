@@ -135,6 +135,8 @@ function LoadStats() {
 }
 
 function CloseResourceModal() {
+    $(".popup_container").removeClass("animate__fadeInUp");
+    $(".popup_container").addClass("animate__fadeOutDown");
     $("#resourceModal").removeClass("--active");
     $("#resourceModal").addClass("--hide");
     setTimeout(() => {
@@ -145,9 +147,13 @@ function CloseResourceModal() {
 
 function OpenResource(resourceName) {
     if (!resources.includes(resourceName)) return;
+    $(".popup_container").removeClass("animate__fadeOutDown");
     $("#resourceModal").css("display", "");
     $("#resourceModal").addClass("--active");
     $("#resourceModalTitle").html(resourceName);
+    setTimeout(() => {
+        $(".popup_container").addClass("animate__fadeInUp");
+    }, 100);
     var resourceQueries = queries.filter(query => query.resourceName == resourceName);
     console.log("resourceQueries: ", resourceQueries);
     $("#resourceModalBody").html("");
