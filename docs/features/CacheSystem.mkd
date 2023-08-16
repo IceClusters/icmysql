@@ -5,20 +5,13 @@ Using this feature you will save more than the 50% of the time that you use to m
 ### Video
 https://github.com/IceSystem/ice_mysql/assets/96537843/f306b9eb-1ace-4ea7-a8fc-83bafa864e6e
 ### Use
-To use this feature you have to specify the databases credentials in the server.cfg, for example:
-```cfg
-set mysqlCredentials_1 "host=127.0.0.1;user=root; password=1234; database=fxserver; port=3306"
-set mysqlCredentials_2 "host=127.0.0.1;user=root; password=1234; database=fxserver; port=3306"
-```
-Once you have specified the databases when the server start in the console you will see a message that tell you if the script has connected to each DB correctly.
-To use you have to specify the database number in the function that you want to use as the first parameter, for example to make a select in the database 2:
+To use this feature you don't have to do anything, by default is applied in the default query functions, if there's a reason to disable it you can do it by passing a false value after the function param.
+Example to disable cache:
 ```lua
-MySQL.Select(2, "SELECT name FROM players WHERE id = ?". {3}, function(result)
+MySQL.Select(1, "SELECT name FROM players WHERE id = ?". {3}, function(result)
     print(result) -- Output: Daniel
-end)
+end, false)
 ```
 ### Files
 This is the list of the involved files in this feature to help any developer to understand how it works:
-- ```src/db/Connections.js```
 - ```src/db/Query.lua```
-- ```src/db/Reader.js```
