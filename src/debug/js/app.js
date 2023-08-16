@@ -146,7 +146,14 @@ function CloseResourceModal() {
 }
 
 function OpenResource(resourceName) {
-    if (!resources.includes(resourceName)) return;
+    let exist = false;
+    for (let i = 0; i < resources.length; i++) {
+        if (resources[i].name == resourceName) {
+            exist = true;
+            break;
+        }
+    }
+    if (!exist) return;
     $(".popup_container").removeClass("animate__fadeOutDown");
     $("#resourceModal").css("display", "");
     $("#resourceModal").addClass("--active");
@@ -237,7 +244,11 @@ function OpenUI(state) {
 
 LoadResources([
     {
-        "name": "testing-mysql",
+        "name": "ice_gym",
+        "description": "Script that manage all connections and querys to the database."
+    },
+    {
+        "name": "ice_hud",
         "description": "Script that manage all connections and querys to the database."
     }
 ]);
