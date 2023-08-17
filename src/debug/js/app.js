@@ -11,6 +11,15 @@ const sections = [
     "section__dbs",
 ]
 
+const dbs = [
+    {
+        id: "1",
+        orm: false,
+        type: "mysql",
+        time: 23.62
+    }
+]
+
 var resources = [];
 
 var queries = [
@@ -258,6 +267,45 @@ function LoadResources(rscs) {
     });
 }
 
+function LoadDBs() {
+    for (let i = 0; i < dbs.length; i++) {
+        const db = dbs[i];
+        var lastUse = null;
+        queries.forEach(element => {
+            if (element.db == db.id) {
+                lastUse = element.currentTimestamp;
+            }
+        });
+
+        $("#dbs-content").append(`
+            <div class="boxdb" id="resource-list-ice_gym">
+                <div class="column">
+                    <div class="icon__db">
+                        <lord-icon class="icon--box" src="https://cdn.lordicon.com/wjrtlwtp.json"
+                            trigger="loop"
+                            colors="primary:#08a88a,secondary:#646e78,tertiary:#3a3347,quaternary:#ffc738">
+                        </lord-icon>
+                        <p style="margin: 0;">Database #${db.id}</p>
+                    </div>
+                    <div class="adjust-content">
+                        <div class="row ">
+                            <div class="column justify-content align-item">
+                                <p class="desc desc--db">2023-07-10 11:48:53</p>
+                                <p class="desc desc--db sub">Last Use</p>
+                            </
+                            <div class="column justify-content align-item">
+                                <p class="desc desc--db">${db.time} ms</p>
+                                <p class="desc desc--db sub">Connection Time</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `)
+    }
+}
+
 function GoBack() {
     sections.forEach(element => {
         $(`#${element}`).css("display", "none");
@@ -292,7 +340,7 @@ ListenSearchInput();
 
 $(document).ready(function () {
     LoadStats();
-
+    LoadDBs();
     // Only for testing
     OpenSection("section__dbs")
 

@@ -4,10 +4,12 @@ var queries = [];
 var cache = [];
 var dbs = [];
 
-function AddDB(db) {
+function AddDB(db, type, time) {
     dbs.push({
         id: db,
-        orm: false
+        orm: false,
+        type: type,
+        time: time
     });
 }
 
