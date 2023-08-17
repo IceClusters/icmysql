@@ -7,7 +7,8 @@ const Colors = {
 }
 const mainSection = "section__buttons"
 const sections = [
-    "section__resources"
+    "section__resources",
+    "section__dbs",
 ]
 
 var resources = [];
@@ -293,7 +294,7 @@ $(document).ready(function () {
     LoadStats();
 
     // Only for testing
-    OpenSection("section__resources")
+    OpenSection("section__dbs")
 
     window.addEventListener("message", function (event) {
         if (event.data.action == undefined) return;

@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ice mysql</title>
+    <link rel="stylesheet" href="./styles/root.css">
     <link rel="stylesheet" href="./styles/app.css">
+    <link rel="stylesheet" href="./styles/resources.css">
     <link rel="stylesheet" href="./styles/input.css">
+    <link rel="stylesheet" href="./styles/database.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://kit.fontawesome.com/1c4b4851e0.js" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -27,7 +30,7 @@
 
                         <div class="dbs__section button__style" onclick="OpenSection('section__dbs')">
                             <i class="fa-solid fa-database"></i>
-                            <p>DBS</p>
+                            <p>Database</p>
                         </div>
 
                         <div class="logs__section button__style" onclick="OpenSection('section__logs')">
@@ -117,6 +120,102 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                <section class="section__dbs" id="section__dbs">
+                    <div class="container--dbs">
+                        <div class="container__title">
+                            <h1>Databases</h1>
+                            <div class="inputBox_container">
+                                <lord-icon class="search_icon" src="https://cdn.lordicon.com/rlizirgt.json"
+                                    trigger="hover" colors="primary:#494a4d">
+                                </lord-icon>
+                                <input class="inputBox" id="inputBox" type="text" placeholder="Find database">
+                            </div>
+                        </div>
+                        
+                        <div class="container__content">
+                            <div class="scroll__dbs" id="dbs-content">
+                                <div class="boxdb" id="resource-list-ice_gym">
+                                    <div class="column">
+                                        <div class="icon__db">
+                                            <lord-icon class="icon--box"     src="https://cdn.lordicon.com/wjrtlwtp.json"
+                                            trigger="loop"
+                                            colors="primary:#08a88a,secondary:#646e78,tertiary:#3a3347,quaternary:#ffc738">
+                                            </lord-icon>
+                                            <p style="margin: 0;">Database #1</p>
+                                        </div>
+                                        <div class="adjust-content">
+                                            <div class="row ">
+                                                <div class="column justify-content align-item">
+                                                    <p class="desc desc--db">2023-07-10 11:48:53</p>
+                                                    <p class="desc desc--db sub">last update</p>
+                                                </div>
+
+                                                <div class="column justify-content align-item">
+                                                    <p class="desc desc--db">3.014900ms</p>
+                                                    <p class="desc desc--db sub">Average Response</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="boxdb" id="resource-list-ice_gym">
+                                    <div class="column">
+                                        <div class="icon__db">
+                                            <lord-icon class="icon--box"     src="https://cdn.lordicon.com/wjrtlwtp.json"
+                                            trigger="loop"
+                                            colors="primary:#08a88a,secondary:#646e78,tertiary:#3a3347,quaternary:#ffc738">
+                                            </lord-icon>
+                                            <p style="margin: 0;">Database #2</p>
+                                        </div>
+                                        <div class="adjust-content">
+                                            <div class="row ">
+                                                <div class="column justify-content align-item">
+                                                    <p class="desc desc--db">2023-07-10 11:48:53</p>
+                                                    <p class="desc desc--db sub">last update</p>
+                                                </div>
+
+                                                <div class="column justify-content align-item">
+                                                    <p class="desc desc--db">3.014900ms</p>
+                                                    <p class="desc desc--db sub">Average Response</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="boxdb" id="resource-list-ice_gym">
+                                    <div class="column">
+                                        <div class="icon__db">
+                                            <lord-icon class="icon--box"     src="https://cdn.lordicon.com/wjrtlwtp.json"
+                                            trigger="loop"
+                                            colors="primary:#08a88a,secondary:#646e78,tertiary:#3a3347,quaternary:#ffc738">
+                                            </lord-icon>
+                                            <p style="margin: 0;">Database #3</p>
+                                        </div>
+                                        <div class="adjust-content">
+                                            <div class="row ">
+                                                <div class="column justify-content align-item">
+                                                    <p class="desc desc--db">2023-07-10 11:48:53</p>
+                                                    <p class="desc desc--db sub">last update</p>
+                                                </div>
+
+                                                <div class="column justify-content align-item">
+                                                    <p class="desc desc--db">3.014900ms</p>
+                                                    <p class="desc desc--db sub">Average Response</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return" onclick="GoBack()">
+                        <a class="icon btn__style">Back</a>
                     </div>
                 </section>
 
