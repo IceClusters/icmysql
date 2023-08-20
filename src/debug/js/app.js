@@ -9,6 +9,7 @@ const mainSection = "section__buttons"
 const sections = [
     "section__resources",
     "section__dbs",
+    "section__logs",
 ]
 
 const dbs = [

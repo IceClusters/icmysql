@@ -117,7 +117,7 @@ body {
 
 .button__style:hover {
 	border: 0px solid transparent;
-	transform: scale(0.98);
+	transform: scale(0.99);
 	background-color: var(--hover-button--color);
 }
 
@@ -165,6 +165,15 @@ body {
 }
 
 .section__dbs {
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: calc(100% - 50px);
+	height: calc(100% - 50px);
+	display: none;
+}
+
+.section__logs{
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
