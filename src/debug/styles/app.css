@@ -182,6 +182,15 @@ body {
 	display: none;
 }
 
+.section__cache{
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: calc(100% - 50px);
+	height: calc(100% - 50px);
+	display: none;
+}
+
 .row {
 	display: flex;
 	justify-content: center;

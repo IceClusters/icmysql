@@ -10,6 +10,7 @@ const sections = [
     "section__resources",
     "section__dbs",
     "section__logs",
+    "section__cache",
 ]
 
 const dbs = [
