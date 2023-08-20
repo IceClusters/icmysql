@@ -74,11 +74,12 @@ var queries = [
         currentTimestamp: Date.now(),
         cache: true
     },
+
     {
         resourceName: "ice_gym",
         type: "query",
         db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
+        query: "SELECT * FROM `gym` WHERE `id` = @id AND `name` = @name AND `lastname` = @lastname AND `age` = @age AND `city` = @city AND `address` = @address AND `phone` = @phone AND `email` = @email ",
         values: { id: 1 },
         time: 0.512,
         currentTimestamp: Date.now(),
@@ -137,8 +138,8 @@ var queries = [
 ]
 
 function ReduceText(text) {
-    if (text.length <= 30) return text;
-    return text.substr(0, 30) + "...";
+    if (text.length <= 47) return text;
+    return text.substr(0, 47) + "...";
 }
 
 function LoadStats() {
@@ -348,7 +349,7 @@ $(document).ready(function () {
     LoadStats();
     LoadDBs();
     // Only for testing
-    OpenSection("section__dbs")
+    OpenSection("section__logs")
 
     window.addEventListener("message", function (event) {
         if (event.data.action == undefined) return;

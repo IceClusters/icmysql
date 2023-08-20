@@ -217,10 +217,6 @@
 	z-index: 4;
 }
 
-.--modal {
-	height: 88%;
-}
-
 .modal--title {
 	display: flex;
 	justify-content: flex-start;
@@ -303,6 +299,15 @@
 
 }
 
+.tablaContent tbody tr {
+	background-color: transparent !important;
+	/* border-bottom: 1px solid var(--border-top); */
+	transition: .3s ease all;
+
+}
+
+
+
 
 .tablaContent thead th {
 	position: sticky;
@@ -344,6 +349,28 @@
 	scrollbar-width: none;
 	display: none;
 }
+
+#query{
+	text-align: left;
+	font-family: "Montserrat" !important;
+	font-size: 0.8rem;
+	color: var(--color--secondary);
+	font-weight: 500;
+}
+
+#values{
+	font-family: "Montserrat" !important;
+	font-size: 0.9rem;
+	color: var(--color--title);
+	font-weight: 600;
+}
+
+#time{
+	font-family: "Montserrat" !important;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
 
 @keyframes bg {
 	0% {
