@@ -28,7 +28,7 @@ var queries = [
         resourceName: "ice_gym",
         type: "query",
         db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
+        query: "SELECT * FROsM `gym`",
         values: { id: 1 },
         time: 0.512,
         currentTimestamp: Date.now(),
@@ -136,6 +136,11 @@ var queries = [
     }
 ]
 
+function ReduceText(text) {
+    if (text.length <= 30) return text;
+    return text.substr(0, 30) + "...";
+}
+
 function LoadStats() {
     var data = {
         queries: 700,
@@ -202,8 +207,8 @@ function OpenResource(resourceName) {
         $("#resourceModalBody").append(`
             <tr>
                 <td id="dbid">${query.cache ? '<i class="fa-solid fa-memory"></i> ' : ''}${query.db}</td>
-                <td id="query">${query.query}</td>
-                <td id="values">${JSON.stringify(query.values)}</td>
+                <td id="query">${ReduceText(query.query)}</td>
+                <td id="values">${ReduceText(JSON.stringify(query.values))}</td>
                 <td id="time">${query.time} ms</td>
             </tr>
         `)
