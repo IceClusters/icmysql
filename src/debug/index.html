@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./styles/database.css">
     <link rel="stylesheet" href="./styles/logs.css">
     <link rel="stylesheet" href="./styles/cache.css">
+    <link rel="stylesheet" href="./styles/backup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://kit.fontawesome.com/1c4b4851e0.js" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -45,7 +46,7 @@
                             <p>Cache</p>
                         </div>
 
-                        <div class="backups__section button__style" onclick="OpenSection('section__backups')">
+                        <div class="backups__section button__style" onclick="OpenSection('section__backup')">
                             <i class="fa-solid fa-memory"></i>
                             <p>backups</p>
                         </div>
@@ -204,6 +205,39 @@
                                                 <td style="width:10%">Players</td>
                                                 <td style="width: 20% !important;">534khjjh43634h6</td>
                                                 <td style="width:50%">[{"asd": "asdasd","asd": "asdasd","asd": "asdasd","asd"...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return" onclick="GoBack()">
+                        <a class="icon btn__style">Back</a>
+                    </div>
+                </section>
+
+                <section class="section__backup" id="section__backup">
+                    <div class="container--backup">
+                        <div class="container__title">
+                            <h1>Backups</h1>
+                        </div>
+                        <div class="container__content --backup">
+                            <div class="backup--content">
+                                <div class="shadow-sm rounded p-4 table__container adg--backup">
+                                    <table class="tablaContent">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:33.3% !important;">Database</th>
+                                                <th style="width: 33.3% !important;">Date</th>
+                                                <th style="width:33.3% !important;">Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="backupModalBody">
+                                            <tr>
+                                                <td style="width:33.3%">Ice Server</td>
+                                                <td style="width: 33.3% !important;">23/10/2023</td>
+                                                <td style="width:33.3%">0.015ms</td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -11,6 +11,7 @@ const sections = [
     "section__dbs",
     "section__logs",
     "section__cache",
+    "section__backup",
 ]
 
 const dbs = [
@@ -350,7 +351,7 @@ $(document).ready(function () {
     LoadStats();
     LoadDBs();
     // Only for testing
-    OpenSection("section__logs")
+    OpenSection("section__backup")
 
     window.addEventListener("message", function (event) {
         if (event.data.action == undefined) return;
