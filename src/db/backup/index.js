@@ -6,6 +6,7 @@ const { CreateDirRecursive, GetOldestFiles, DeleteFile } = require('../../utils/
 const { Log, LogTypes } = require('../../utils/Logger.js');
 const { GetDate } = require('../../utils/Time.js')
 const { GetKey } = require('../../language/localisation.js')
+const { ReadDir, GetFileCreationDate, GetFileSize } = require('../../utils/Files.js')
 
 var pendingBackup = [];
 var backupMaded = false;
@@ -108,4 +109,16 @@ async function MakeBackup() {
     pendingBackup = [];
 }
 
-module.exports = { PrepareBackup }
+async function GetBackupHistory() {
+    const data = await ReadDir(Config.BackupDirPath);
+    const result = [];
+    for (let i = 0; i < data.length; i++) {
+        const name = data[i].split("_")[0];
+        const date = data[i].split("_")[1].replace(".sql", "");
+        const size = await GetFileSize(`${Config.BackupDirPath}/${data[i]}`) / 1000;
+        result.push({ name: name, date: date, size: size });
+    }
+    return result;
+}
+
+module.exports = { PrepareBackup, GetBackupHistory }

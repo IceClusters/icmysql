@@ -34,7 +34,7 @@ async function RegisterConnection(index, credentials) {
     const pool = mysql.createPool(credentials, { connectionLimit: Config.ConnectionLimit, queueLimit: Config.QueueLimit });
     const end = performance.now();
     global.pools[index] = pool;
-    AddDB(index);
+    AddDB(index, "mysql", (end - start).toFixed(4));
     if (Config.ORM) {
         if (await DirExist(path.join(GetResourcePath(GetCurrentResourceName()), `src/db/orm/models/${index}`))) {
             RegisterORMConnection(index, credentials);

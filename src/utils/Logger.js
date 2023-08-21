@@ -7,6 +7,7 @@ const path = require('path');
 const LogTypes = Object.freeze({ "Info": "INFO", "Warning": "WARNING", "Error": "ERROR", "Debug": "DEBUG", "Solution": "SOLUTION" })
 var logReady = false;
 var logPath = `${Config.LogFilesPath}_${GetTimestamp()}.log`;
+var logs = [];
 
 function GetComponents() {
     const architecture = os.arch();
@@ -31,7 +32,7 @@ async function InitLogs() {
     logReady = true;
 }
 
-async function Log(logType, message) {
+async function Log(logType, message, description = null, solution = null) {
     while (!logReady) {
         await new Promise(resolve => setTimeout(resolve, 1));
     }
@@ -45,7 +46,6 @@ async function Log(logType, message) {
             console.warn(`${message}^0`);
             break;
         case LogTypes.Error:
-
             console.error(`${message}^0`);
             break;
         case LogTypes.Debug:
@@ -55,7 +55,17 @@ async function Log(logType, message) {
             console.log(`^3${message}^0`);
             break;
     }
+    logs.push({
+        type: logType,
+        message: logMessage,
+        description: description,
+        solution: solution
+    });
     AppendData(logPath, logMessage.replace(/\^(\d+)/g, '') + "\n");
 }
 
-module.exports = { Log, LogTypes, InitLogs }
+async function GetLogs() {
+    return logs;
+}
+
+module.exports = { Log, LogTypes, InitLogs, GetLogs }

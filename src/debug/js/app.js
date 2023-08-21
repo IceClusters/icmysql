@@ -13,135 +13,13 @@ const sections = [
     "section__cache",
     "section__backup",
 ]
-
-const dbs = [
-    {
-        id: "1",
-        orm: false,
-        type: "mysql",
-        time: 23.62
-    }
-]
+var queries = [];
 
 var resources = [];
 
-var queries = [
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROsM `gym`",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id AND `name` = @name AND `lastname` = @lastname AND `age` = @age AND `city` = @city AND `address` = @address AND `phone` = @phone AND `email` = @email ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    },
-    {
-        resourceName: "ice_gym",
-        type: "query",
-        db: "1",
-        query: "SELECT * FROM `gym` WHERE `id` = @id ",
-        values: { id: 1 },
-        time: 0.512,
-        currentTimestamp: Date.now(),
-        cache: true
-    }
-]
-
-function ReduceText(text) {
-    if (text.length <= 47) return text;
-    return text.substr(0, 47) + "...";
+function ReduceText(text, max) {
+    if (text.length <= max) return text;
+    return text.substr(0, max) + "...";
 }
 
 function LoadStats() {
@@ -210,8 +88,8 @@ function OpenResource(resourceName) {
         $("#resourceModalBody").append(`
             <tr>
                 <td id="dbid">${query.cache ? '<i class="fa-solid fa-memory"></i> ' : ''}${query.db}</td>
-                <td id="query">${ReduceText(query.query)}</td>
-                <td id="values">${ReduceText(JSON.stringify(query.values))}</td>
+                <td id="query">${ReduceText(query.query, 47)}</td>
+                <td id="values">${ReduceText(JSON.stringify(query.values), 47)}</td>
                 <td id="time">${query.time} ms</td>
             </tr>
         `)
@@ -251,8 +129,11 @@ function ListenSearchInput() {
 }
 
 function LoadResources(rscs) {
+    console.log(`AHHH ${rscs}`)
     resources = rscs;
-    rscs.forEach(resource => {
+    $("#resources-content").html("");
+
+    resources.forEach(resource => {
         $("#resources-content").append(`
         <div class="box" id="resource-list-${resource.name}">
             <div class="grid--box">
@@ -276,8 +157,11 @@ function LoadResources(rscs) {
     });
 }
 
-function LoadDBs() {
+function LoadDBs(dbs) {
+    dbs = JSON.parse(dbs)
+    $("#dbs-content").html("");
     for (let i = 0; i < dbs.length; i++) {
+        console.log("add")
         const db = dbs[i];
         var lastUse = null;
         queries.forEach(element => {
@@ -285,6 +169,8 @@ function LoadDBs() {
                 lastUse = element.currentTimestamp;
             }
         });
+        var date = new Date(lastUse);
+        date = date.getHours() + ":" + date.getMinutes() + ", " + date.toDateString();
 
         $("#dbs-content").append(`
             <div class="boxdb" id="resource-list-ice_gym">
@@ -299,7 +185,7 @@ function LoadDBs() {
                     <div class="adjust-content">
                         <div class="row ">
                             <div class="column justify-content align-item">
-                                <p class="desc desc--db">2023-07-10 11:48:53</p>
+                                <p class="desc desc--db">${date}</p>
                                 <p class="desc desc--db sub">Last Use</p>
                             </
                             <div class="column justify-content align-item">
@@ -312,6 +198,45 @@ function LoadDBs() {
                 </div>
             </div>
         `)
+    }
+}
+
+function LoadLogs(logs) {
+    $("#logsModalBody").html("");
+    logs.forEach(log => {
+        $("#logsModalBody").append(`
+            <tr>
+                <td style="width:10%">${log.type}</td>
+                <td style="width: 70% !important;">${log.message.replace("^0", "").replace("^1", "").replace("^2", "").replace("^3", "")}</td>
+                <td style="width:20%">${log.solution ? log.solution : "Unavailable"}</td>
+            </tr>
+        `);
+    });
+}
+
+function LoadCache(cache) {
+    $("#cacheModalBody").html("");
+    for (let i = 0; i < cache.length; i++) {
+        $("#cacheModalBody").append(`
+            <tr>
+                <td style="width:10%">${cache[i].table}</td>
+                <td style="width: 20% !important;">${cache[i].hash}</td>
+                <td style="width:50%">${ReduceText(JSON.stringify(cache[i].values), 60)}</td>
+            </tr>
+        `);
+    }
+}
+
+function LoadBackups(backups) {
+    $("#backupModalBody").html("");
+    for (let i = 0; i < backups.length; i++) {
+        $("#backupModalBody").append(`
+            <tr>
+                <td style="width:10%">${backups[i].name}</td>
+                <td style="width: 20% !important;">${backups[i].date}</td>
+                <td style="width:50%">${backups[i].size} mb</td>
+            </tr>
+        `);
     }
 }
 
@@ -335,29 +260,51 @@ function OpenUI(state) {
     isOpen = state;
 }
 
-LoadResources([
-    {
-        "name": "ice_gym",
-        "description": "Script that manage all connections and querys to the database."
-    },
-    {
-        "name": "ice_hud",
-        "description": "Script that manage all connections and querys to the database."
-    }
-]);
-ListenSearchInput();
+// LoadResources([
+//     {
+//         "name": "ice_gym",
+//         "description": "Script that manage all connections and querys to the database."
+//     },
+//     {
+//         "name": "ice_hud",
+//         "description": "Script that manage all connections and querys to the database."
+//     }
+// ]);
 
 $(document).ready(function () {
-    LoadStats();
-    LoadDBs();
-    // Only for testing
-    OpenSection("section__backup")
+    ListenSearchInput();
+    // LoadStats();
+    // LoadDBs();
+
+    // // Only for testing
+    // OpenSection("section__backup")
 
     window.addEventListener("message", function (event) {
         if (event.data.action == undefined) return;
         switch (event.data.action) {
             case "open":
+                $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "queries" }));
                 OpenUI(true);
+                break;
+            case "loadData":
+                if (event.data.info == "dbs") {
+                    LoadDBs(event.data.data);
+                } else if (event.data.info == "queries") {
+                    queries = event.data.data;
+                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "dbs" }));
+                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "resources" }));
+                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "logs" }));
+                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "cache" }));
+                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "backup" }));
+                } else if (event.data.info == "resources") {
+                    LoadResources(event.data.data);
+                } else if (event.data.info == "logs") {
+                    LoadLogs(event.data.data)
+                } else if (event.data.info == "cache") {
+                    LoadCache(JSON.parse(event.data.data))
+                } else if (event.data.info == "backup") {
+                    LoadBackups(event.data.data)
+                }
                 break;
         }
     })

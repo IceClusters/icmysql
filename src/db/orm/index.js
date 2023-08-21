@@ -7,6 +7,7 @@ const { GetORMPools } = require('../Connections.js')
 const { DefineModels } = require('../orm/models/index.js')
 const { Log, LogTypes } = require('../../utils/Logger.js')
 const { GetKey } = require('../../language/localisation.js');
+const { SetDBORM } = require('../Debug.js');
 
 async function GenerateModels(credentials, index) {
 	if (!Config.ORM) return;
@@ -74,6 +75,7 @@ async function RegisterORMConnection(index, credentials) {
 		const end = performance.now();
 		poolsORM[index] = sequelize;
 		DefineModels(sequelize, index);
+		SetDBORM(index, true)
 		if (Config.LogORMConnections)
 			Log(LogTypes.Info, `^2ORM Database ${index} connected successfully in ${(end - start).toFixed(4)}ms`);
 	} catch (e) {

@@ -42,7 +42,6 @@ function ParseError(error, replaceParams = []) {
     }
     else {
         quickFix.push(errorData);
-        Log(LogTypes.Error, error + "^0");
         var errorSolution = errorData.solution[GetLanguage()];
         var errorDescription = errorData.description[GetLanguage()];
         const keyword = "{ice_mysql_error_replace}";
@@ -50,7 +49,7 @@ function ParseError(error, replaceParams = []) {
             errorSolution = errorSolution.replace(keyword, param);
             errorDescription = errorDescription.replace(keyword, param);
         });
-
+        Log(LogTypes.Error, error + "^0", errorDescription, errorSolution);
         if (Config.SendCommonErrors)
             SendDiscordLog({
                 "content": null,

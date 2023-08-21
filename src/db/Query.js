@@ -227,7 +227,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         var query = query.toLowerCase();
         if ((query.includes("update") || query.includes("delete") || query.includes("insert")) && table && global.queryCache.has(table)) {
             global.queryCache.del(table);
-            AddDebugCache(table, hash)
+            DeleteCache(table, hash)
         }
     }
 }

@@ -77,4 +77,22 @@ async function GetOldestFiles(dirPath, numFilesToKeep) {
     }
 }
 
-module.exports = { FileExist, CreateFile, ReadFile, ReadDir, DeleteFile, CreateDir, DirExist, AppendData, ModifyData, CreateDirRecursive, CreateIfNotExist, GetOldestFiles }
+function GetFileCreationDate(filePath) {
+    try {
+        const stats = fs.statSync(filePath);
+        return stats.birthtime;
+    } catch (err) {
+        throw err;
+    }
+}
+
+function GetFileSize(filePath) {
+    try {
+        const stats = fs.statSync(filePath);
+        return stats.size;
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { FileExist, CreateFile, ReadFile, ReadDir, DeleteFile, CreateDir, DirExist, AppendData, ModifyData, CreateDirRecursive, CreateIfNotExist, GetOldestFiles, GetFileCreationDate, GetFileSize }
