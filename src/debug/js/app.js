@@ -252,11 +252,24 @@ function OpenSection(sec) {
     $(`#${sec}`).css("display", "flex");
 }
 
+let isOpened = false;
+
 function OpenUI(state) {
-    $("#main-container").css("display", state ? "" : "none");
-    $("#body").css("background-color", state ? "#00000087" : "");
-    if (!state)
-        $.post("https://ice_mysql/closeDebugUI", {});
+    if (state){
+        $("#main-container").css("display", "flex");
+        $(".menu").removeClass("animate__fadeOutDown");
+        $(".menu").css("display", "flex");
+        $(".menu").addClass("animate__fadeInUp");
+    }else {
+        $(".menu").removeClass("animate__fadeInUp");
+        $(".menu").addClass("animate__fadeOutDown");
+        setTimeout(() => {
+            $("#main-container").css("display", "none");
+            $.post("https://ice_mysql/closeDebugUI", {});
+        }, 1000);
+    }
+    
+  
     isOpen = state;
 }
 

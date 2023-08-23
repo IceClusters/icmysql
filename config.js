@@ -25,11 +25,15 @@ Config.SendDatabaseMapped = true; // Send the database mapped event when a datab
 
 // BACKUP
 Config.BackupEnabled = true; // Enable the backup system
-Config.MysqlDumpPath = "C:/Program Files/MariaDB 11.2/bin/mysqldump.exe"; // The path of the mysqldump.exe file, in this case is the path of the xampp mysql dump
+Config.MysqlDumpPath = "C:/xampp/mysql/bin/mysqldump.exe"; // The path of the mysqldump.exe file, in this case is the path of the xampp mysql dump 
+// MOST USED PATHS
+// XAMPP: C:/xampp/mysql/bin/mysqldump.exe
+// WAMP: C:/wamp/bin/mysql/mysql5.7.26/bin/mysqldump.exe
+// MariaDB: C:/Program Files/MariaDB 11.2/bin/mysqldump.exe
 Config.BackupDirPath = "IceMysql/Backups"; // Path respective to the FXServer.exe file
 Config.MaxBackups = 4; // The max count of backups that will be saved, the oldest will be deleted
 Config.Days = [5, 14, 23, 29]; // The days that the backup will be executed, if the array is empty the backup will be executed every day
-Config.Hour = "20:00" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
+Config.Hour = "18:36" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
 
 // DATABASE
 Config.MaxDB = 10; // The max count of databases that can be readed in the server.cfg file
@@ -46,7 +50,7 @@ Config.ConnectiTimout = 5000; // The time in milliseconds that the MongoDB will 
 
 // Debug UI
 Config.Enabled = true; // Enable the debug UI
-Config.DebugLicenses = ["license:0ca0dfbead8e22c4235769d9380d1fb9d6f32d5a"] // The licenses of the players that will be able to use the debug UI.
+Config.DebugLicenses = ["license:357eb9ff6db060eb292e8e4f71b66a9efb2adcbe"] // The licenses of the players that will be able to use the debug UI.
 
 // ORM
 Config.ORM = true; // Enable the ORM queries

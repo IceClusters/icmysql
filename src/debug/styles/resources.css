@@ -56,7 +56,7 @@
 .scroll {
 	margin-top: 2vh;
 	position: relative;
-	overflow-y: scroll;
+	overflow-y: auto;
 	scroll-snap-type: y mandatory;
 	padding: 1vh;
 	width: 100%;
@@ -70,7 +70,7 @@
 .scroll__dbs {
 	margin-top: 2vh;
 	position: relative;
-	overflow-y: scroll;
+	overflow-y: auto;
 	scroll-snap-type: y mandatory;
 	padding: 1vh;
 	width: 100%;
