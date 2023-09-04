@@ -72,13 +72,12 @@ function IsConnecting() {
 var connectionCache = {};
 
 async function GetConnection(index) {
-    if (!connectionCache[index]) {
+    if (!connectionCache[index] || connectionCache[index].length === 0) {
         connectionCache[index] = [];
         const connection = await global.pools[index].getConnection();
         connectionCache[index].push(connection);
         return connection;
     }
-
     return connectionCache[index][0];
 }
 
