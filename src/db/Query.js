@@ -136,7 +136,8 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
     const connection = await GetConnection(dbId);
     try {
         if (values) {
-            values = ConvertNilParams(values)
+            // console.log("antes era: ", values)
+            // values = ConvertNilParams(values)
         } else {
             values = null;
         }
@@ -148,6 +149,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             query = ReplaceDotParams(query, values);
             values = null;
         }
+        console.log(query, values)
         const [rows, fields] = await connection.execute(query, values);
         const end = performance.now();
         const time = (end - start).toFixed(3);
@@ -220,7 +222,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         }
         return callback ? callback(rows) : rows;
     } catch (err) {
-        ParseError(`Error while executing query: ${err} `);
+        ParseError(`Error while executing query: ${err} , query: ${query}`);
         return null;
     } finally {
         ReleaseConnection(dbId, connection)
@@ -278,8 +280,8 @@ async function ExecuteTransaction(dbId, queries, callback) {
 async function AwaitQuery(dbId, query, values, cache) {
     const data = await ParseArgs(dbId, query, values, cache);
     if (data === undefined) return null;
-
-    return await ExecuteQuery(global.QueryTypes.Query, data.dbId, data.query, data.values, null, data.cache);
+    const invokingResource = GetInvokingResource();
+    return await ExecuteQuery(invokingResource, global.QueryTypes.Query, data.dbId, data.query, data.values, null, data.cache);
 }
 
 async function Query(dbId, query, values, callback, cache) {
