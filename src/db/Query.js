@@ -145,12 +145,16 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             query = ReplaceNamedParams(query, values)
             values = null;
         }
-        if (query.includes(":")) {
-            query = ReplaceDotParams(query, values);
-            values = null;
+        // if (query.includes(":")) {
+        //     query = ReplaceDotParams(query, values);
+        //     values = null;
+        // }
+        var [rows, fields] = [null, null];
+        if(type == "RAW") {
+            [rows, fields] = await connection.query(query, values);
+        } else {
+            [rows, fields] = await connection.execute(query, values);
         }
-        console.log(query, values)
-        const [rows, fields] = await connection.execute(query, values);
         const end = performance.now();
         const time = (end - start).toFixed(3);
         if (time >= Config.SlowQueryWarn) {

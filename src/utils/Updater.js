@@ -2,7 +2,7 @@ const extract = require('extract-zip')
 const { ParseError } = require('../errors/Parser.js')
 const axios = require('axios')
 
-const urlVersion = `https://raw.githubusercontent.com/IceSystem/IceVersions/develop/${GetCurrentResourceName()}`;
+const urlVersion = `https://raw.githubusercontent.com/IceClusters/IceVersions/develop/${GetCurrentResourceName()}`;
 
 async function GetVersion() {
     try {
@@ -30,7 +30,7 @@ async function GetVersion() {
 
 async function UpdateScript() {
     const ignoreFiles = ["config.js"];
-    const downloadUrl = "https://github.com/IceSystem/icmysql/archive/refs/heads/develop.zip";
+    const downloadUrl = "https://github.com/IceClusters/icmysql/archive/refs/heads/develop.zip";
     const extractPath = path.join(GetResourcePath(GetCurrentResourceName()));
     const downloadPath = path.join(extractPath, "icmysql.zip");
     const download = await axios({

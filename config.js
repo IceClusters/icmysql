@@ -2,7 +2,7 @@ Config = {};
 Config.Language = "es"; // en, es, fr
 
 // DataMemSave
-Config.SaveDirPath = "IceMysql/Data/"; // Path respective to the FXServer.exe file
+Config.SaveDirPath = "IcMysql/Data/"; // Path respective to the FXServer.exe file
 Config.SaveInterval = 20000; // The interval in milliseconds that the resource will save the data in the JSON file don't put a value less than 5000
 
 // Errors
@@ -11,7 +11,7 @@ Config.ShowErrorDescription = true; // Show the error description if is register
 Config.ShowErrorSolution = true; // Show the error solution if is registered in the list
 
 // LOGS
-Config.LogFilesPath = "IceMysql/Logs/IceMysql"; // Path respective to the FXServer.exe file
+Config.LogFilesPath = "IcMysql/Logs/IcMysql"; // Path respective to the FXServer.exe file
 Config.MaxLogFiles = 10; // The count of log files that will be saved, the oldest will be deleted
 
 // Discord Logs
@@ -30,7 +30,7 @@ Config.MysqlDumpPath = "C:/xampp/mysql/bin/mysqldump.exe"; // The path of the my
 // XAMPP: C:/xampp/mysql/bin/mysqldump.exe
 // WAMP: C:/wamp/bin/mysql/mysql5.7.26/bin/mysqldump.exe
 // MariaDB: C:/Program Files/MariaDB 11.2/bin/mysqldump.exe
-Config.BackupDirPath = "IceMysql/Backups"; // Path respective to the FXServer.exe file
+Config.BackupDirPath = "IcMysql/Backups"; // Path respective to the FXServer.exe file
 Config.MaxBackups = 4; // The max count of backups that will be saved, the oldest will be deleted
 Config.Days = [5, 14, 23, 29]; // The days that the backup will be executed, if the array is empty the backup will be executed every day
 Config.Hour = "18:36" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
@@ -49,11 +49,11 @@ Config.DefaultMongoDB = 1;
 Config.ConnectiTimout = 5000; // The time in milliseconds that the MongoDB will wait for a connection to be available in the pool, if the time is exceeded a error will be thrown
 
 // Debug UI
-Config.Enabled = true; // Enable the debug UI
+Config.Enabled = false; // Enable the debug UI
 Config.DebugLicenses = ["license:123eb974ddb060eb123e8e4feee66a9efb2eeebe"] // The licenses of the players that will be able to use the debug UI.
 
 // ORM
-Config.ORM = true; // Enable the ORM queries
+Config.ORM = false; // Enable the ORM queries
 Config.DefaultORMDB = 1; // The default database that will be used if the database is not specified in the orm query
 Config.RawData = true; // If the ORM will return the raw data or the model instance that contains sequelize data
 Config.ConnectionsORM = [0, 10] // Minimum and maximum count of connections that will be created for the ORM, this is used to create a pool of connections that will be used by the ORM, this is used to avoid the creation of a connection for each query
@@ -65,5 +65,5 @@ Config.Redis = false; // Enable the Redis support
 
 // Update
 Config.CheckForUpdates = true; // Check for updates when the server starts
-Config.AutoUpdate = true; // If there is a new version, the resource will be updated automatically in the next server restart
+Config.AutoUpdate = false; // If there is a new version, the resource will be updated automatically in the next server restart
 // After update you need to restart the server to apply the changes

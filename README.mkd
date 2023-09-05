@@ -21,7 +21,7 @@ We created this database connection system because, even though there are good s
 - [Debug UI](docs/features/DebugUI.mkd)
 - [Error handling](docs/features/ErrorHandling.mkd)
 ### Installation
-1. Download the latest release from [here](https://github.com/IceSystem/icmysql/releases/latest)
+1. Download the latest release from [here](https://github.com/IceClusters/icmysql/releases/latest)
 2. Extract the resource in your resources folder
 3. Add `ensure icmysql` at the top of your server.cfg
 4. In the server.cfg add your databases connections like this:
@@ -36,4 +36,4 @@ We're going to list some known issues here, so you don't have to worry about the
 - First query after a restart is slow(because we wait to make the connection to the database)
 - Thread hitch warning when starting the resource(don't worry, it's normal)
 ### Support
-Right now we only give support in our [Discord Server](https://discord.gg/3DhEgXAX2U). Anyway you can open an issue in our [GitHub](https://github.com/IceSystem/icmysql/issues), if you ask in the forum we will try to answer you as soon as possible but to make sure to get an answer join our [Discord Server](https://discord.gg/3DhEgXAX2U).
+Right now we only give support in our [Discord Server](https://discord.gg/3DhEgXAX2U). Anyway you can open an issue in our [GitHub](https://github.com/IceClusters/icmysql/issues), if you ask in the forum we will try to answer you as soon as possible but to make sure to get an answer join our [Discord Server](https://discord.gg/3DhEgXAX2U).

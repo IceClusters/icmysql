@@ -14,8 +14,9 @@ global.mongoConnetions = {};
 
 async function CheckConnection(credentials) {
     try {
-        const pool = mysql.createPool(credentials
-        );
+        credentials.multipleStatements = true;
+        credentials.namedPlaceholders = true;
+        const pool = mysql.createPool(credentials);
         const connection = await pool.getConnection();
         connection.release();
         return true;
@@ -31,6 +32,8 @@ async function RegisterConnection(index, credentials) {
         ParseError(`^3Can't connect to database ${index}, ${checkConnection}.^0`);
         return;
     }
+    credentials.multipleStatements = true;
+    credentials.namedPlaceholders = true;
     const pool = mysql.createPool(credentials, { connectionLimit: Config.ConnectionLimit, queueLimit: Config.QueueLimit });
     const end = performance.now();
     global.pools[index] = pool;
