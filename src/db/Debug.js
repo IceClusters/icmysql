@@ -75,7 +75,7 @@ function GetQueryCache() {
 function CheckPermission(src) {
     if (!Config.Enabled) return false;
     if (Config.DebugLicenses.length === 0) return false;
-    const license = GetPlayerIdentifierByType(src, "license");
+    const license = GetPlayerIdentifier(src, 0);
     for (const element of Config.DebugLicenses) {
         if (element == license) {
             return true;

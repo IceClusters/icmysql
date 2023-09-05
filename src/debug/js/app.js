@@ -82,7 +82,6 @@ function OpenResource(resourceName) {
         $(".popup_container").addClass("animate__fadeInUp");
     }, 100);
     var resourceQueries = queries.filter(query => query.resourceName == resourceName);
-    console.log("resourceQueries: ", resourceQueries);
     $("#resourceModalBody").html("");
     resourceQueries.forEach(query => {
         $("#resourceModalBody").append(`
@@ -129,7 +128,6 @@ function ListenSearchInput() {
 }
 
 function LoadResources(rscs) {
-    console.log(`AHHH ${rscs}`)
     resources = rscs;
     $("#resources-content").html("");
 
@@ -161,7 +159,6 @@ function LoadDBs(dbs) {
     dbs = JSON.parse(dbs)
     $("#dbs-content").html("");
     for (let i = 0; i < dbs.length; i++) {
-        console.log("add")
         const db = dbs[i];
         var lastUse = null;
         queries.forEach(element => {
