@@ -1,5 +1,6 @@
 local icmysql = exports.icmysql
 local MySQLData = {}
+local dbReady = false
 
 local function customAwait(func, ...)
     local promiseObj = Promise.new()
@@ -154,6 +155,14 @@ for _, func in pairs(MongoFunctions) do
     Mongo[func] = function(...)
         return icmysql[func](nil, ...)
     end
+end
+
+MySQL.ready = function(cb)
+    while(not dbReady) do 
+        dbReady = icmysql.IsReady()
+        Wait(10)
+    end
+    cb()
 end
 
 -- MySQL = {

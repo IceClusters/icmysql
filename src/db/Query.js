@@ -136,6 +136,8 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
     const connection = await GetConnection(dbId);
     try {
         if (values) {
+            if(typeof(values) === "string")
+                values = [values]
             // console.log("antes era: ", values)
             // values = ConvertNilParams(values)
         } else {
@@ -226,7 +228,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         }
         return callback ? callback(rows) : rows;
     } catch (err) {
-        ParseError(`Error while executing query: ${err} , query: ${query}`);
+        ParseError(`Error while executing query: ${err} , query: ${query}, values: ${values}`);
         return null;
     } finally {
         ReleaseConnection(dbId, connection)

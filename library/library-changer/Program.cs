@@ -119,6 +119,7 @@ namespace LibChanger
                     ("exports.mongodb.update|exports.mongodb.updateOne", Functions.Queries.MongoUpdate),
                     ("exports.mongodb.count|exports.mongodb.countOne", Functions.Queries.MongoCount),
                     ("exports.mongodb.delete|exports.mongodb.deleteOne", Functions.Queries.MongoDelete),
+                    ("GetConvar('mysql_connection_string'|GetConvar(\"mysql_connection_string\"", "GetConvar('mysqlCredentials_1'")
                 };
 
                 foreach (var (pattern, replacement) in replacements)
@@ -135,6 +136,9 @@ namespace LibChanger
             content = content.Replace("@oxmysql/lib/MySQL", "@icmysql/library/MySQL");
             content = content.Replace("@mysql-async/lib/MySQL", "@icmysql/library/MySQL");
             content = content.Replace("@ghmattimysql/lib/MySQL", "@icmysql/library/MySQL");
+            content = content.Replace("oxmysql", "icmysql");
+            content = content.Replace("mysql-async", "icmysql");
+            content = content.Replace("ghmattimysql", "icmysql");
             if (content.Contains("icmysql"))
             {
                 string directoryName = Path.GetDirectoryName(path);

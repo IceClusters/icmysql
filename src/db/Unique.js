@@ -4,8 +4,8 @@ const { ParseArgs, ExecuteQuery } = require('./Query.js');
 async function AwaitUnique(dbId, query, values, cache) {
     const data = await ParseArgs(dbId, query, values, cache);
     if (data === undefined) return null;
-
-    return await ExecuteQuery(global.QueryTypes.Unique, data.dbId, data.query, data.values, null, data.cache);
+    const invokingResource = GetInvokingResource();
+    return await ExecuteQuery(invokingResource, global.QueryTypes.Unique, data.dbId, data.query, data.values, null, data.cache);
 }
 
 async function Unique(dbId, query, values, callback, cache) {

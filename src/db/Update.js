@@ -4,8 +4,8 @@ const { ParseArgs, ExecuteQuery } = require('./Query.js');
 async function AwaitUpdate(dbId, query, values) {
     const data = await ParseArgs(dbId, query, values, true);
     if (data == undefined) return null;
-
-    return await ExecuteQuery(QueryTypes.Update, data.dbId, data.query, data.values, null, data.cache);
+    const invokingResource = GetInvokingResource();
+    return await ExecuteQuery(invokingResource, QueryTypes.Update, data.dbId, data.query, data.values, null, data.cache);
 }
 
 async function Update(dbId, query, values, callback) {

@@ -95,4 +95,8 @@ function ReleaseConnection(index, connection) {
     connectionCache[index].push(connection);
 }
 
+global.exports("IsReady", function(){
+    return !connecting;
+})
+
 module.exports = { GetORMPools, RegisterConnection, IsConnecting, GetConnection, ReleaseConnection }
