@@ -1,4 +1,4 @@
-# Ice MySQL
+# ICMySQL
 An sophisticated encapsulation of the mysql2 and sequelize libraries, ingeniously designed to empower CFX scripts with seamless capabilities for accessing and manipulating data within relational databases.
 ### Why?
 We created this database connection system because, even though there are good solutions out there, we wanted to bring something new to the table for the FiveM community. We've added some cool features that are missing in other systems, and we hope you find it useful!
@@ -30,7 +30,7 @@ set mysqlCredentials_1 "host=127.0.0.1;user=root; password=1234; database=fxserv
 set mysqlCredentials_2 "host=127.0.0.1;user=root; password=1234; database=fxserver; port=3306"
 ...
 ```
-5. Enjoy! and thanks for trusting in Ice MySQL
+5. Enjoy! and thanks for trusting in ICMySQL
 ### Known Issues
 We're going to list some known issues here, so you don't have to worry about them. Or you don't have to report them, because we already know about them. If you find any other issues, please report them in our [Discord Server](https://discord.gg/3DhEgXAX2U). 
 - First query after a restart is slow(because we wait to make the connection to the database)

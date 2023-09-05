@@ -1,6 +1,6 @@
 # Auto Update
 ### Description
-The ice mysql have a system to auto update if there is a new available version it will download the script and replace the necessary files, the config.js will be kipped and not will be replaced.
+The ICMySQL have a system to auto update if there is a new available version it will download the script and replace the necessary files, the config.js will be kipped and not will be replaced.
 
 ### Use
 If you want to use the system you only have to enable these options in the config.js file: ```Config.CheckForUpdates``` and ```Config.AutoUpdate```.

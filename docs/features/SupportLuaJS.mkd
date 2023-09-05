@@ -1,6 +1,6 @@
 # Lua, JS, C# library support
 ### Description
-We made compatible the ice mysql script compatible with Lua, JS and C# libraries, so you can use the same script in any of these languages.
+We made compatible the ICMySQL script compatible with Lua, JS and C# libraries, so you can use the same script in any of these languages.
 Obviously, you can call the script exports from any language, but this feature is to make it easier to use and read. 
 
 ### Use

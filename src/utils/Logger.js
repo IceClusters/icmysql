@@ -28,7 +28,7 @@ async function InitLogs() {
     }).catch(err => {
         ParseError(`Can't delete old logs: ${err.message}`);
     });
-    await CreateIfNotExist(logPath, "ICE MYSQL\n" + GetComponents());
+    await CreateIfNotExist(logPath, "ICMySQL\n" + GetComponents());
     logReady = true;
 }
 
