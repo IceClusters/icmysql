@@ -265,7 +265,7 @@ function OpenUI(state) {
         $(".menu").addClass("animate__fadeOutDown");
         setTimeout(() => {
             $("#main-container").css("display", "none");
-            $.post("https://ice_mysql/closeDebugUI", {});
+            $.post("https://icmysql/closeDebugUI", {});
         }, 1000);
     }
     
@@ -296,7 +296,7 @@ $(document).ready(function () {
         if (event.data.action == undefined) return;
         switch (event.data.action) {
             case "open":
-                $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "queries" }));
+                $.post("https://icmysql/loadData", JSON.stringify({ "load": "queries" }));
                 OpenUI(true);
                 break;
             case "loadData":
@@ -304,11 +304,11 @@ $(document).ready(function () {
                     LoadDBs(event.data.data);
                 } else if (event.data.info == "queries") {
                     queries = event.data.data;
-                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "dbs" }));
-                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "resources" }));
-                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "logs" }));
-                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "cache" }));
-                    $.post("https://ice_mysql/loadData", JSON.stringify({ "load": "backup" }));
+                    $.post("https://icmysql/loadData", JSON.stringify({ "load": "dbs" }));
+                    $.post("https://icmysql/loadData", JSON.stringify({ "load": "resources" }));
+                    $.post("https://icmysql/loadData", JSON.stringify({ "load": "logs" }));
+                    $.post("https://icmysql/loadData", JSON.stringify({ "load": "cache" }));
+                    $.post("https://icmysql/loadData", JSON.stringify({ "load": "backup" }));
                 } else if (event.data.info == "resources") {
                     LoadResources(event.data.data);
                 } else if (event.data.info == "logs") {

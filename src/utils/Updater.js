@@ -30,9 +30,9 @@ async function GetVersion() {
 
 async function UpdateScript() {
     const ignoreFiles = ["config.js"];
-    const downloadUrl = "https://github.com/IceSystem/ice_mysql/archive/refs/heads/develop.zip";
+    const downloadUrl = "https://github.com/IceSystem/icmysql/archive/refs/heads/develop.zip";
     const extractPath = path.join(GetResourcePath(GetCurrentResourceName()));
-    const downloadPath = path.join(extractPath, "ice_mysql.zip");
+    const downloadPath = path.join(extractPath, "icmysql.zip");
     const download = await axios({
         method: 'get',
         url: downloadUrl,
@@ -50,11 +50,11 @@ async function UpdateScript() {
     try {
         const zip = new AdmZip(downloadPath);
         await extract(downloadPath, { dir: path.resolve(extractPath, '..') });
-        const newFolderPath = extractPath.replace("ice_mysql", "ice_mysql-old");
-        const oldFolderPath = extractPath.replace("ice_mysql", "ice_mysql-develop");
+        const newFolderPath = extractPath.replace("icmysql", "icmysql-old");
+        const oldFolderPath = extractPath.replace("icmysql", "icmysql-develop");
         await fs.promises.copyFile(path.join(extractPath, "config.js"), path.join(oldFolderPath, "config.js"));
         await fs.promises.rename(extractPath, newFolderPath);
-        await fs.promises.rename(path.join(path.resolve(extractPath, '..'), "ice_mysql-develop"), extractPath);
+        await fs.promises.rename(path.join(path.resolve(extractPath, '..'), "icmysql-develop"), extractPath);
     } catch (err) {
         ParseError("Error updating resource", [err]);
     }

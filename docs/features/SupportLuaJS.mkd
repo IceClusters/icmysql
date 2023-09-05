@@ -7,7 +7,7 @@ Obviously, you can call the script exports from any language, but this feature i
 #### Lua
 fxmanifest.lua
 ```lua
-server_script '@ice_mysql/library/MySQL.lua'
+server_script '@icmysql/library/MySQL.lua'
 ```
 server.lua
 ```lua
@@ -16,14 +16,14 @@ MySQL.Select()...
 #### JS
 fxmanifest.lua
 ```lua
-server_script '@ice_mysql/library/MySQL.js'
+server_script '@icmysql/library/MySQL.js'
 ```
 server.js
 ```js
 MySQL.Select()...
 ```
 #### C#
-In the server project you have to add a dependency to the MySQL.net.dll file, path: ```ice_mysql/library/MySQL.net.dll```
+In the server project you have to add a dependency to the MySQL.net.dll file, path: ```icmysql/library/MySQL.net.dll```
 ```cs
 using System;
 using System.Collections.Generic;

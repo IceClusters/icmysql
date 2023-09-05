@@ -14,10 +14,10 @@ In this case it will return the insert id of the query.
 
 ## Functions
 ```lua
-exports["ice_mysql"]:Insert(database, query, values, function, cache)
+exports["icmysql"]:Insert(database, query, values, function, cache)
 ```
 ```lua
-exports["ice_mysql"]:AwaitInsert(database, query, values, function, cache)
+exports["icmysql"]:AwaitInsert(database, query, values, function, cache)
 ```
 ```lua
 MySQL.Insert(database, query, values, function, cache)

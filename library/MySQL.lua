@@ -1,4 +1,4 @@
-local ice_mysql = exports.ice_mysql
+local icmysql = exports.icmysql
 local MySQLData = {}
 
 local function customAwait(func, ...)
@@ -32,127 +32,127 @@ MySQL = {
     -- Replace OxMySQL functions
     Sync = {
         insert = function(...) 
-            return ice_mysql.AwaitInsert(nil, ...)
+            return icmysql.AwaitInsert(nil, ...)
         end,
         fetchAll = function(...) 
-            return ice_mysql.AwaitQuery(nil, ...)
+            return icmysql.AwaitQuery(nil, ...)
         end,
         fetchScalar = function(...) 
-            return ice_mysql.AwaitScalar(nil, ...)
+            return icmysql.AwaitScalar(nil, ...)
         end,
         transaction = function(...) 
-            return ice_mysql.AwaitTransaction(nil, ...)
+            return icmysql.AwaitTransaction(nil, ...)
         end,
         execute = function(...) 
-            return ice_mysql.AwaitUpdate(nil, ...)
+            return icmysql.AwaitUpdate(nil, ...)
         end,
     },
     Async = {
         insert = function(...) 
-            return ice_mysql.Insert(nil, ...)
+            return icmysql.Insert(nil, ...)
         end,
         fetchAll = function(...) 
-            return ice_mysql.Query(nil, ...)
+            return icmysql.Query(nil, ...)
         end,
         fetchScalar = function(...) 
-            return ice_mysql.Scalar(nil, ...)
+            return icmysql.Scalar(nil, ...)
         end,
         transaction = function(...) 
-            return ice_mysql.Transaction(nil, ...)
+            return icmysql.Transaction(nil, ...)
         end,
         execute = function(...) 
-            return ice_mysql.Update(nil, ...)
+            return icmysql.Update(nil, ...)
         end,
     },
     insert = setmetatable({
         await = function(...) 
-            return ice_mysql.AwaitInsert(nil, ...)
+            return icmysql.AwaitInsert(nil, ...)
         end,
     }, {
         __call = function(self, ...)
-            return ice_mysql.Insert(nil, ...)
+            return icmysql.Insert(nil, ...)
         end
     }),
     prepare = setmetatable({
         await = function(...) 
-            return ice_mysql.AwaitPrepare(nil, ...)
+            return icmysql.AwaitPrepare(nil, ...)
         end,
     }, {
         __call = function(self, ...)
-            return ice_mysql.Prepare(nil, ...)
+            return icmysql.Prepare(nil, ...)
         end
     }),
     query = setmetatable({
         await = function(...) 
-            return ice_mysql.AwaitQuery(nil, ...)
+            return icmysql.AwaitQuery(nil, ...)
         end,
     }, {
         __call = function(self, ...)
-            return ice_mysql.Query(nil, ...)
+            return icmysql.Query(nil, ...)
         end
     }),
     rawExecute = setmetatable({
         await = function(...) 
-            return ice_mysql.AwaitRaw(nil, ...)
+            return icmysql.AwaitRaw(nil, ...)
         end,
     }, {
         __call = function(self, ...)
-            return ice_mysql.Raw(nil, ...)
+            return icmysql.Raw(nil, ...)
         end
     }),
     scalar = setmetatable({
         await = function(...) 
-            return ice_mysql.AwaitScalar(nil, ...)
+            return icmysql.AwaitScalar(nil, ...)
         end,
     }, {
         __call = function(self, ...)
-            return ice_mysql.Scalar(nil, ...)
+            return icmysql.Scalar(nil, ...)
         end
     }),
     single = setmetatable({
         await = function(...) 
-            return ice_mysql.AwaitSingle(nil, ...)
+            return icmysql.AwaitSingle(nil, ...)
         end,
     }, {
         __call = function(self, ...)
-            return ice_mysql.Single(nil, ...)
+            return icmysql.Single(nil, ...)
         end
     }),
     transaction = setmetatable({
         await = function(...) 
-            return ice_mysql.AwaitTransaction(nil, ...)
+            return icmysql.AwaitTransaction(nil, ...)
         end,
     }, {
         __call = function(self, ...)
-            return ice_mysql.Transaction(nil, ...)
+            return icmysql.Transaction(nil, ...)
         end
     }),
     update = setmetatable({
         await = function(...) 
-            return ice_mysql.AwaitUpdate(nil, ...)
+            return icmysql.AwaitUpdate(nil, ...)
         end,
     }, {
         __call = function(self, ...)
-            return ice_mysql.Update(nil, ...)
+            return icmysql.Update(nil, ...)
         end
     }),
 }
 
 for _, func in ipairs(ORMFunctions) do
     MySQL.ORM[func] = function(...)
-        return ice_mysql[func](...)
+        return icmysql[func](...)
     end
 end
 
 for _, func in pairs(QueryFunctions) do
     MySQL[func] = function(...)
-        return ice_mysql[func](nil, ...)
+        return icmysql[func](nil, ...)
     end
 end
 
 for _, func in pairs(MongoFunctions) do
     Mongo[func] = function(...)
-        return ice_mysql[func](nil, ...)
+        return icmysql[func](nil, ...)
     end
 end
 
@@ -161,16 +161,16 @@ end
     -- Other functions
     -- JSON = {
     --     GetData = function(...) 
-    --         return ice_mysql.GetData(nil, ...)
+    --         return icmysql.GetData(nil, ...)
     --     end,
     --     SetData = function(...) 
-    --         return ice_mysql.SetData(nil, ...)
+    --         return icmysql.SetData(nil, ...)
     --     end,
     --     RemoveData = function(...) 
-    --         return ice_mysql.RemoveData(nil, ...)
+    --         return icmysql.RemoveData(nil, ...)
     --     end,
     --     SaveData = function() 
-    --         return ice_mysql.SaveData(nil)
+    --         return icmysql.SaveData(nil)
     --     end,
     -- }
 -- }

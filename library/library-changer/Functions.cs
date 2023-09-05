@@ -34,27 +34,27 @@ namespace library_changer
             public static string MongoDelete = "Mongo.MongoDelete";
             public static class Exports
             {
-                public static string Query = "exports['ice_mysql']:Query";
-                public static string AwaitQuery = "exports['ice_mysql']:AwaitQuery";
-                public static string Select = "exports['ice_mysql']:Select";
-                public static string AwaitSelect = "exports['ice_mysql']:AwaitSelect";
-                public static string Insert = "exports['ice_mysql']:Insert";
-                public static string AwaitInsert = "exports['ice_mysql']:AwaitInsert";
-                public static string Update = "exports['ice_mysql']:Update";
-                public static string AwaitUpdate = "exports['ice_mysql']:AwaitUpdate";
-                public static string Delete = "exports['ice_mysql']:Delete";
-                public static string AwaitDelete = "exports['ice_mysql']:AwaitDelete";
-                public static string Transaction = "exports['ice_mysql']:Transaction";
-                public static string AwaitTransaction = "exports['ice_mysql']:AwaitTransaction";
-                public static string Unique = "exports['ice_mysql']:Unique";
-                public static string AwaitUnique = "exports['ice_mysql']:AwaitUnique";
-                public static string Single = "exports['ice_mysql']:Single";
-                public static string AwaitSingle = "exports['ice_mysql']:AwaitSingle";
-                public static string MongoInsert = "exports['ice_mysql']:MongoInsert";
-                public static string MongoFind = "exports['ice_mysql']:MongoFind";
-                public static string MongoUpdate = "exports['ice_mysql']:MongoUpdate";
-                public static string MongoCount = "exports['ice_mysql']:MongoCount";
-                public static string MongoDelete = "exports['ice_mysql']:MongoDelete";
+                public static string Query = "exports['icmysql']:Query";
+                public static string AwaitQuery = "exports['icmysql']:AwaitQuery";
+                public static string Select = "exports['icmysql']:Select";
+                public static string AwaitSelect = "exports['icmysql']:AwaitSelect";
+                public static string Insert = "exports['icmysql']:Insert";
+                public static string AwaitInsert = "exports['icmysql']:AwaitInsert";
+                public static string Update = "exports['icmysql']:Update";
+                public static string AwaitUpdate = "exports['icmysql']:AwaitUpdate";
+                public static string Delete = "exports['icmysql']:Delete";
+                public static string AwaitDelete = "exports['icmysql']:AwaitDelete";
+                public static string Transaction = "exports['icmysql']:Transaction";
+                public static string AwaitTransaction = "exports['icmysql']:AwaitTransaction";
+                public static string Unique = "exports['icmysql']:Unique";
+                public static string AwaitUnique = "exports['icmysql']:AwaitUnique";
+                public static string Single = "exports['icmysql']:Single";
+                public static string AwaitSingle = "exports['icmysql']:AwaitSingle";
+                public static string MongoInsert = "exports['icmysql']:MongoInsert";
+                public static string MongoFind = "exports['icmysql']:MongoFind";
+                public static string MongoUpdate = "exports['icmysql']:MongoUpdate";
+                public static string MongoCount = "exports['icmysql']:MongoCount";
+                public static string MongoDelete = "exports['icmysql']:MongoDelete";
             }
         }
     }

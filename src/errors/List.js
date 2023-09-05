@@ -33,9 +33,9 @@ module.exports = [
             'fr': "La langue specifiee dans la configuration n'est pas prise en charge."
         },
         solution: {
-            'es': 'Comprueba que el idioma que esta en la configuracion sea soportado, soportados: {ice_mysql_error_replace}.',
-            'en': 'Check that the language in the configuration is supported, supported: {ice_mysql_error_replace}.',
-            'fr': 'Verifiez que la langue dans la configuration est prise en charge, prise en charge: {ice_mysql_error_replace}.'
+            'es': 'Comprueba que el idioma que esta en la configuracion sea soportado, soportados: {icmysql_error_replace}.',
+            'en': 'Check that the language in the configuration is supported, supported: {icmysql_error_replace}.',
+            'fr': 'Verifiez que la langue dans la configuration est prise en charge, prise en charge: {icmysql_error_replace}.'
         }
     },
     {
@@ -93,7 +93,7 @@ module.exports = [
     {
         tags: ["Invalid variable type for", "LoadData function"],
         description: {
-            'es': 'El tipo de variable especificado no coincide con el esperado. Obtenido: {ice_mysql_error_replace}, esperado: {ice_mysql_error_replace}.',
+            'es': 'El tipo de variable especificado no coincide con el esperado. Obtenido: {icmysql_error_replace}, esperado: {icmysql_error_replace}.',
             'en': 'The specified variable type does not match the expected one.',
             'fr': 'Le type de variable specifie ne correspond pas a celui attendu.'
         },
@@ -184,9 +184,9 @@ module.exports = [
     {
         tags: ["Error deleting files"],
         description: {
-            'es': 'Ha ocurrido un error al eliminar los archivos. Mensaje: {ice_mysql_error_replace}',
-            'en': 'An error occurred while deleting the files. Message: {ice_mysql_error_replace}',
-            'fr': 'Une erreur s\'est produite lors de la suppression des fichiers. Message: {ice_mysql_error_replace}'
+            'es': 'Ha ocurrido un error al eliminar los archivos. Mensaje: {icmysql_error_replace}',
+            'en': 'An error occurred while deleting the files. Message: {icmysql_error_replace}',
+            'fr': 'Une erreur s\'est produite lors de la suppression des fichiers. Message: {icmysql_error_replace}'
         },
         solution: {
             'es': 'Asegurate de que ningun programa este utilizando ese archivo y que no este en una ubicacion que necesite altos privilegios.',
@@ -197,9 +197,9 @@ module.exports = [
     {
         tags: ["Backup error"],
         description: {
-            'es': 'Ha ocurrido un error al realizar el backup. Mensaje: {ice_mysql_error_replace}',
-            'en': 'An error occurred while making the backup. Message: {ice_mysql_error_replace}',
-            'fr': 'Une erreur s\'est produite lors de la sauvegarde. Message: {ice_mysql_error_replace}'
+            'es': 'Ha ocurrido un error al realizar el backup. Mensaje: {icmysql_error_replace}',
+            'en': 'An error occurred while making the backup. Message: {icmysql_error_replace}',
+            'fr': 'Une erreur s\'est produite lors de la sauvegarde. Message: {icmysql_error_replace}'
         },
         solution: {
             'es': 'Asegurate de que el archivo mysqldump.exe este en la ruta especificada en la configuracion y que la ubicacion de exportacion no depende de privilegios de administrador.',

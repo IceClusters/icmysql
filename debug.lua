@@ -1,5 +1,5 @@
-RegisterNetEvent("ice_mysql:client:openDebugUI")
-AddEventHandler("ice_mysql:client:openDebugUI", function()
+RegisterNetEvent("icmysql:client:openDebugUI")
+AddEventHandler("icmysql:client:openDebugUI", function()
     SendNUIMessage({
         action = "open"
     })
@@ -13,22 +13,22 @@ end)
 RegisterNUICallback("loadData", function(data)
     data = data.load
     if data == "cache" then
-        TriggerServerEvent("ice_mysql:server:getquerycache")
+        TriggerServerEvent("icmysql:server:getquerycache")
     elseif data == "resources" then
-        TriggerServerEvent("ice_mysql:server:getresources")
+        TriggerServerEvent("icmysql:server:getresources")
     elseif data == "logs" then
-        TriggerServerEvent("ice_mysql:server:getlogs")
+        TriggerServerEvent("icmysql:server:getlogs")
     elseif data == "backup" then
-        TriggerServerEvent("ice_mysql:server:getbackup")
+        TriggerServerEvent("icmysql:server:getbackup")
     elseif data == "dbs" then
-        TriggerServerEvent("ice_mysql:server:getdbs")
+        TriggerServerEvent("icmysql:server:getdbs")
     elseif data == "queries" then 
-        TriggerServerEvent("ice_mysql:server:getQueries")
+        TriggerServerEvent("icmysql:server:getQueries")
     end
 end)
 
-RegisterNetEvent("ice_mysql:client:getdbs")
-AddEventHandler("ice_mysql:client:getdbs", function(data)
+RegisterNetEvent("icmysql:client:getdbs")
+AddEventHandler("icmysql:client:getdbs", function(data)
     SendNUIMessage({
         action = "loadData",
         info = "dbs",
@@ -36,8 +36,8 @@ AddEventHandler("ice_mysql:client:getdbs", function(data)
     })
 end)
 
-RegisterNetEvent("ice_mysql:client:getQueries")
-AddEventHandler("ice_mysql:client:getQueries", function(data)
+RegisterNetEvent("icmysql:client:getQueries")
+AddEventHandler("icmysql:client:getQueries", function(data)
     SendNUIMessage({
         action = "loadData",
         info = "queries",
@@ -45,8 +45,8 @@ AddEventHandler("ice_mysql:client:getQueries", function(data)
     })
 end)
 
-RegisterNetEvent("ice_mysql:client:getquerycache")
-AddEventHandler("ice_mysql:client:getquerycache", function(data)
+RegisterNetEvent("icmysql:client:getquerycache")
+AddEventHandler("icmysql:client:getquerycache", function(data)
     SendNUIMessage({
         action = "loadData",
         info = "cache",
@@ -54,8 +54,8 @@ AddEventHandler("ice_mysql:client:getquerycache", function(data)
     })
 end)
 
-RegisterNetEvent("ice_mysql:client:getResources")
-AddEventHandler("ice_mysql:client:getResources", function(data)
+RegisterNetEvent("icmysql:client:getResources")
+AddEventHandler("icmysql:client:getResources", function(data)
     SendNUIMessage({
         action = "loadData",
         info = "resources",
@@ -63,8 +63,8 @@ AddEventHandler("ice_mysql:client:getResources", function(data)
     })
 end)
 
-RegisterNetEvent("ice_mysql:client:getlogs")
-AddEventHandler("ice_mysql:client:getlogs", function(data)
+RegisterNetEvent("icmysql:client:getlogs")
+AddEventHandler("icmysql:client:getlogs", function(data)
     SendNUIMessage({
         action = "loadData",
         info = "logs",
@@ -72,8 +72,8 @@ AddEventHandler("ice_mysql:client:getlogs", function(data)
     })
 end)
 
-RegisterNetEvent("ice_mysql:client:getbackup")
-AddEventHandler("ice_mysql:client:getbackup", function(data)
+RegisterNetEvent("icmysql:client:getbackup")
+AddEventHandler("icmysql:client:getbackup", function(data)
     SendNUIMessage({
         action = "loadData",
         info = "backup",

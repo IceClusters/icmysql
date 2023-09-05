@@ -13,10 +13,10 @@ If you've specified a function it will return the result of the query in the fun
 
 ## Functions
 ```lua
-exports["ice_mysql"]:Delete(database, query, values, function, cache)
+exports["icmysql"]:Delete(database, query, values, function, cache)
 ```
 ```lua
-exports["ice_mysql"]:AwaitDelete(database, query, values, function, cache)
+exports["icmysql"]:AwaitDelete(database, query, values, function, cache)
 ```
 ```lua
 MySQL.Delete(database, query, values, function, cache)

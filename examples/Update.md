@@ -14,10 +14,10 @@ In this case it will return the number of affected rows.
 
 ## Functions
 ```lua
-exports["ice_mysql"]:Update(database, query, values, function, cache)
+exports["icmysql"]:Update(database, query, values, function, cache)
 ```
 ```lua
-exports["ice_mysql"]:AwaitUpdate(database, query, values, function, cache)
+exports["icmysql"]:AwaitUpdate(database, query, values, function, cache)
 ```
 ```lua
 MySQL.Update(database, query, values, function, cache)

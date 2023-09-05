@@ -27,7 +27,7 @@ Mongo.MongoDelete(dbID, options, callback);
 #### Examples
 ##### Insert
 ```lua
-local result = exports["ice_mysql"]:MongoInsert(1, {
+local result = exports["icmysql"]:MongoInsert(1, {
     collection = "users",
     documents = {
         ["name"] = "Daniel"
@@ -36,7 +36,7 @@ local result = exports["ice_mysql"]:MongoInsert(1, {
 ```
 ##### Find
 ```lua
-local result = exports["ice_mysql"]:MongoFind(1, {
+local result = exports["icmysql"]:MongoFind(1, {
     collection = "users",
     query = {
         ["name"] = "Daniel"
@@ -45,7 +45,7 @@ local result = exports["ice_mysql"]:MongoFind(1, {
 ```
 ##### Update
 ```lua
-local result = exports["ice_mysql"]:MongoUpdate(1, {
+local result = exports["icmysql"]:MongoUpdate(1, {
     collection = "users",
     query = {
         ["name"] = "Daniel"
@@ -59,13 +59,13 @@ local result = exports["ice_mysql"]:MongoUpdate(1, {
 ```
 ##### Count
 ```lua
-local result = exports["ice_mysql"]:MongoCount(1, {
+local result = exports["icmysql"]:MongoCount(1, {
     collection = "users",
 });
 ```
 ##### Delete
 ```lua
-local result = exports["ice_mysql"]:MongoDelete(1, {
+local result = exports["icmysql"]:MongoDelete(1, {
     collection = "users",
     query = {
         ["name"] = "Daniel2"

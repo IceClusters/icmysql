@@ -14,10 +14,10 @@ In this case it will return all the data matched.
 
 ## Functions
 ```lua
-exports["ice_mysql"]:Query(database, query, values, function, cache)
+exports["icmysql"]:Query(database, query, values, function, cache)
 ```
 ```lua
-exports["ice_mysql"]:AwaitQuery(database, query, values, function, cache)
+exports["icmysql"]:AwaitQuery(database, query, values, function, cache)
 ```
 ```lua
 MySQL.Query(database, query, values, function, cache)

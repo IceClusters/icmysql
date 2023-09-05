@@ -6,7 +6,7 @@ We have made a small program to replace other systems functions to our functions
 Make sure to **make a backup** of the resources folder before use this program, we are not responsible for any damage that this program can do to your files. Obviously the program isn't going to delete your server but probably some functions don't work because the program probably don't replace functions correctly.
 
 ### Use
-To use you have to open a command prompt in this path: ```ice_mysql/library``` when you're in that dir, you can type ```library-changer.exe <resources-path>``` and it will change all the functions to our functions.
+To use you have to open a command prompt in this path: ```icmysql/library``` when you're in that dir, you can type ```library-changer.exe <resources-path>``` and it will change all the functions to our functions.
 Example:```library-changer.exe "C:\Users\DanielGP\Desktop\FivemServer\resources"```.
 
 ### How it works

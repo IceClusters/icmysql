@@ -35,27 +35,27 @@ Redis.Reload();
 #### Examples
 ##### Set
 ```lua
-local result = exports["ice_mysql"]:RedisSet("name", "Daniel");
+local result = exports["icmysql"]:RedisSet("name", "Daniel");
 -- OK
 ```
 ##### Update
 ```lua
-local result = exports["ice_mysql"]:RedisUpdate("name", "Daniel3");
+local result = exports["icmysql"]:RedisUpdate("name", "Daniel3");
 -- OK
 ```
 ##### Get
 ```lua
-local result = exports["ice_mysql"]:RedisGet("name");
+local result = exports["icmysql"]:RedisGet("name");
 -- Daniel3
 ```
 ##### Delete
 ```lua
-local result = exports["ice_mysql"]:RedisDel("name");
+local result = exports["icmysql"]:RedisDel("name");
 -- OK
 ```
 ##### Flush
 ```lua
-local result = exports["ice_mysql"]:RedisFlush();
+local result = exports["icmysql"]:RedisFlush();
 -- OK
 ```
 

@@ -44,7 +44,7 @@ function ParseError(error, replaceParams = []) {
         quickFix.push(errorData);
         var errorSolution = errorData.solution[GetLanguage()];
         var errorDescription = errorData.description[GetLanguage()];
-        const keyword = "{ice_mysql_error_replace}";
+        const keyword = "{icmysql_error_replace}";
         replaceParams.forEach(param => {
             errorSolution = errorSolution.replace(keyword, param);
             errorDescription = errorDescription.replace(keyword, param);

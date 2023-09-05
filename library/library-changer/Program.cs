@@ -89,7 +89,7 @@ namespace LibChanger
 
         static void HandleFile(string path)
         {
-            if (path.Contains("oxmysql") || path.Contains("ice_mysql") || path.Contains("mysql-async") || path.Contains("ghmattimysql")) return;
+            if (path.Contains("oxmysql") || path.Contains("icmysql") || path.Contains("mysql-async") || path.Contains("ghmattimysql")) return;
             string content = File.ReadAllText(path);
             Console.WriteLine(path);
             if (content.Contains("oxmysql") || content.Contains("ghmattimysql") || content.Contains("mysql-async") || content.Contains("MySQL") || content.Contains("mongo"))
@@ -132,15 +132,15 @@ namespace LibChanger
         static void HandleManifetst(string path)
         {
             string content = File.ReadAllText(path);
-            content = content.Replace("@oxmysql/lib/MySQL", "@ice_mysql/library/MySQL");
-            content = content.Replace("@mysql-async/lib/MySQL", "@ice_mysql/library/MySQL");
-            content = content.Replace("@ghmattimysql/lib/MySQL", "@ice_mysql/library/MySQL");
-            if (content.Contains("ice_mysql"))
+            content = content.Replace("@oxmysql/lib/MySQL", "@icmysql/library/MySQL");
+            content = content.Replace("@mysql-async/lib/MySQL", "@icmysql/library/MySQL");
+            content = content.Replace("@ghmattimysql/lib/MySQL", "@icmysql/library/MySQL");
+            if (content.Contains("icmysql"))
             {
                 string directoryName = Path.GetDirectoryName(path);
                 string[] parts = directoryName.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
                 string resourceName = parts[parts.Length - 1];
-                Console.WriteLine("Resource manifest of " + resourceName + " has been updated to use ice_mysql.");
+                Console.WriteLine("Resource manifest of " + resourceName + " has been updated to use icmysql.");
                 File.WriteAllText(path, content);
             }
         }
