@@ -8,11 +8,25 @@ const { performance } = require('perf_hooks');
 const { AddDebugCache, DeleteCache, AddQuery } = require('./Debug.js');
 const { Log, LogTypes } = require('../utils/Logger.js');
 
-global.QueryTypes = Object.freeze({ "Query": "QUERY", "Select": "SELECT", "Insert": "INSERT", "Update": "UPDATE", "Delete": "DELETE", "Unique": "UNIQUE", "Scalar": "SCALAR", "Single": "SINGLE", "Raw": "RAW" });
+global.QueryTypes = Object.freeze({ "Query": "QUERY", "Select": "SELECT", "Insert": "INSERT", "Update": "UPDATE", "Delete": "DELETE", "Unique": "UNIQUE", "Scalar": "SCALAR", "Single": "SINGLE", "Raw": "RAW", "Execute": "EXECUTE"});
 
 global.queryCache = new LRU({
     max: 50 * 1024 * 1024,
 })
+
+function transformToBoolean(fields, result) {
+    const res = result;
+    if (fields) {
+        fields.forEach((field) => {
+            if (field.columnType === 1 && field.columnLength === 1) {
+            result.forEach((_, index) => {
+                res[index][field.name] = (result[index][field.name] !== 0);
+            });
+            }
+        });
+    }
+    return res;
+}
 
 function generateQueryHash(dbId, type, query, values) {
     const hash = crypto.createHash("sha1");
@@ -225,6 +239,8 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         }
         else if (type == "UPDATE") {
             return callback ? callback(rows["affectedRows"]) : rows["affectedRows"];
+        } else if(type == "EXECUTE") {
+            return callback ? callback(transformToBoolean(fields, rows), fields) : transformToBoolean(fields, rows);
         }
         return callback ? callback(rows) : rows;
     } catch (err) {
@@ -343,6 +359,21 @@ async function Raw(dbId, query, values, callback, cache) {
     await ExecuteQuery(invokingResource, global.QueryTypes.Raw, data.dbId, data.query, data.values, data.callback, data.cache);
 }
 
+async function AwaitExecute(dbId, query, values, cache) {
+    const data = await ParseArgs(dbId, query, values, cache);
+    if (data === undefined) return null;
+    const invokingResource = GetInvokingResource();
+    return await ExecuteQuery(invokingResource, global.QueryTypes.Execute, data.dbId, data.query, data.values, null, data.cache);
+}
+
+async function Execute(dbId, query, values, callback, cache) {
+    const data = await ParseArgs(dbId, query, values, callback, cache);
+    if (data === undefined) return null;
+    // if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
+    const invokingResource = GetInvokingResource();
+    await ExecuteQuery(invokingResource, global.QueryTypes.Execute, data.dbId, data.query, data.values, data.callback, data.cache);
+}
+
 global.exports("Query", Query);
 global.exports("AwaitQuery", AwaitQuery);
 global.exports("Scalar", Scalar);
@@ -351,5 +382,7 @@ global.exports("Single", Single);
 global.exports("AwaitSingle", AwaitSingle);
 global.exports("Raw", Raw);
 global.exports("AwaitRaw", AwaitRaw);
+global.exports("Execute", Execute);
+global.exports("AwaitExecute", AwaitExecute);
 
 module.exports = { ParseArgs, ExecuteQuery, ExecuteTransaction }
