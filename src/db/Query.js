@@ -137,7 +137,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
     ScheduleResourceTick(GetCurrentResourceName())
     const table = ExtractTable(query);
     const hash = generateQueryHash(dbId, type, query, values);
-    if (cache && type != "UNIQUE" && type != "SCALAR") {
+    if (cache && (type == "SELECT" || type == "UNIQUE" || type == "SINGLE")) {
         if (global.queryCache.has(table) && global.queryCache.get(table).has(hash)) {
             const cachedResult = global.queryCache.get(table).get(hash);
             return callback ? callback(cachedResult) : cachedResult;
@@ -181,7 +181,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             if (cache)
                 AddDebugCache(table, hash, rows)
         }
-        if (cache && table && type != "UNIQUE" && type != "SCALAR") {
+        if (cache && table && (type == "SELECT" || type == "UNIQUE" || type == "SINGLE")) {
             var data = null;
             if (type == "SELECT" && rows.length === 1) {
                 if (Object.entries(rows[0]).length === 1) {
@@ -190,13 +190,20 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
                 else
                     data = rows[0];
             }
-            if (type == "SCALAR") {
+            if (type == "UNIQUE") {
                 if (rows.length > 0 && fields.length > 0) {
                     data = rows[0][fields[0].name];
                 }
+                if (rows.length <= 0)
+                    data = null
+                else
+                    data = rows[0][Object.keys(rows[0])[0]]
             }
-            if (type == "RAW") {
-                data = rows;
+            if (type == "SINGLE") {
+                if (rows.length > 0 && fields.length > 0) {
+                    data = rows[0];
+                }
+                data = null;
             }
             if (data != null)
                 global.queryCache.get(table).set(hash, data);
@@ -249,7 +256,13 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
     } finally {
         ReleaseConnection(dbId, connection)
         var query = query.toLowerCase();
-        if ((query.includes("update") || query.includes("delete") || query.includes("insert")) && table && global.queryCache.has(table)) {
+        if (
+            (query.toLowerCase().includes("update") || 
+                query.toLowerCase().includes("delete") || 
+                query.toLowerCase().includes("insert") || 
+                query.toLowerCase().includes("replace")
+            ) && table && global.queryCache.has(table)
+        ){
             global.queryCache.del(table);
             DeleteCache(table, hash)
         }
