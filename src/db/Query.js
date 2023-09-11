@@ -114,7 +114,7 @@ async function ParseArgs(dbId, query, values, callback, cache) {
         if (typeof callback === "boolean")
             cache = callback;
         else
-            cache = true;
+            cache = false;
     } else if (typeof values === "boolean") {
         cache = values;
         values = [];
@@ -122,11 +122,11 @@ async function ParseArgs(dbId, query, values, callback, cache) {
         if (typeof callback === "boolean")
             cache = callback;
         else
-            cache = true;
+            cache = false;
     } else {
         values = [];
     }
-    if (cache === undefined) cache = true;
+    if (cache === undefined) cache = false;
     if (typeof dbId !== "number" || typeof query !== "string" || typeof values !== "object" || typeof cache !== "boolean") return ParseError("Invalid params for query function.");
     if (pools[dbId] == null) return ParseError(`The database ${dbId} is not registered.`);
     return { dbId: dbId, query: query, values: values, callback: callback, cache: cache };
