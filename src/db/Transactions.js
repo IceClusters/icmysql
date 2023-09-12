@@ -19,7 +19,7 @@ async function AwaitTransaction(dbId, queries, parameters) {
             queriesList.push({ query: queries[i], values: valuesArgs })
         }
     }
-    if (queriesList.length < 1) return ParseError("You must provide at least one query to execute in transactions.");
+    if (queriesList.length < 1) return [];
     if (dbId === undefined || queries === undefined) return ParseError("You've provided invalid arguments to AwaitTransaction.");
 
     return await ExecuteTransaction(dbId, queriesList, null);
