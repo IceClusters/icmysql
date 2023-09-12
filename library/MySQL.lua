@@ -164,11 +164,13 @@ for _, func in pairs(MongoFunctions) do
 end
 
 MySQL.ready = function(cb)
-    while(not dbReady) do 
-        dbReady = icmysql.IsReady()
-        Wait(10)
-    end
-    cb()
+    CreateThread(function()
+        while(not dbReady) do 
+            dbReady = icmysql.IsReady()
+            Wait(10)
+        end
+        cb()    
+    end)
 end
 
 -- MySQL = {
