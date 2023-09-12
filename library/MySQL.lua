@@ -38,6 +38,9 @@ MySQL = {
         fetchAll = function(...) 
             return icmysql.AwaitQuery(nil, ...)
         end,
+        fetchSingle = function(...) 
+            return icmysql.AwaitSelect(nil, ...)
+        end,
         fetchScalar = function(...) 
             return icmysql.AwaitScalar(nil, ...)
         end,
@@ -54,6 +57,9 @@ MySQL = {
         end,
         fetchAll = function(...) 
             return icmysql.Query(nil, ...)
+        end,
+        fetchSingle = function(...)
+            return icmysql.Select(nil, ...)
         end,
         fetchScalar = function(...) 
             return icmysql.Scalar(nil, ...)
