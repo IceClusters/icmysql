@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICMySQL</title>
+    <link rel="stylesheet" href="./styles/root.css">
+    <link rel="stylesheet" href="./styles/app.css">
+    <link rel="stylesheet" href="./styles/resources.css">
+    <link rel="stylesheet" href="./styles/input.css">
+    <link rel="stylesheet" href="./styles/database.css">
+    <link rel="stylesheet" href="./styles/logs.css">
+    <link rel="stylesheet" href="./styles/cache.css">
+    <link rel="stylesheet" href="./styles/backup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://kit.fontawesome.com/1c4b4851e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+</head>
+
+<body id="body">
+    <section class="container" id="main-container" style="display: none;">
+        <div class="menu animate__animated" style="display: none;">
+            <video src="./assets/bg.mp4" autoplay muted loop></video>
+            <main class="main">
+                <!-- HOME -->
+                <section class="section__buttons" id="section__buttons">
+                    <div class="grid">
+                        <div class="resources__section button__style" onclick="OpenSection('section__resources')">
+                            <i class="fa-solid fa-scroll"></i>
+                            <p>Resources</p>
+                        </div>
+
+                        <div class="dbs__section button__style" onclick="OpenSection('section__dbs')">
+                            <i class="fa-solid fa-database"></i>
+                            <p>Database</p>
+                        </div>
+
+                        <div class="logs__section button__style" onclick="OpenSection('section__logs')">
+                            <i class="fa-solid fa-list"></i>
+                            <p>Logs</p>
+                        </div>
+
+                        <div class="cache__section button__style" onclick="OpenSection('section__cache')">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <p>Cache</p>
+                        </div>
+
+                        <div class="backups__section button__style" onclick="OpenSection('section__backup')">
+                            <i class="fa-solid fa-memory"></i>
+                            <p>backups</p>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- RESOURCES -->
+                <section class="section__resources" id="section__resources">
+                    <div class="modal_container" id="resourceModal">
+                        <div class="modal--style popup_container animate__animated">
+                            <div class="modal--title">
+                                <h1 class="txt--title" id="resourceModalTitle">ice core</h1>
+                                <i onclick="CloseResourceModal()" class="icon--modal fa-solid fa-times"></i>
+                            </div>
+                            <div class="container__content --modal">
+                                <div class="shadow-sm rounded p-4 table__container">
+                                    <table class="tablaContent">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:10%">DB</th>
+                                                <th style="width: 50% !important;">Query</th>
+                                                <th style="width:20%">Values</th>
+                                                <th style="width:13%;">Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="resourceModalBody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return" onclick="GoBack()">
+                        <a class="icon btn__style">Back</a>
+                    </div>
+                    <div class="row">
+                        <div class="rs--grid adj">
+
+                            <div class="container__title">
+                                <h1>Resources</h1>
+                                <div class="inputBox_container">
+                                    <lord-icon class="search_icon" src="https://cdn.lordicon.com/rlizirgt.json"
+                                        trigger="hover" colors="primary:#494a4d">
+                                    </lord-icon>
+                                    <input class="inputBox" id="inputBox" type="text" placeholder="Find Resources">
+                                </div>
+                            </div>
+                            <div class="container__content">
+                                <div class="scroll" id="resources-content">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rs--grid stats">
+                            <div class="rs--grid">
+                                <div class="container__title">
+                                    <h1>Stats</h1>
+                                </div>
+                                <div class="container__content --stats">
+                                    <div class="rs--grid">
+                                        <div class="tags--wrapper">
+                                            <div class="tags" id="statsQueries">Queries: 200</div>
+                                            <div class="tags" id="statsSlowQueries">Slow queries: 120</div>
+                                            <div class="tags" id="statsAverageQueries">Average queries: 10</div>
+                                            <div class="tags" id="statsTimeQuerying">Time querying: 10</div>
+                                            <div class="tags" id="statsScripts">Scripts: 10</div>
+                                            <div class="tags" id="statsDBCount">Databases used: 10</div>
+                                            <div class="tags" id="statsFailedQueries">Failed queries: 100</div>
+                                        </div>
+                                        <div class="container__content --graphic"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section__dbs" id="section__dbs">
+                    <div class="container--dbs">
+                        <div class="container__title">
+                            <h1>Databases</h1>
+                        </div>
+
+                        <div class="container__content">
+                            <div class="scroll__dbs" id="dbs-content">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return" onclick="GoBack()">
+                        <a class="icon btn__style">Back</a>
+                    </div>
+                </section>
+
+                <section class="section__logs" id="section__logs">
+                    <div class="container--logs">
+                        <div class="container__title">
+                            <h1>Logs</h1>
+                        </div>
+                        <div class="container__content --logs">
+                            <div class="logs--content">
+                                <div class="shadow-sm rounded p-4 table__container adg--logs">
+                                    <table class="tablaContent">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:10%">Type</th>
+                                                <th style="width: 70% !important;">Message</th>
+                                                <th style="width: 20%;">Solution</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="logsModalBody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return" onclick="GoBack()">
+                        <a class="icon btn__style">Back</a>
+                    </div>
+                </section>
+
+                <section class="section__cache" id="section__cache">
+                    <div class="container--cache">
+                        <div class="container__title">
+                            <h1>Cache</h1>
+                        </div>
+                        <div class="container__content --cache">
+                            <div class="cache--content">
+                                <div class="shadow-sm rounded p-4 table__container adg--cache">
+                                    <table class="tablaContent">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:10%">Table</th>
+                                                <th style="width: 20% !important;">Hash</th>
+                                                <th style="width:50%">Values</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cacheModalBody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return" onclick="GoBack()">
+                        <a class="icon btn__style">Back</a>
+                    </div>
+                </section>
+
+                <section class="section__backup" id="section__backup">
+                    <div class="container--backup">
+                        <div class="container__title">
+                            <h1>Backups</h1>
+                        </div>
+                        <div class="container__content --backup">
+                            <div class="backup--content">
+                                <div class="shadow-sm rounded p-4 table__container adg--backup">
+                                    <table class="tablaContent">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:33.3% !important;">Database</th>
+                                                <th style="width: 33.3% !important;">Date</th>
+                                                <th style="width:15.0% !important;">Size</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="backupModalBody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return" onclick="GoBack()">
+                        <a class="icon btn__style">Back</a>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+# Discord Logs
+### Description
+The discord logs system is a way to log all the mysql involved information in a discord channel.
+
+### Use
+To use this system you have to enable this options ```Config.DiscordLogs``` in the config.js and specify the webhook url in ```Config.DiscordWebhook```, then you have some options to enable if you want to send some information.
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/utils/Discord.js```

@@ -4,19 +4,22 @@ game 'gta5'
 author 'DanielGP'
 description 'Script that manage all connections and querys to the database.'
 version '1.0.0'
+is_release 'yes'
 
-shared_script 'config.js'
-server_script 'src/server.js'
-client_script 'src/debug.lua'
-
-files {
-    'ui/js/*.js',
-    'ui/index.html',
-    'ui/assets/css/*.css',
-    'ui/assets/js/*.js',
-    'ui/assets/plugins/global/*.css',
-    'ui/assets/plugins/global/*.js',
-    'ui/assets/*.css',
+client_scripts {
+    'debug.lua'
 }
 
-ui_page 'ui/index.html'
+server_scripts {
+    'config.js',
+    'src/server/main.lua',
+    'dist/build.js'
+}
+
+ui_page 'src/debug/index.html'
+files {
+    'src/debug/*.html',
+    'src/debug/js/*.js',
+    'src/debug/styles/*.css',
+    'src/debug/assets/*.*'
+}

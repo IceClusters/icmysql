@@ -1,0 +1,20 @@
+:root {
+	--bg__color: rgb(17, 17, 17);
+	--hover-button: rgba(255, 255, 255, 0.01);
+    --hover-button--color: rgba(255, 255, 255, 0.048);
+    --color--primary: #ffffff;
+    --color-text--secondary: #353535;
+    --color--secondary: #adadad;
+    --color--placeholder: #808080;
+    --bg__btn--color: #353535;
+    --bg__btn--hover: #74747485;
+    --bg__color--input: rgb(24, 24, 24);
+    --bg--hover-input: rgb(28, 28, 28);
+    --border-top: #ffffff05;
+    --color--title: whitesmoke;
+    --color-box: rgba(24, 24, 24, 0.7);
+    --color-box-hover: rgba(28, 28, 28, 0.7);
+    --modal--color: rgb(18, 18, 18);
+    --modal--body: rgb(20, 20, 20);
+    --modal_td--color: rgb(110, 110, 110);
+}

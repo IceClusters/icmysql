@@ -1,0 +1,44 @@
+.inputBox_container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    /* max-width: 18em; */
+    width: 14em;
+    height: fit-content;
+    margin-right: 1vh;
+    padding: 0.5vh;
+    background-color: var(--bg__color--input);
+    border-top: 2px solid var(--border-top);
+    border-radius: 5px;
+    transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1), width 0.4s ease-in-out;
+    overflow: hidden;
+}
+
+.inputBox_container:hover {
+    background-color: var(--bg--hover-input);
+}
+
+.inputBox_container:focus-within {
+    background-color: var(--bg--hover-input);
+    width: 18em;
+}
+
+.search_icon {
+    height: 1.6em;
+    padding: 0 0.5em 0 0.0em;
+}
+
+.inputBox {
+    background-color: transparent;
+    color: var(--color--secondary);
+    outline: none;
+    width: 100%;
+    border: 0;
+    line-height: 10px;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    font-size: 0.8rem;
+}
+
+::placeholder {
+    color: var(--color--placeholder);
+}

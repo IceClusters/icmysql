@@ -1,0 +1,21 @@
+# Multiple DB
+### Description
+The multiple DB feature make it possible to use multiple databases in a single server. This feature is useful when you want to separate the data of each user or when you want to separate the data of each service. For example if you ban a user in a database you can share that database with multiple servers and the user will be banned in all of them. Other example you have a data and you want to share it with multiple servers, in this case it can be bought coins, items, or other data.
+### Use
+To use this feature you have to specify the databases credentials in the server.cfg, for example:
+```cfg
+set mysqlCredentials_1 "host=127.0.0.1;user=root; password=1234; database=fxserver; port=3306"
+set mysqlCredentials_2 "host=127.0.0.1;user=root; password=1234; database=fxserver; port=3306"
+```
+Once you have specified the databases when the server start in the console you will see a message that tell you if the script has connected to each DB correctly.
+To use you have to specify the database number in the function that you want to use as the first parameter, for example to make a select in the database 2:
+```lua
+MySQL.Select(2, "SELECT name FROM players WHERE id = ?". {3}, function(result)
+    print(result) -- Output: Daniel
+end)
+```
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/Connections.js```
+- ```src/db/Query.lua```
+- ```src/db/Reader.js```

@@ -1,0 +1,17 @@
+# Cache System
+### Description
+The cache system if a efficient mode to make only necessary queries to databases, that save the new data in a cache and if the data is already in the cache it will not make a new query to the database. This feature is very useful to make a lot of queries to the database without having to worry about the performance of the server.
+Using this feature you will save more than the 50% of the time that you use to make queries to the database. If you have made any change to the database for example making a Update query the cache data will be removed and the next time that you make a query to the database it will be saved in the cache again.
+### Video
+https://github.com/IceClusters/icmysql/assets/96537843/f306b9eb-1ace-4ea7-a8fc-83bafa864e6e
+### Use
+To use this feature you don't have to do anything, by default is applied in the default query functions, if there's a reason to disable it you can do it by passing a false value after the function param.
+Example to disable cache:
+```lua
+MySQL.Select(1, "SELECT name FROM players WHERE id = ?". {3}, function(result)
+    print(result) -- Output: Daniel
+end, false)
+```
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/Query.lua```

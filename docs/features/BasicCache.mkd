@@ -1,0 +1,13 @@
+# Basic Connection Cache System
+### Description
+This is a very basic system to keep alive multiple connections of one database and make queries to them. For example for each database the script will create the neccessary connections and will keep them alive to make queries to them. This is very useful to reduce time of creating a new connection from the pool, an example of that is for example when you make a query, the script will create a new connection from the pool if there isn't available connection, once the query has ended the connection keeps stored in an array an is waiting for other queries, you can change the max connection limit in the config.js, by default the max connection limit is 15.
+
+### Video
+https://github.com/IceClusters/icmysql/assets/96537843/9306427a-f58a-4335-8134-3684a436cfa6
+### Use
+You don't have to make anything special to use this feature as this is already implmented in the script, you just have to make the queries as you would do normally, the script will take care of the rest.
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/Connections.js```
+- ```src/db/Query.lua```

@@ -1,0 +1,78 @@
+# Mongo DB Support
+<img src="../assets/MongoDB_Logo.png" width=250>
+
+### Description
+We've added the support to Mongo DB, so you can use it as a database, you can mix it with other SQL & non-SQL databases. The multi-database support is a feature that you can use in SQL & non-SQL databases.
+
+### Use
+To use is the same as the other databases, you just need to enable this option in the config.js ```Config.MongoDB``` and provide the credentials in the server.cfg like this: 
+```cfg
+set mongoCredentials_1 "mongodb://localhost:27017/test"
+```
+As you can see is the same structure like mysql you have to specify the id of the database because we've provided multiple database support here, then the database will be connected automatically on the server start.
+**Function list:**
+```lua
+Mongo.MongoInsert(dbID, options, callback);
+Mongo.MongoFind(dbID, options, callback);
+Mongo.MongoUpdate(dbID, options, callback);
+Mongo.MongoCount(dbID, options, callback);
+Mongo.MongoDelete(dbID, options, callback);
+```
+
+#### Params
+- ```dbID(optional)``` is the database ID that you want to use, by default the database ID is 1, you can change it in the config.js ```Config.DefaultMongoDB```, this parameter is optional so if you don't specify that it will work.
+- ```options(*)``` is the options that you want to make in the query, above where're going to explain you how it works and some examples, but you can find the options in the [MongoDB Documentation](https://docs.mongodb.com/manual/reference/method/js-collection/).
+- ```callback(optional)``` is the function that will be called when the query is finished, if the callback is not specified the query will be executed and it will be as an await function.
+
+#### Examples
+##### Insert
+```lua
+local result = exports["icmysql"]:MongoInsert(1, {
+    collection = "users",
+    documents = {
+        ["name"] = "Daniel"
+    }
+});
+```
+##### Find
+```lua
+local result = exports["icmysql"]:MongoFind(1, {
+    collection = "users",
+    query = {
+        ["name"] = "Daniel"
+    }
+});
+```
+##### Update
+```lua
+local result = exports["icmysql"]:MongoUpdate(1, {
+    collection = "users",
+    query = {
+        ["name"] = "Daniel"
+    },
+    update = {
+        ["$set"] = {
+            ["name"] = "Daniel2"
+        }
+    }
+});
+```
+##### Count
+```lua
+local result = exports["icmysql"]:MongoCount(1, {
+    collection = "users",
+});
+```
+##### Delete
+```lua
+local result = exports["icmysql"]:MongoDelete(1, {
+    collection = "users",
+    query = {
+        ["name"] = "Daniel2"
+    }
+});
+```
+
+### Files
+This is the list of the involved files in this feature to help any developer to understand how it works:
+- ```src/db/mongo/*.js```
