@@ -1,10 +1,14 @@
 const axios = require('axios');
 const { ParseError } = require('../errors/Parser.js')
-
+let warned = false;
 module.exports = {
 	SendDiscordLog: async function (content) {
 		if (!Config.DiscordLogs) return;
-		if (Config.DiscordWebhook === "") return ParseError(`You have enabled the discord logs but you have not set the webhook, please set the webhook in the config.js file`);
+		if(warned) return;
+		if (Config.DiscordWebhook === "") { 
+			warned = true;
+			return ParseError(`You have enabled the discord logs but you have not set the webhook, please set the webhook in the config.js file`);
+		}
 		try {
 			await axios.post(Config.DiscordWebhook, content);
 		} catch (error) {
