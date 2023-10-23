@@ -48,7 +48,6 @@ async function UpdateScript() {
         await CreateDirRecursive(extractPath)
     }
     try {
-        const zip = new AdmZip(downloadPath);
         await extract(downloadPath, { dir: path.resolve(extractPath, '..') });
         const newFolderPath = extractPath.replace("icmysql", "icmysql-old");
         const oldFolderPath = extractPath.replace("icmysql", "icmysql-develop");
