@@ -18,7 +18,7 @@ We created this database connection system because, even though there are good s
 - [Support Lua, JS, C# library](docs/features/SupportLuaJS.mkd)
 - [Library to change other mysql system functions to ice](docs/features/ChangeOtherSystem.mkd)
 - [Named and unnamed parameters support](docs/features/NamedParameters.mkd)
-- [Debug UI](docs/features/DebugUI.mkd)
+- [Debug UI]()
 - [Error handling](docs/features/ErrorHandling.mkd)
 ### Installation
 1. Download the latest release from [here](https://github.com/IceClusters/icmysql/releases/latest)
