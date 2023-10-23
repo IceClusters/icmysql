@@ -270,7 +270,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
 }
 
 async function ExecuteTransaction(dbId, queries, callback) {
-    const connection = await pools[dbId].getConnection();
+    const connection = await GetConnection(dbId);
     await connection.beginTransaction();
     var modifiedTables = [];
     try {
@@ -291,8 +291,8 @@ async function ExecuteTransaction(dbId, queries, callback) {
         });
         if (hasErrors) {
             await connection.rollback();
-            typeof callback === "function" ? callback(null) : null;
-            return ParseError("Some queries failed while executing transaction.");
+            ParseError("Some queries failed while executing transaction.");
+            return typeof callback === "function" ? callback(false) : false;
         }
         await connection.commit();
         connection.release();
@@ -301,6 +301,7 @@ async function ExecuteTransaction(dbId, queries, callback) {
         await connection.rollback();
         connection.release();
         ParseError(`Error while executing transaction: ${err.message} `);
+        return typeof callback === "function" ? callback(false) : false;
     } finally {
         await connection.rollback();
         connection.release();
