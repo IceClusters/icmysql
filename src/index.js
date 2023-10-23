@@ -14,17 +14,19 @@ if (Config.Redis) require('./db/redis/index.js');
 
 setTimeout(async () => {
     try {
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-
         if (Config.CheckForUpdates) {
             await CheckVersion();
         }
-        // InitData()
+        // InitData() // This is the JSON system, disabled until fix the high cpu usage
         ParseLocalisations();
-        ReadCFG();
+        if(Config.MySQL){
+            ReadCFG();
+        } else if(Config.ORM) {
+            ParseError(`^3The MySQL support is disabled, but you're trying to use ORM, if you want to use ORM enable the MySQL support in config.js.^0`)
+        }
+        if(!Config.MySQL && !Config.MongoDB && !Config.Redis) {
+            ParseError(`^3You need to enable at least one database system in config.js.^0`)
+        }
         InitLogs();
     } catch (error) {
         ParseError(error.message)

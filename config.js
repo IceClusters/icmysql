@@ -1,7 +1,7 @@
 Config = {};
 Config.Language = "en"; // en, es, fr
 
-// DataMemSave
+// DataMemSave(TEMPORALY DISABLED UNTIL I FIND A WAY TO FIX PERFORMANCE ISSUES)
 Config.SaveDirPath = "IcMysql/Data/"; // Path respective to the FXServer.exe file
 Config.SaveInterval = 20000; // The interval in milliseconds that the resource will save the data in the JSON file don't put a value less than 5000
 
@@ -24,18 +24,19 @@ Config.SendBackupInfo = true; // Send the backup event when a backup is executed
 Config.SendDatabaseMapped = true; // Send the database mapped event when a database is mapped
 
 // BACKUP
-Config.BackupEnabled = true; // Enable the backup system
-Config.MysqlDumpPath = "C:/xampp/mysql/bin/mysqldump.exe"; // The path of the mysqldump.exe file, in this case is the path of the xampp mysql dump 
+Config.BackupEnabled = false; // Enable the backup system
+Config.MysqlDumpPath = "C:/Program Files/MariaDB 11.1/bin/mysqldump.exe"; // The path of the mysqldump.exe file, in this case is the path of the xampp mysql dump 
 // MOST USED PATHS
 // XAMPP: C:/xampp/mysql/bin/mysqldump.exe
 // WAMP: C:/wamp/bin/mysql/mysql5.7.26/bin/mysqldump.exe
-// MariaDB: C:/Program Files/MariaDB 11.2/bin/mysqldump.exe
+// MariaDB: C:/Program Files/MariaDB 11.1/bin/mysqldump.exe
 Config.BackupDirPath = "IcMysql/Backups"; // Path respective to the FXServer.exe file
 Config.MaxBackups = 4; // The max count of backups that will be saved, the oldest will be deleted
 Config.Days = [5, 14, 23, 29]; // The days that the backup will be executed, if the array is empty the backup will be executed every day
-Config.Hour = "18:36" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
+Config.Hour = "23:00" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
 
 // DATABASE
+Config.MySQL = true; // Enable the MySQL support
 Config.MaxDB = 10; // The max count of databases that can be readed in the server.cfg file
 Config.MaxConnectionLimit = 15; // The max count of connections that can be created per database(recomend to not alter this value too much)
 Config.QueueLimit = 100; // The max count of queries that can be queued per database(recomend to not alter this value too much)
@@ -53,7 +54,7 @@ Config.Enabled = false; // Enable the debug UI
 Config.DebugLicenses = ["license:0ca0dfbead8e22c4235769d9380d1fb9d6f32d5a"] // The licenses of the players that will be able to use the debug UI.
 
 // ORM
-Config.ORM = false; // Enable the ORM queries
+Config.ORM = false; // Enable the ORM queries, this depend of the MySQL support
 Config.DefaultORMDB = 1; // The default database that will be used if the database is not specified in the orm query
 Config.RawData = true; // If the ORM will return the raw data or the model instance that contains sequelize data
 Config.ConnectionsORM = [0, 10] // Minimum and maximum count of connections that will be created for the ORM, this is used to create a pool of connections that will be used by the ORM, this is used to avoid the creation of a connection for each query
