@@ -14,7 +14,7 @@ async function ConnectToRedis() {
     });
     start = performance.now();
     client.once('ready', () => {
-        Log(LogTypes.Info, `^2Redis connected in ${performance.now() - start}ms^0`);
+        Log(LogTypes.Info, `^2Redis connected in ${(performance.now() - start).toFixed(4)}ms^0`);
     });
     client.once('error', err => {
         Log(LogTypes.Error, `^3Can't connect to redis, ${err.message}^0`);

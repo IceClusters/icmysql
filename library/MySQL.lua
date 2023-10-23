@@ -2,20 +2,6 @@ local icmysql = exports.icmysql
 local MySQLData = {}
 local dbReady = false
 
-local function customAwait(func, ...)
-    local promiseObj = Promise.new()
-
-    func(nil, ..., function(result, error)
-        if error then
-            promiseObj:reject(error)
-        else
-            promiseObj:resolve(result)
-        end
-    end, GetCurrentResourceName(), true)
-
-    return Citizen.Await(promiseObj)
-end
-
 MySQLData.__call = function(self, ...)
     local newObj = {}
     setmetatable(newObj, self)
@@ -25,8 +11,9 @@ end
 
 local ORMFunctions = {"FindAll", "FindOne", "FindById", "Modify", "FindAndCountAll", "Create", "Destroy", "Count", "Max", "Min", "Sum", "Increment", "Decrement", "BulkCreate"}
 local QueryFunctions = {"Query", "AwaitQuery", "Select", "AwaitSelect", "Insert", "AwaitInsert", "Update", "AwaitUpdate", "Delete", "AwaitDelete", "Transaction", "AwaitTransaction", "Unique", "AwaitUnique", "Single", "AwaitSingle"}
-local MongoFunctions = {"MongoInsert", "MongoFind", "MongoUpdate", "MongoCount", "MongoDelete"}
-Mongo = {}
+local MongoFunctions = {"MongoInsertOne", "MongoInsertMany", "MongoFindOne", "MongoFindMany", "MongoUpdateOne", "MongoUpdateMany", "MongoCount", "MongoDeleteOne", "MongoDeleteMany", "MongoCreateIndex", "MongoStartTransactionSession", "MongoWithTransaction", "MongoBulkWrite", "MongoReplaceOne", "MongoReplaceMany", "MongoIsConnected"}
+local RedisFunctions = {"RedisGet", "RedisSet", "RedisDel", "RedisExists", "RedisExpire", "RedisUpdate", "RedisFlush", "RedisKeys", "RedisMGet", "CloseRedis", "OpenRedis", "ReloadRedis" }
+
 MySQL = {
     ORM = {},
 
@@ -156,9 +143,15 @@ for _, func in pairs(QueryFunctions) do
         return icmysql[func](nil, ...)
     end
 end
-
+MySQL.Mongo = {}
 for _, func in pairs(MongoFunctions) do
-    Mongo[func] = function(...)
+    MySQL.Mongo[func:gsub("Mongo", "")] = function(...)
+        return icmysql[func](nil, ...)
+    end
+end
+MySQL.Redis = {}
+for _, func in pairs(RedisFunctions) do
+    MySQL.Redis[func:gsub("Redis", "")] = function(...)
         return icmysql[func](nil, ...)
     end
 end
@@ -172,24 +165,5 @@ MySQL.ready = function(cb)
         cb()    
     end)
 end
-
--- MySQL = {
-
-    -- Other functions
-    -- JSON = {
-    --     GetData = function(...) 
-    --         return icmysql.GetData(nil, ...)
-    --     end,
-    --     SetData = function(...) 
-    --         return icmysql.SetData(nil, ...)
-    --     end,
-    --     RemoveData = function(...) 
-    --         return icmysql.RemoveData(nil, ...)
-    --     end,
-    --     SaveData = function() 
-    --         return icmysql.SaveData(nil)
-    --     end,
-    -- }
--- }
 
 setmetatable(MySQL, MySQLData)

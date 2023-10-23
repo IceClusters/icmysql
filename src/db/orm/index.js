@@ -124,7 +124,7 @@ async function MapCustomOperator(operator) {
 		"col": Op.col,
 		"placeholder": Op.placeholder,
 		"join": Op.join,
-		"match": Op.match
+		"match": Op.match,
 	};
 	return operatorMap[operator] || null;
 }
@@ -231,6 +231,30 @@ async function FindAndCountAll(index, model, options, callback) {
 		return null;
 	}
 }
+
+async function FindOrCreate(index, model, options, callback) {
+	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
+	if (typeof index === "string") {
+		if (typeof options === "function")
+			callback = options;
+		options = model;
+		model = index;
+		index = Config.DefaultORMDB;
+	}
+	if (options == null || options.length == 0) options = {};
+	options.raw = Config.RawData;
+
+	try {
+		const result = await poolsORM[index].models[model].findOrCreate(await ParseOperators(options));
+		if (typeof callback === "function") return callback(result);
+		return result;
+	} catch (e) {
+		ParseError(`Can't find or create with ORM database ${index}, ${e.message}.`);
+		if (typeof callback === "function") return callback(null);
+		return null;
+	}
+}
+
 async function Create(index, model, options, callback) {
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
@@ -466,6 +490,7 @@ if (Config.ORM) {
 	global.exports("Increment", Increment)
 	global.exports("Decrement", Decrement)
 	global.exports("BulkCreate", BulkCreate)
+	global.exports("FindOrCreate", FindOrCreate)
 }
 
 module.exports = {

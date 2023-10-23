@@ -21,5 +21,4 @@ function PrepareObject(input) {
     return output;
 }
 
-
 module.exports = { PrepareObject }
