@@ -98,9 +98,9 @@ async function MakeBackup() {
                     "description": "Hey there! The database backup process has been successfully completed. 🎉\n\nYou can find the backup file at the following path:\n" + pathList,
                     "color": 8912728,
                     "footer": {
-                        "text": "ICMySQL"
+                        "text": "IcMySQL"
                     },
-                    "timestamp": "2023-08-02T10:07:00.000Z"
+                    "timestamp": new Date().toISOString()
                 }
             ],
             "attachments": []
