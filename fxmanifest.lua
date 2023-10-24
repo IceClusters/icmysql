@@ -1,5 +1,5 @@
 fx_version 'cerulean'
-game 'gta5'
+games {'gta5'}
 
 author 'DanielGP'
 description 'Script that manage all connections and querys to the database.'
