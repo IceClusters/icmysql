@@ -17,13 +17,12 @@ async function AwaitTransaction(dbId, queries) {
         dbId = Config.DefaultDB;
     }
     const queriesList = [];
-    for(let i = 0; i < queries.length; i++) {
-        queriesList.push({query: queries[i][0] || queries[i]["query"], values: ParseValues(queries[i][1] || queries[i]["values"])})
-    }
+    queriesList = parseTransaction(queries); 
+    console.log(queriesList)
     if (queriesList.length < 1) return [];
     if (dbId === undefined || queries === undefined) return ParseError("You've provided invalid arguments to AwaitTransaction.");
 
-    return await ExecuteTransaction(dbId, queriesList, null);
+    // return await ExecuteTransaction(dbId, queriesList, null);
 }
 
 async function Transaction(dbId, queries, callback) {
