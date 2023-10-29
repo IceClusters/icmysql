@@ -1,10 +1,9 @@
 fx_version 'cerulean'
 games {'gta5'}
 
-author 'DanielGP'
-description 'Script that manage all connections and querys to the database.'
+author 'Ice Cluster'
+description 'Advanced database system for FiveM'
 version '1.0.0'
-is_release 'yes'
 
 client_scripts {
     'debug.lua'
@@ -16,10 +15,10 @@ server_scripts {
     'dist/build.js'
 }
 
-ui_page 'src/debug/index.html'
+ui_page 'debug/index.html'
 files {
-    'src/debug/*.html',
-    'src/debug/js/*.js',
-    'src/debug/styles/*.css',
-    'src/debug/assets/*.*'
+    'debug/*.html',
+    'debug/js/*.js',
+    'debug/styles/*.css',
+    'debug/assets/*.*'
 }
