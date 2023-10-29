@@ -8,20 +8,12 @@ const { DefineModels } = require('../orm/models/index.js')
 const { Log, LogTypes } = require('../../utils/Logger.js')
 const { GetKey } = require('../../language/localisation.js');
 const { SetDBORM } = require('../Debug.js');
+const { DirExist, DeleteDir } = require('../../utils/Files.js');
 
 async function GenerateModels(credentials, index) {
 	if (!Config.ORM) return;
-	const sourceDBConfig = {
-		host: credentials.host,
-		dialect: "mysql",
-		username: credentials.user,
-		password: credentials.password,
-		database: credentials.database,
-		port: credentials.port
-	};
-
 	const autoOptions = {
-		directory: GetResourcePath(GetCurrentResourceName()) + "/src/db/orm/models/" + index,
+		directory: GetResourcePath(GetCurrentResourceName()) + "/Models/"+ index,
 		lang: 'js',
 		logging: false,
 	};
@@ -30,11 +22,10 @@ async function GenerateModels(credentials, index) {
 	try {
 		const start = performance.now();
 		Log(LogTypes.Info, "^3" + GetKey("MappingDB"));
-		const auto = new SequelizeAuto(sourceDBConfig.database, sourceDBConfig.username, sourceDBConfig.password, {
+		const auto = new SequelizeAuto(credentials.database, credentials.user, credentials.password, {
 			...autoOptions,
-			dialect: sourceDBConfig.dialect,
+			dialect: credentials.dialect,
 		});
-
 		await auto.run();
 
 		Log(LogTypes.Info, "^2" + GetKey("MappedSuccess") + " " + (performance.now() - start).toFixed(2) + "ms");
@@ -51,8 +42,10 @@ async function GenerateModels(credentials, index) {
 				],
 				"attachments": []
 			})
+		return true
 	} catch (error) {
 		Log(LogTypes.Error, "^1" + GetKey("MappedError") + ", " + error.message);
+		return false
 	}
 }
 
@@ -61,23 +54,21 @@ async function RegisterORMConnection(index, credentials) {
 	const start = performance.now();
 	const sequelize = await new Sequelize(credentials.database, credentials.user, credentials.password, {
 		host: credentials.host,
-		dialect: "mysql",
-		port: credentials.port,
-		logging: false,
-		pool: {
-			max: Config.ConnectionsORM[1],
-			min: Config.ConnectionsORM[0],
-			acquire: Config.ORMConnectionTimout
-		}
+		dialect: credentials.dialect,
+		logging: false
 	});
 	try {
 		await sequelize.authenticate();
 		const end = performance.now();
 		poolsORM[index] = sequelize;
-		DefineModels(sequelize, index);
-		SetDBORM(index, true)
-		if (Config.LogORMConnections)
-			Log(LogTypes.Info, `^2ORM Database ${index} connected successfully in ${(end - start).toFixed(4)}ms`);
+		if (await DirExist(path.join(GetResourcePath(GetCurrentResourceName()) + "/Models/", `${index}`))) {
+			DefineModels(sequelize, index);
+			SetDBORM(index, true)
+			if (Config.LogORMConnections)
+				Log(LogTypes.Info, `^2ORM Database ${index} connected successfully in ${(end - start).toFixed(4)}ms`);
+        } else {
+            await GenerateModels(credentials, index) ? RegisterORMConnection(index, credentials).then() : null;
+        }
 	} catch (e) {
 		ParseError(`Can't connect to ORM database ${index}, ${e.message}.`);
 	}
@@ -492,6 +483,49 @@ if (Config.ORM) {
 	global.exports("BulkCreate", BulkCreate)
 	global.exports("FindOrCreate", FindOrCreate)
 }
+
+RegisterCommand("maporm", async function(source, args, rawCommand){
+	if(Number(source) == 0) {
+		if (!Config.ORM) return Log(LogTypes.Info, "^3" + GetKey("TryOrmWithoutEnabled")+"^0");
+		const dbId = args[0].length > 0 ? args[0] == "*" ? "*" : Number(args[0]) : Config.DefaultORMDB;
+		if(!poolsORM[dbId] && dbId != "*") return ParseError(`^1Can't find ORM DB with ID: ${dbId} ^0`);
+
+		const remap = async function(id) {
+			console.log("Remaping ORM DB: "+id)
+			if(await DirExist(GetResourcePath(GetCurrentResourceName()) + "/Models/"+id)) {
+				await DeleteDir(GetResourcePath(GetCurrentResourceName()) + "/Models/" + id);
+	
+				Log(LogTypes.Info, "^3" + GetKey("MappingProgrammed")+"^0");
+				if (Config.SendDatabaseMapped)
+					SendDiscordLog({
+						"content": null,
+						"embeds": [
+							{
+								"title": "ORM Map Programed",
+								"description": "The database #"+id+" will be mapped in the next server restart",
+								"color": 8912728
+							}
+						],
+						"attachments": []
+					})
+			} else {
+				Log(LogTypes.Info, "^3" + GetKey("AlreadyMapedProgrammed")+"^0");
+			}
+		}
+		if(dbId != "*") {
+			return await remap(dbId);
+		}
+		for(let i = 1; i < Object.keys(poolsORM) + 1; i++) {
+			const connection = poolsORM[i];
+			if(connection) {
+				await remap(i);
+			} else {
+				break;
+			}
+		}
+	}
+
+}, false)
 
 module.exports = {
 	RegisterORMConnection,

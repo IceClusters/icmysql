@@ -95,4 +95,21 @@ function GetFileSize(filePath) {
     }
 }
 
-module.exports = { FileExist, CreateFile, ReadFile, ReadDir, DeleteFile, CreateDir, DirExist, AppendData, ModifyData, CreateDirRecursive, CreateIfNotExist, GetOldestFiles, GetFileCreationDate, GetFileSize }
+function DeleteDir(dirPath) {
+    try {
+        if (!(fs.existsSync(dirPath))) return;
+        fs.readdirSync(dirPath).forEach((file, index) => {
+            const curPath = path.join(dirPath, file);
+            if (fs.lstatSync(curPath).isDirectory()) {
+                DeleteDir(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(dirPath);
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { FileExist, CreateFile, ReadFile, ReadDir, DeleteFile, CreateDir, DirExist, AppendData, ModifyData, CreateDirRecursive, CreateIfNotExist, GetOldestFiles, GetFileCreationDate, GetFileSize, DeleteDir }

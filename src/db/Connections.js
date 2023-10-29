@@ -38,16 +38,6 @@ async function RegisterConnection(index, credentials) {
     const end = performance.now();
     global.pools[index] = pool;
     AddDB(index, "mysql", (end - start).toFixed(4));
-    if (Config.ORM) {
-        if (await DirExist(path.join(GetResourcePath(GetCurrentResourceName()), `src/db/orm/models/${index}`))) {
-            RegisterORMConnection(index, credentials);
-            SetDBORM(index, true)
-        } else {
-            GenerateModels(credentials, index).then(function () {
-                RegisterORMConnection(index, credentials).then();
-            });
-        }
-    }
     Log(LogTypes.Info, `^2Database ${index} connected successfully in ${(end - start).toFixed(4)}ms`);
     PrepareBackup(index, credentials);
     connecting = false;
