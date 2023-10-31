@@ -1,4 +1,3 @@
-const { get } = require('http');
 const mysql = require('mysql2')
 
 function ReplaceNamedParams(query, params) {

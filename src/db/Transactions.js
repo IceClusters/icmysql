@@ -11,34 +11,55 @@ function ParseValues(values) {
     return values;
 }
 
-async function AwaitTransaction(dbId, queries) {
+async function AwaitTransaction(dbId, queries, params) {
+    ScheduleResourceTick(GetCurrentResourceName())
     if(typeof dbId !== "number") {
+        params = queries;
         queries = dbId;
         dbId = Config.DefaultDB;
     }
     const queriesList = [];
-    queriesList = parseTransaction(queries); 
-    console.log(queriesList)
-    if (queriesList.length < 1) return [];
-    if (dbId === undefined || queries === undefined) return ParseError("You've provided invalid arguments to AwaitTransaction.");
-
-    // return await ExecuteTransaction(dbId, queriesList, null);
+    if(Object.keys(queries[0])[0] == "query") {
+        for(let i = 0; i < queries.length; i++) {
+            queriesList.push({query: queries[i]["query"], values: queries[i]["values"]})
+        }
+    } else if(Object.keys(queries[0])[0] == "0" && params == null) {
+        for(let i = 0; i < queries.length; i++) {
+            queriesList.push({query: queries[i][0], values: queries[i][1]})
+        }
+    } else {
+        for(let i = 0; i < queries.length; i++) {
+            queriesList.push({query : queries[i]})
+        }
+    }
+    return await ExecuteTransaction(dbId, queriesList, params, null /* CALLBACK */);
 }
 
-async function Transaction(dbId, queries, callback) {
+
+function Transaction(dbId, queries, params, callback) {
+    ScheduleResourceTick(GetCurrentResourceName())
     if(typeof dbId !== "number") {
-        callback = queries;
+        callback = params;
+        params = queries;
         queries = dbId;
         dbId = Config.DefaultDB;
     }
+    if(typeof params === "function") { callback = params; params = null;}
     const queriesList = [];
-    for(let i = 0; i < queries.length; i++) {
-        queriesList.push({query: queries[i][0] || queries[i]["query"], values: ParseValues(queries[i][1] || queries[i]["values"])})
+    if(Object.keys(queries[0])[0] == "query") {
+        for(let i = 0; i < queries.length; i++) {
+            queriesList.push({query: queries[i]["query"], values: queries[i]["values"]})
+        }
+    } else if(Object.keys(queries[0])[0] == "0" && params == null) {
+        for(let i = 0; i < queries.length; i++) {
+            queriesList.push({query: queries[i][0], values: queries[i][1]})
+        }
+    } else {
+        for(let i = 0; i < queries.length; i++) {
+            queriesList.push({query : queries[i]})
+        }
     }
-    if (queriesList.length < 1) return [];
-    if (dbId === undefined || queries === undefined) return ParseError("You've provided invalid arguments to AwaitTransaction.");
-
-    return await ExecuteTransaction(dbId, queriesList, callback);
+    ExecuteTransaction(dbId, queriesList, params, callback);
 }
 
 global.exports("AwaitTransaction", AwaitTransaction);

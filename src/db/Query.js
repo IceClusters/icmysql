@@ -12,7 +12,6 @@ global.queryTypes = Object.freeze({ "Query": "Query", "Prepare": "Prepare", "Ins
 
 async function ExecuteQuery(resourceName, type, dbId, query, values, callback, cache) {
     const start = performance.now();
-    ScheduleResourceTick(GetCurrentResourceName())
     const connection = await GetConnection(dbId);
     try {
         if (values) {
@@ -51,17 +50,16 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
     }
 }
 
-async function ExecuteTransaction(dbId, queries, callback) {
+async function ExecuteTransaction(dbId, queries, params, callback) {
     const connection = await GetConnection(dbId);
     await connection.beginTransaction();
     try {
         const queryPromises = queries.map((queryObject) => {
             if (queryObject["query"].includes("@")) {
-                queryObject["query"] = ReplaceNamedParams(queryObject["query"], queryObject["values"])
+                queryObject["query"] = ReplaceNamedParams(queryObject["query"], queryObject["values"] == null ? (params != null ? params : []) : queryObject["values"])
                 queryObject["values"] = null;
             }
-            // console.log(queryObject["query"], queryObject["values"])
-            return connection.query(queryObject["query"], queryObject["values"] || []);
+            return connection.query(queryObject["query"], queryObject["values"] == null ? (params != null ? params : []) : queryObject["values"]);
         });
         const results = await Promise.allSettled(queryPromises);
         const hasErrors = results.some((result) => {
@@ -73,24 +71,31 @@ async function ExecuteTransaction(dbId, queries, callback) {
         if (hasErrors) {
             await connection.rollback();
             ParseError("Some queries failed while executing transaction.");
-            return typeof callback === "function" ? callback(false) : false;
+            if (typeof callback === "function") {
+                callback(false);
+            }
+            return false;
         }
         await connection.commit();
         connection.release();
-        return typeof callback === "function" ? callback(true) : true;
+        if (typeof callback === "function") {
+            callback(true);
+        }
+        return true;
     } catch (err) {
         await connection.rollback();
         connection.release();
         ParseError(`Error while executing transaction: ${err.message} `);
-        return typeof callback === "function" ? callback(false) : false;
-    } finally {
-        await connection.rollback();
-        connection.release();
+        if (typeof callback === "function") {
+            callback(false);
+        }
+        return false;
     }
 }
 
 function AddMethod(type) {
     global.exports(type, async function(dbId, query, values, callback, cache) {
+        ScheduleResourceTick(GetCurrentResourceName())
         const data = await ParseArgs(dbId, query, values, callback, cache);
         if (data === undefined) return null;
         if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
@@ -99,6 +104,7 @@ function AddMethod(type) {
     });
 
     global.exports(`Await${type}`, async function(dbId, query, values, cache) {
+        ScheduleResourceTick(GetCurrentResourceName())
         const data = await ParseArgs(dbId, query, values, null, cache);
         if (data === undefined) return null;
         const invokingResource = GetInvokingResource();

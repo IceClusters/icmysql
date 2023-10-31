@@ -51,6 +51,7 @@ async function GenerateModels(credentials, index) {
 
 async function RegisterORMConnection(index, credentials) {
 	if (!Config.ORM) return;
+	ScheduleResourceTick(GetCurrentResourceName())
 	const start = performance.now();
 	const sequelize = await new Sequelize(credentials.database, credentials.user, credentials.password, {
 		host: credentials.host,
@@ -486,7 +487,7 @@ if (Config.ORM) {
 
 RegisterCommand("maporm", async function(source, args, rawCommand){
 	if(Number(source) == 0) {
-		if (!Config.ORM) return Log(LogTypes.Info, "^3" + GetKey("TryOrmWithoutEnabled")+"^0");
+		if (!Config.ORM) return Log(LogTypes.Warning, "^3" + GetKey("TryOrmWithoutEnabled")+"^0");
 		const dbId = args[0].length > 0 ? args[0] == "*" ? "*" : Number(args[0]) : Config.DefaultORMDB;
 		if(!poolsORM[dbId] && dbId != "*") return ParseError(`^1Can't find ORM DB with ID: ${dbId} ^0`);
 

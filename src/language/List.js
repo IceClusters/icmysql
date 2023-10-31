@@ -68,5 +68,20 @@ module.exports = {
         'es': "Ya se ha programado el mapeo de la base de datos en el proximo reinicio de servidor.",
         'en': "The mapping of the database has already been programmed in the next server restart.",
         'fr': "La cartographie de la base de donnees a deja ete programme lors du prochain redemarrage du serveur."
+    },
+    "TryMySQLWithoutEnabled": {
+        'es': "Estas intentando usar MySQL sin tenerlo habilitado.",
+        'en': "You are trying to use MySQL without having it enabled.",
+        'fr': "Vous essayez d'utiliser MySQL sans l'avoir active."
+    },
+    "TryBackupWithoutEnabled": {
+        'es': "Estas intentando usar el backup sin tenerlo habilitado.",
+        'en': "You are trying to use the backup without having it enabled.",
+        'fr': "Vous essayez d'utiliser la sauvegarde sans l'avoir active."
+    },
+    "BackupTimeRate": {
+        'es': "El tiempo de backup no puede ser menor a 60 segundos.",
+        'en': "The backup time cannot be less than 60 seconds.",
+        'fr': "Le temps de sauvegarde ne peut pas etre inferieur a 60 secondes."
     }
 }
