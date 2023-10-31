@@ -10,6 +10,7 @@ const { ReadDir, GetFileCreationDate, GetFileSize } = require('../../utils/Files
 
 var pendingBackup = [];
 var backupMaded = false;
+var lastBackupTime = 0;
 
 function execAsync(command) {
     return new Promise((resolve, reject) => {
@@ -26,6 +27,7 @@ function execAsync(command) {
 async function PrepareBackup(id, credentials) {
     var makeBackup = false;
     var day = new Date().getDate();
+    pendingBackup.push(credentials);
     for (let i = 0; i < Config.Days.length; i++) {
         if (Config.Days[i] == day) {
             makeBackup = true;
@@ -40,7 +42,6 @@ async function PrepareBackup(id, credentials) {
         var exceptedMinute = Config.Hour.split(":")[1];
         if (hour == parseInt(exceptHour) && minutes == parseInt(exceptedMinute)) {
             clearInterval(BackupInterval);
-            pendingBackup.push(credentials);
             if (id == 1) {
                 setTimeout(async () => {
                     await MakeBackup();
@@ -66,7 +67,7 @@ async function MakeBackup() {
     var times = [];
     for (let i = 0; i < pendingBackup.length; i++) {
         const start = performance.now();
-        const backupName = `${pendingBackup[i].database}_${GetDate().replace("/", "-").replace("/", "-")}`;
+        const backupName = `${pendingBackup[i].database}_${GetDate().replace("/", "-").replace("/", "-")}_${new Date().getHours()}-${new Date().getMinutes()}-${new Date().getSeconds()}`;
         var passwordString = "";
         if (pendingBackup[i].password) {
             passwordString = `-p${pendingBackup[i].password}`;
@@ -89,6 +90,7 @@ async function MakeBackup() {
     for (let i = 0; i < times.length; i++) {
         pathList += `\n\`${times[i].path}\` in ${times[i].duration}`;
     }
+    lastBackupTime = new Date().getTime();
     if (Config.SendBackupInfo)
         SendDiscordLog({
             "content": null,
@@ -106,7 +108,7 @@ async function MakeBackup() {
             "attachments": []
         });
     process.env.MYSQL_PWD = null;
-    pendingBackup = [];
+    // pendingBackup = [];
 }
 
 async function GetBackupHistory() {
@@ -120,5 +122,15 @@ async function GetBackupHistory() {
     }
     return result;
 }
+
+RegisterCommand("backupdb", async function(source, args, rawCommand){
+	if(Number(source) == 0) {
+		if (!Config.MySQL) return Log(LogTypes.Warning, "^3" + GetKey("TryMySQLWithoutEnabled")+"^0");
+        if (!Config.BackupEnabled) return Log(LogTypes.Warning, "^3" + GetKey("TryBackupWithoutEnabled")+"^0");
+        if(lastBackupTime + 60000 > new Date().getTime()) return Log(LogTypes.Warning, "^3" + GetKey("BackupTimeRate")+"^0");
+        backupMaded = false;
+		MakeBackup()
+	}
+}, false)
 
 module.exports = { PrepareBackup, GetBackupHistory }
