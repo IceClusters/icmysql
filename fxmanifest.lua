@@ -1,8 +1,8 @@
 fx_version 'cerulean'
-games {'gta5'}
+game 'common'
 
 author 'Ice Cluster'
-description 'Advanced database system for FiveM'
+description 'Advanced database system for FiveM with MySQL, ORM, Mongo and Redis support.'
 version '1.0.0'
 
 client_scripts {
@@ -22,3 +22,7 @@ files {
     'debug/styles/*.css',
     'debug/assets/*.*'
 }
+
+provide 'ghmattimysql'
+provide 'mysql-async'
+provide 'oxmysql'
