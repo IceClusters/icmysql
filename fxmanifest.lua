@@ -11,7 +11,7 @@ client_scripts {
 
 server_scripts {
     'config.js',
-    'src/server/main.lua',
+    'server/main.lua',
     'dist/build.js'
 }
 
