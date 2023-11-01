@@ -4,15 +4,14 @@ async function ParseArgs(dbId, query, values, callback, cache) {
     while (IsConnecting()) {
         await new Promise(resolve => requestAnimationFrame(resolve));
     }
-
-    if (dbId === undefined) {
+    if (dbId == null) {
         return ParseError("Invalid params for query function.");
     }
 
     if (typeof dbId === "string") {
-        cache = callback;
+        cache = callback != null ? callback : false;
         callback = values;
-        values = query;
+        values = query != null ? query : [];
         query = dbId;
         dbId = Config.DefaultDB;
     }
@@ -34,6 +33,11 @@ async function ParseArgs(dbId, query, values, callback, cache) {
             cache = false;
     } else {
         values = [];
+    }
+    if(values.length > 0) {
+        if(values[0] instanceof Array) {
+            values = values[0];
+        }
     }
     if (cache === undefined) cache = false;
     if (typeof dbId !== "number" || typeof query !== "string" || typeof values !== "object" || typeof cache !== "boolean") return ParseError("Invalid params for query function.");

@@ -62,12 +62,14 @@ function ParseError(error, replaceParams = []) {
                 ],
                 "attachments": []
             })
-
+            
         if (Config.ShowErrorDescription)
             Log(LogTypes.Info, `^5${GetKey("Description")}: ${errorDescription}^0`);
         if (Config.ShowErrorSolution)
             Log(LogTypes.Solution, `^3${GetKey("Possible_Solutions")}: ${errorSolution}^0`);
     }
+
+    throw new Error(error);
 }
 
 module.exports = { ParseError, GetErrors }

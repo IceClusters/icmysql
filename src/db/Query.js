@@ -45,7 +45,6 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         return callback ? callback(await QueryInterceptor(ParseResponse(type, rows), queryData)) : await QueryInterceptor(ParseResponse(type, rows), queryData);
     } catch (err) {
         ParseError(`Error while executing query: ${err} , query: ${query}, values: ${values}`);
-        return null;
     } finally {
         ReleaseConnection(dbId, connection)
     }
@@ -98,7 +97,7 @@ function AddMethod(type) {
     global.exports(type, async function(dbId, query, values, callback, cache) {
         ScheduleResourceTick(GetCurrentResourceName())
         const data = await ParseArgs(dbId, query, values, callback, cache);
-        if (data === undefined) return null;
+        if (data == null) return null;
         const invokingResource = GetInvokingResource();
         return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, data.callback, data.cache);
     });
@@ -106,7 +105,7 @@ function AddMethod(type) {
     global.exports(`Await${type}`, async function(dbId, query, values, cache) {
         ScheduleResourceTick(GetCurrentResourceName())
         const data = await ParseArgs(dbId, query, values, null, cache);
-        if (data === undefined) return null;
+        if (data == null) return null;
         const invokingResource = GetInvokingResource();
         return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, null, data.cache);
     });
