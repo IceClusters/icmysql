@@ -7,7 +7,7 @@ const { GetORMPools } = require('../Connections.js')
 const { DefineModels } = require('../orm/models/index.js')
 const { Log, LogTypes } = require('../../utils/Logger.js')
 const { GetKey } = require('../../language/localisation.js');
-const { SetDBORM } = require('../Debug.js');
+const { SetDBORM } = require('../debug/Debug.js');
 const { DirExist, DeleteDir } = require('../../utils/Files.js');
 
 async function GenerateModels(credentials, index) {

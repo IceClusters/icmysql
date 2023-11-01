@@ -4,9 +4,10 @@ const { ReplaceNamedParams, ReplaceDotParams, ConvertNilParams } = require('./Pa
 const { QueryTypes } = require('sequelize');
 const { GetConnection, ReleaseConnection } = require('./Connections.js');
 const { performance } = require('perf_hooks');
-const { AddDebugCache, DeleteCache, AddQuery } = require('./Debug.js');
+const { AddDebugCache, DeleteCache, AddQuery } = require('./debug/Debug.js');
 const { Log, LogTypes } = require('../utils/Logger.js');
 const { ParseArgs, ParseResponse } = require('../utils/Parser.js');
+const QueryInterceptor = require('./debug/Interceptor.js').Middleware;
 
 global.queryTypes = Object.freeze({ "Query": "Query", "Prepare": "Prepare", "Insert": "Insert", "Update": "Update", "Delete": "Delete", "Scalar": "Scalar", "Single": "Single", "Raw": "Raw"});
 
@@ -24,7 +25,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             query = ReplaceNamedParams(query, values)
             values = null;
         }
-        var [rows, fields] = [null, null];
+        var [rows] = [null, null];
         if(type == "RAW") {
             [rows] = await connection.query(query, values);
         } else {
@@ -35,13 +36,13 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         if (time >= Config.SlowQueryWarn) {
             Log(LogTypes.Warning, `Slow query detected: ${query} - ${time}ms`)
         }
-        // Until fix cache
-        // if (Config.Enabled && resourceName != null) {
-        //     AddQuery(resourceName, type.toString(), dbId, query, values, rows, time);
-        //     if (cache)
-        //         AddDebugCache(table, hash, rows)
-        // }
-        return callback ? callback(ParseResponse(type, rows)) : ParseResponse(type, rows);
+        const queryData = {
+            resourceName: resourceName, 
+            type: type, dbId: dbId, query: query, 
+            values: values, callback: callback, 
+            cache: cache, time: performance.now()
+        }
+        return callback ? callback(await QueryInterceptor(ParseResponse(type, rows), queryData)) : await QueryInterceptor(ParseResponse(type, rows), queryData);
     } catch (err) {
         ParseError(`Error while executing query: ${err} , query: ${query}, values: ${values}`);
         return null;
@@ -98,7 +99,6 @@ function AddMethod(type) {
         ScheduleResourceTick(GetCurrentResourceName())
         const data = await ParseArgs(dbId, query, values, callback, cache);
         if (data === undefined) return null;
-        if (typeof data.callback !== "function") return ParseError("You must provide a callback function.")
         const invokingResource = GetInvokingResource();
         return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, data.callback, data.cache);
     });

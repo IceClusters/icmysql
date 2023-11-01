@@ -5,7 +5,7 @@ const { DirExist } = require('../utils/Files.js')
 const { RegisterORMConnection, GenerateModels } = require('./orm/index.js')
 const { Log, LogTypes } = require('../utils/Logger.js')
 const { PrepareBackup } = require('../db/backup/index.js')
-const { AddDB, SetDBORM } = require('./Debug.js')
+const { AddDB, SetDBORM } = require('./debug/Debug.js')
 
 var connecting = true;
 global.pools = {};
