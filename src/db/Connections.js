@@ -86,8 +86,33 @@ function ReleaseConnection(index, connection) {
     connectionCache[index].push(connection);
 }
 
+function DisconnectDB(index) {
+    if (!global.pools[index]) return;
+    global.pools[index].end();
+    delete global.pools[index];
+    Log(LogTypes.Warn, `^5Database ${index} was disconnected.`);
+}
+
 global.exports("IsReady", function(){
     return !connecting;
 })
+
+RegisterCommand("disconnectdb", async function(source, args, rawCommand){
+	if(Number(source) == 0) {
+		if (!Config.MySQL) return Log(LogTypes.Warning, "^3" + GetKey("TryMySQLWithoutEnabled")+"^0");
+        if (!Config.AllowDBDisconnection) return Log(LogTypes.Warning, "^3" + GetKey("TryDisconnectWithoutEnabled")+"^0");
+        const dbId = args[0].length > 0 ? args[0] == "*" ? "*" : Number(args[0]) : Config.DefaultDB;
+		if(!pools[dbId] && dbId != "*") return ParseError(`^1Can't find DB with ID: ${dbId} ^0`);
+
+        if(dbId == "*") {
+            const keys = Object.keys(pools[i])[0]
+            for(let i = 0; i < keys; i++) {
+                DisconnectDB(keys[i]);
+            }
+            return;
+        }
+        DisconnectDB(dbId);
+	}
+}, false)
 
 module.exports = { GetORMPools, RegisterConnection, IsConnecting, GetConnection, ReleaseConnection }

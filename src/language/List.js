@@ -83,5 +83,10 @@ module.exports = {
         'es': "El tiempo de backup no puede ser menor a 60 segundos.",
         'en': "The backup time cannot be less than 60 seconds.",
         'fr': "Le temps de sauvegarde ne peut pas etre inferieur a 60 secondes."
-    }
+    },
+    "TryDisconnectWithoutEnabled": {
+        'es': "Estas intentando usar la desconexión sin tenerla habilitada.",
+        'en': "You are trying to use the disconnection without having it enabled.",
+        'fr': "Vous essayez d'utiliser la deconnexion sans l'avoir active."
+    },
 }

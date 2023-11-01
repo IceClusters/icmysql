@@ -43,6 +43,7 @@ Config.QueueLimit = 100; // The max count of queries that can be queued per data
 Config.DefaultDB = 1; // The default database that will be used if the database is not specified in the query
 Config.SlowQueryWarn = 300; // The time in milliseconds that the query will be considered slow and will be logged in the console
 Config.CacheMaxSize = 50; // The time of the cache in megabytes that will be used to store the queries, if the cache is full the oldest query will be deleted, please don't increase a lot this value because the cache is stored in the RAM
+Config.AllowDBDisconnection = true; // Allow the disconnection command to be executed, this will close the conection of a specific database
 
 // MongoDB
 Config.MongoDB = false; // Enable the MongoDB support
