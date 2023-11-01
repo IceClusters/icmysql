@@ -76,57 +76,12 @@ namespace LibChanger
                     {
                         if (file.Contains("fxmanifest.lua"))
                             HandleManifetst(file);
-                        else
-                            HandleFile(file);
                     }
                 }
             }
             else
             {
                 Console.WriteLine("You need to specify the path of the resource folder.");
-            }
-        }
-
-        static void HandleFile(string path)
-        {
-            if (path.Contains("oxmysql") || path.Contains("icmysql") || path.Contains("mysql-async") || path.Contains("ghmattimysql")) return;
-            string content = File.ReadAllText(path);
-            Console.WriteLine(path);
-            if (content.Contains("oxmysql") || content.Contains("ghmattimysql") || content.Contains("mysql-async") || content.Contains("MySQL") || content.Contains("mongo"))
-            {
-                var replacements = new (string pattern, string replacement)[]
-                {
-                    ("MySQL.insert.await|MySQL.Sync.insert|exports.oxmysql.insert_async|exports.oxmysql:insert_async|exports\\['oxmysql'\\].insert_async|exports\\['oxmysql'\\]:insert_async|exports\\[\"oxmysql\"\\].insert_async|exports\\[\"oxmysql\"\\]:insert_async", Functions.Queries.Exports.AwaitInsert),
-                    ("MySQL.insert|MySQL.insert|exports.oxmysql.insert|exports.oxmysql:insert|exports\\['oxmysql'\\].insert|exports\\['oxmysql'\\]:insert|exports\\[\"oxmysql\"\\].insert|exports\\[\"oxmysql\"\\]:insert", Functions.Queries.Exports.Insert),
-                    ("MySQL.prepare.await|MySQL.Sync.prepare|exports.oxmysql.prepare_async|exports.oxmysql:prepare_async|exports\\['oxmysql'\\].prepare_async|exports\\['oxmysql'\\]:prepare_async|exports\\[\"oxmysql\"\\].prepare_async|exports\\[\"oxmysql\"\\]:prepare_async", Functions.Queries.Exports.AwaitSelect),
-                    ("MySQL.prepare|exports.oxmysql.prepare|exports.oxmysql:prepare|exports\\['oxmysql'\\].prepare|exports\\['oxmysql'\\]:prepare|exports\\[\"oxmysql\"\\].prepare|exports\\[\"oxmysql\"\\]:prepare", Functions.Queries.Exports.Select),
-                    ("MySQL.query.await|MySQL.Sync.fetchAll|exports.oxmysql.query_async|exports.oxmysql:query_async|exports\\['oxmysql'\\].query_async|exports\\['oxmysql'\\]:query_async|exports\\[\"oxmysql\"\\].query_async|exports\\[\"oxmysql\"\\]:query_async", Functions.Queries.Exports.AwaitQuery),
-                    ("MySQL.query|MySQL.Async.fetchAll|exports.oxmysql.query|exports.oxmysql:query|exports\\['oxmysql'\\].query|exports\\['oxmysql'\\]:query|exports\\[\"oxmysql\"\\].query|exports\\[\"oxmysql\"\\]:query", Functions.Queries.Exports.Query),
-                    ("MySQL.update.await|MySQL.Sync.execute|exports.oxmysql.update_async|exports.oxmysql:update_async|exports\\['oxmysql'\\].update_async|exports\\['oxmysql'\\]:update_async|exports\\[\"oxmysql\"\\].update_async|exports\\[\"oxmysql\"\\]:update_async", Functions.Queries.Exports.AwaitUpdate),
-                    ("MySQL.update|MySQL.Async.execute|exports.oxmysql.update|exports.oxmysql:update|exports\\['oxmysql'\\].update|exports\\['oxmysql'\\]:update|exports\\[\"oxmysql\"\\].update|exports\\[\"oxmysql\"\\]:update", Functions.Queries.Exports.Update),
-                    ("MySQL.insert.await|MySQL.Sync.insert|exports.oxmysql.insert_async|exports.oxmysql:insert_async|exports\\['oxmysql'\\].insert_async|exports\\['oxmysql'\\]:insert_async|exports\\[\"oxmysql\"\\].insert_async|exports\\[\"oxmysql\"\\]:insert_async", Functions.Queries.Exports.AwaitInsert),
-                    ("MySQL.insert|MySQL.Async.insert|exports.oxmysql.insert|exports.oxmysql:insert|exports\\['oxmysql'\\].insert|exports\\['oxmysql'\\]:insert|exports\\[\"oxmysql\"\\].insert|exports\\[\"oxmysql\"\\]:insert", Functions.Queries.Exports.Insert),
-                    ("MySQL.scalar.await|MySQL.Sync.fetchScalar|exports.oxmysql.scalar_async|exports.oxmysql:scalar_async|exports\\['oxmysql'\\].scalar_async|exports\\['oxmysql'\\]:scalar_async|exports\\[\"oxmysql\"\\].scalar_async|exports\\[\"oxmysql\"\\]:scalar_async", Functions.Queries.Exports.AwaitUnique),
-                    ("MySQL.scalar|MySQL.fetchScalar|exports.oxmysql.scalar|exports.oxmysql:scalar|exports\\['oxmysql'\\].scalar|exports\\['oxmysql'\\]:scalar|exports\\[\"oxmysql\"\\].scalar|exports\\[\"oxmysql\"\\]:scalar", Functions.Queries.Exports.Unique),
-                    ("MySQL.transaction.await|MySQL.Sync.transaction|exports.oxmysql.transaction_async|exports.oxmysql:transaction_async|exports\\['oxmysql'\\].transaction_async|exports\\['oxmysql'\\]:transaction_async|exports\\[\"oxmysql\"\\].transaction_async|exports\\[\"oxmysql\"\\]:transaction_async", Functions.Queries.Exports.AwaitTransaction),
-                    ("MySQL.transaction|MySQL.Async.transaction|exports.oxmysql.transaction|exports.oxmysql:transaction|exports\\['oxmysql'\\].transaction|exports\\['oxmysql'\\]:transaction|exports\\[\"oxmysql\"\\].transaction|exports\\[\"oxmysql\"\\]:transaction", Functions.Queries.Exports.Transaction),
-                    ("MySQL.single.await|exports.oxmysql.single_async|exports.oxmysql:single_async|exports\\['oxmysql'\\].single_async|exports\\['oxmysql'\\]:single_async|exports\\[\"oxmysql\"\\].single_async|exports\\[\"oxmysql\"\\]:single_async", Functions.Queries.Exports.AwaitSingle),
-                    ("MySQL.single|exports.oxmysql.single|exports.oxmysql:single|exports\\['oxmysql'\\].single|exports\\['oxmysql'\\]:single|exports\\[\"oxmysql\"\\].single|exports\\[\"oxmysql\"\\]:single", Functions.Queries.Exports.Single),
-                    ("MySQL.rawExecute.await|exports.oxmysql.rawExecute_async|exports.oxmysql:rawExecute_async|exports\\['oxmysql'\\].rawExecute_async|exports\\['oxmysql'\\]:rawExecute_async|exports\\[\"oxmysql\"\\].rawExecute_async|exports\\[\"oxmysql\"\\]:rawExecute_async", Functions.Queries.Exports.AwaitQuery),
-                    ("MySQL.rawExecute|exports.oxmysql.rawExecute|exports.oxmysql:rawExecute|exports\\['oxmysql'\\].rawExecute|exports\\['oxmysql'\\]:rawExecute|exports\\[\"oxmysql\"\\].rawExecute|exports\\[\"oxmysql\"\\]:rawExecute", Functions.Queries.Exports.Query),
-                    ("exports.mongodb.insert|exports.mongodb.insertOne", Functions.Queries.MongoInsert),
-                    ("exports.mongodb.find|exports.mongodb.findOne", Functions.Queries.MongoFind),
-                    ("exports.mongodb.update|exports.mongodb.updateOne", Functions.Queries.MongoUpdate),
-                    ("exports.mongodb.count|exports.mongodb.countOne", Functions.Queries.MongoCount),
-                    ("exports.mongodb.delete|exports.mongodb.deleteOne", Functions.Queries.MongoDelete),
-                    ("GetConvar('mysql_connection_string'|GetConvar(\"mysql_connection_string\"", "GetConvar('mysqlCredentials_1'")
-                };
-
-                foreach (var (pattern, replacement) in replacements)
-                {
-                    content = Regex.Replace(content, pattern, replacement);
-                }
-                File.WriteAllText(path, content);
             }
         }
 
