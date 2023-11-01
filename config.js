@@ -22,6 +22,7 @@ Config.SendCommonErrors = true; // Send the common errors to the discord webhook
 Config.SendSaveData = true; // Send the file name that is being saved
 Config.SendBackupInfo = true; // Send the backup event when a backup is executed
 Config.SendDatabaseMapped = true; // Send the database mapped event when a database is mapped
+Config.SendDatabaseDisconnect = true; // Send the database disconnect event when a database is disconnected
 
 // BACKUP
 Config.BackupEnabled = false; // Enable the backup system

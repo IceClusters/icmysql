@@ -6,6 +6,8 @@ const { RegisterORMConnection, GenerateModels } = require('./orm/index.js')
 const { Log, LogTypes } = require('../utils/Logger.js')
 const { PrepareBackup } = require('../db/backup/index.js')
 const { AddDB, SetDBORM } = require('./debug/Debug.js')
+const { GetKey } = require('../language/localisation.js')
+const { SendDiscordLog } = require('../utils/Discord.js')
 
 var connecting = true;
 global.pools = {};
@@ -88,9 +90,22 @@ function ReleaseConnection(index, connection) {
 
 function DisconnectDB(index) {
     if (!global.pools[index]) return;
+    
     global.pools[index].end();
     delete global.pools[index];
-    Log(LogTypes.Warn, `^5Database ${index} was disconnected.`);
+    Log(LogTypes.Warning, `Database ${index} was disconnected.^0`);
+    if(Config.SendDatabaseDisconnect)
+        SendDiscordLog({
+            "content": null,
+            "embeds": [
+                {
+                    "title": GetKey("DBDisconnectTitle"),
+                    "description": GetKey("DBDisconnectDescription"),
+                    "color": 16755968
+                }
+            ],
+            "attachments": []
+        });
 }
 
 global.exports("IsReady", function(){
@@ -102,8 +117,8 @@ RegisterCommand("disconnectdb", async function(source, args, rawCommand){
 		if (!Config.MySQL) return Log(LogTypes.Warning, "^3" + GetKey("TryMySQLWithoutEnabled")+"^0");
         if (!Config.AllowDBDisconnection) return Log(LogTypes.Warning, "^3" + GetKey("TryDisconnectWithoutEnabled")+"^0");
         const dbId = args[0].length > 0 ? args[0] == "*" ? "*" : Number(args[0]) : Config.DefaultDB;
-		if(!pools[dbId] && dbId != "*") return ParseError(`^1Can't find DB with ID: ${dbId} ^0`);
-
+		if(!pools[dbId] && dbId != "*") return ParseError(`^1Can't find DB with ID: ${dbId} ^0`, null);
+        
         if(dbId == "*") {
             const keys = Object.keys(pools[i])[0]
             for(let i = 0; i < keys; i++) {

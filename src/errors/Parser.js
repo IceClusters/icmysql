@@ -12,7 +12,7 @@ function GetErrors() {
     return { "quickFix": quickFix, "unknowErrors": unknowErrors };
 }
 
-function ParseError(error, replaceParams = []) {
+function ParseError(error, replaceParams = [], canTrowException = false) {
     errors.push(error);
     var errorData = null;
 
@@ -68,8 +68,8 @@ function ParseError(error, replaceParams = []) {
         if (Config.ShowErrorSolution)
             Log(LogTypes.Solution, `^3${GetKey("Possible_Solutions")}: ${errorSolution}^0`);
     }
-
-    throw new Error(error);
+    if(canTrowException)
+        throw new Error(error);
 }
 
 module.exports = { ParseError, GetErrors }

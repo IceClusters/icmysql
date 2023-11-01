@@ -89,4 +89,14 @@ module.exports = {
         'en': "You are trying to use the disconnection without having it enabled.",
         'fr': "Vous essayez d'utiliser la deconnexion sans l'avoir active."
     },
+    "DBDisconnectTitle": {
+        'es': "Desconexión de base de datos",
+        'en': "Database disconnection",
+        'fr': "Deconnexion de la base de donnees"
+    },
+    "DBDisconnectDescription": {
+        'es': "Se han desconectado una o más bases de datos.",
+        'en': "One or more databases have been disconnected.",
+        'fr': "Une ou plusieurs bases de donnees ont ete deconnectees."
+    },
 }

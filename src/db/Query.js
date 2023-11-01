@@ -44,7 +44,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         }
         return callback ? callback(await QueryInterceptor(ParseResponse(type, rows), queryData)) : await QueryInterceptor(ParseResponse(type, rows), queryData);
     } catch (err) {
-        ParseError(`Error while executing query: ${err} , query: ${query}, values: ${values}`);
+        ParseError(`Error while executing query: ${err} , query: ${query}, values: ${values}`, null, true);
     } finally {
         ReleaseConnection(dbId, connection)
     }
