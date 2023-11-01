@@ -1,0 +1,16 @@
+.intercept {
+    display: flex;
+    margin: auto;
+    height: 2.5em;
+    width: 10em;
+    background-color: #ffffff24;
+    color: #a3a3a3;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.intercept:hover {
+    background-color: #2c2c2c44;
+    color: #ffffff;
+    border-color: #2d2d2d;
+}

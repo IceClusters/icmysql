@@ -13,9 +13,13 @@
     <link rel="stylesheet" href="./styles/logs.css">
     <link rel="stylesheet" href="./styles/cache.css">
     <link rel="stylesheet" href="./styles/backup.css">
+    <link rel="stylesheet" href="./styles/intercept.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://kit.fontawesome.com/1c4b4851e0.js" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/javascript/javascript.min.js"></script>
 </head>
 
 <body id="body">
@@ -50,7 +54,10 @@
                             <i class="fa-solid fa-memory"></i>
                             <p>backups</p>
                         </div>
-
+                        <div class="interceptor__section button__style" onclick="OpenSection('section__interceptor')">
+                            <i class="fa-solid fa-traffic-light"></i>
+                            <p>Interceptor</p>
+                        </div>
                     </div>
                 </section>
 
@@ -230,6 +237,65 @@
                     </div>
                 </section>
 
+                <!-- INTERCEPTOR -->
+                <section class="section__interceptor" id="section__interceptor">
+                    <div class="modal_container" id="interceptorModal">
+                        <div class="modal--style popup_container animate__animated">
+                            <div class="modal--title">
+                                <h1 class="txt--title" id="resourceModalTitle">ice core</h1>
+                                <i onclick="CloseResourceModal()" class="icon--modal fa-solid fa-times"></i>
+                            </div>
+                            <div class="container__content --modal">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return" onclick="GoBack()">
+                        <a class="icon btn__style">Back</a>
+                    </div>
+                    <div class="row">
+                        <div class="rs--grid adj">
+
+                            <div class="container__title">
+                                <h1>Interceptor</h1>
+                                
+                                <!-- <div class="inputBox_container">
+                                    <lord-icon class="search_icon" src="https://cdn.lordicon.com/rlizirgt.json"
+                                        trigger="hover" colors="primary:#494a4d">
+                                    </lord-icon>
+                                    <input class="inputBox" id="inputBox" type="text" placeholder="Find Resources">
+                                </div> -->
+                                <div class="tags intercept" id="enableIntercept">Intercept is off</div>
+                            </div>
+                            <div class="container__content">
+                                <div class="scroll" id="resources-content">
+                                    <textarea id="codigo">asd</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rs--grid stats">
+                            <div class="rs--grid">
+                                <div class="container__title">
+                                    <h1>Stats</h1>
+                                </div>
+                                <div class="container__content --stats">
+                                    <div class="rs--grid">
+                                        <div class="tags--wrapper">
+                                            <div class="tags" id="statsQueries">Intercept is off</div>
+                                            <!-- <div class="tags" id="statsSlowQueries">Slow queries: 120</div>
+                                            <div class="tags" id="statsAverageQueries">Average queries: 10</div>
+                                            <div class="tags" id="statsTimeQuerying">Time querying: 10</div>
+                                            <div class="tags" id="statsScripts">Scripts: 10</div>
+                                            <div class="tags" id="statsDBCount">Databases used: 10</div>
+                                            <div class="tags" id="statsFailedQueries">Failed queries: 100</div> -->
+                                        </div>
+                                        <div class="container__content --graphic"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
         </div>
     </section>

@@ -12,6 +12,7 @@ const sections = [
     "section__logs",
     "section__cache",
     "section__backup",
+    "section__interceptor"
 ]
 var queries = [];
 
