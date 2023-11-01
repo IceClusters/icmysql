@@ -41,7 +41,7 @@ Config.MaxDB = 10; // The max count of databases that can be readed in the serve
 Config.MaxConnectionLimit = 15; // The max count of connections that can be created per database(recomend to not alter this value too much)
 Config.QueueLimit = 100; // The max count of queries that can be queued per database(recomend to not alter this value too much)
 Config.DefaultDB = 1; // The default database that will be used if the database is not specified in the query
-Config.SlowQueryWarn = 500; // The time in milliseconds that the query will be considered slow and will be logged in the console
+Config.SlowQueryWarn = 300; // The time in milliseconds that the query will be considered slow and will be logged in the console
 Config.CacheMaxSize = 50; // The time of the cache in megabytes that will be used to store the queries, if the cache is full the oldest query will be deleted, please don't increase a lot this value because the cache is stored in the RAM
 
 // MongoDB
@@ -59,7 +59,7 @@ Config.DefaultORMDB = 1; // The default database that will be used if the databa
 Config.RawData = true; // If the ORM will return the raw data or the model instance that contains sequelize data
 Config.ConnectionsORM = [0, 10] // Minimum and maximum count of connections that will be created for the ORM, this is used to create a pool of connections that will be used by the ORM, this is used to avoid the creation of a connection for each query
 Config.ORMConnectionTimout = 15000 // The time in milliseconds that the ORM will wait for a connection to be available in the pool, if the time is exceeded a error will be thrown
-Config.LogORMConnections = false; // Show in the console when a connection is created or released by the ORM
+Config.LogORMConnections = true; // Show in the console when a connection is created or released by the ORM
 
 // Redis
 Config.Redis = false; // Enable the Redis support
