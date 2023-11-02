@@ -100,7 +100,6 @@ function ListenSearchInput() {
     $("#inputBox").on("input", () => {
         const input = $("#inputBox").val();
         if (input.length < 0) return;
-        // console.log(resources)
         const filtered = resources.filter(resource => resource.name.toLowerCase().includes(input.toLowerCase()));
         $("#resources-content").html("");
         filtered.forEach(resource => {

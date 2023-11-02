@@ -26,7 +26,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             values = null;
         }
         var [rows] = [null, null];
-        if(type == "RAW") {
+        if(type == "Raw") {
             [rows] = await connection.query(query, values);
         } else {
             [rows] = await connection.execute(query, values);

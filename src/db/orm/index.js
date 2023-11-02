@@ -492,7 +492,7 @@ RegisterCommand("maporm", async function(source, args, rawCommand){
 		if(!poolsORM[dbId] && dbId != "*") return ParseError(`^1Can't find ORM DB with ID: ${dbId} ^0`);
 
 		const remap = async function(id) {
-			console.log("Remaping ORM DB: "+id)
+			Log(LogTypes.Info, "^3Remaping ORM DB: "+id+"^0");
 			if(await DirExist(GetResourcePath(GetCurrentResourceName()) + "/Models/"+id)) {
 				await DeleteDir(GetResourcePath(GetCurrentResourceName()) + "/Models/" + id);
 	
