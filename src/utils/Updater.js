@@ -1,6 +1,7 @@
 const extract = require('extract-zip')
 const { ParseError } = require('../errors/Parser.js')
 const axios = require('axios')
+const { Log, LogTypes } = require('../utils/Logger.js')
 
 var updateAvailable = false;
 
@@ -87,11 +88,11 @@ async function CheckVersion() {
         }
         if (missingMajorUpdate > 0 || missingMinorUpdate > 0 || missingPatchUpdate > 0) {
             Log(LogTypes.Info, "^6New version available");
-            Log(LogTypes.Info, "^6Current version: " + currentVersion.join('.'));
-            Log(LogTypes.Info, "^6New version: " + version.join('.'));
+            Log(LogTypes.Info, "^6Current version: ^5" + currentVersion.join('.'));
+            Log(LogTypes.Info, "^6New version: ^5" + version.join('.'));
             if (Config.AutoUpdate) {
                 updateAvailable = true;
-                Log(LogTypes.Info, "^3There is a new version available, type ^2updateic^3 command to update the resource");
+                Log(LogTypes.Info, "^3There is a new version available, type ^2updateic^3 command to update the resource, if you don't want to recieve this message again, disable the auto update in the config.js file.");
                 RegisterCommand("updateic", async function (source, args, rawCommand) {
                     if(source != 0) return;
                     if (updateAvailable) {
