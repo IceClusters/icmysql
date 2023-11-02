@@ -11,7 +11,8 @@ function ReplaceNamedParams(query, params) {
 }
 
 function ReplaceDotParams(query, params) {
-    for (const [key, value] of Object.entries(params)) {
+    for (var [key, value] of Object.entries(params)) {
+        key = key.replace(":", "");
         const regex = new RegExp(`\\:${key}\\b`, 'g');
         const escapedValue = value === null ? 'NULL' : mysql.escape(value);
         query = query.replace(regex, escapedValue);
