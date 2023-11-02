@@ -68,5 +68,5 @@ Config.Redis = false; // Enable the Redis support
 
 // Update
 Config.CheckForUpdates = true; // Check for updates when the server starts
-Config.AutoUpdate = false; // If there is a new version, the resource will be updated automatically in the next server restart
+Config.AutoUpdate = false; // If there is a new version, the resource will ask you to type a command if you want to update it
 // After update you need to restart the server to apply the changes

@@ -9,6 +9,7 @@ require('./db/Transactions.js');
 if (Config.ORM) require('./db/orm/Connection.js');
 if (Config.MongoDB) require('./db/mongo/Connections.js');
 if (Config.Redis) require('./db/redis/index.js');
+global.resourceName = GetCurrentResourceName();
 
 setTimeout(async () => {
     try {

@@ -6,7 +6,7 @@ var loadingData = true;
 
 async function InitData() {
     if (!await DirExist(Config.SaveDirPath)) {
-        await CreateIfNotExist(Config.SaveDirPath + `/${GetCurrentResourceName()}.json`, "{}");
+        await CreateIfNotExist(Config.SaveDirPath + `/${global.resourceName}.json`, "{}");
     }
 
     ReadDir(Config.SaveDirPath).then(async function (files) {

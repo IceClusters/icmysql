@@ -2,7 +2,7 @@ const fs = require('fs')
 const Sequelize = require('sequelize')
 
 function DefineModels(sequelize, index) {
-    const modelsPath = GetResourcePath(GetCurrentResourceName()) + "/Models/" + index;
+    const modelsPath = GetResourcePath(global.resourceName) + "/Models/" + index;
     fs.readdirSync(modelsPath)
         .filter((file) => file.endsWith('.js'))
         .forEach((file) => {

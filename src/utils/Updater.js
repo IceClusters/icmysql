@@ -2,9 +2,10 @@ const extract = require('extract-zip')
 const { ParseError } = require('../errors/Parser.js')
 const axios = require('axios')
 
-const urlVersion = `https://raw.githubusercontent.com/IceClusters/IceVersions/develop/${GetCurrentResourceName()}`;
+var updateAvailable = false;
 
 async function GetVersion() {
+    const urlVersion = `https://raw.githubusercontent.com/IceClusters/IceVersions/develop/${global.resourceName}`;
     try {
         return await axios.get(urlVersion).then((response) => {
             if (response.status != 200) {
@@ -31,7 +32,7 @@ async function GetVersion() {
 async function UpdateScript() {
     const ignoreFiles = ["config.js"];
     const downloadUrl = "https://github.com/IceClusters/icmysql/archive/refs/heads/develop.zip";
-    const extractPath = path.join(GetResourcePath(GetCurrentResourceName()));
+    const extractPath = path.join(GetResourcePath(global.resourceName));
     const downloadPath = path.join(extractPath, "icmysql.zip");
     const download = await axios({
         method: 'get',
@@ -61,7 +62,8 @@ async function UpdateScript() {
 
 async function CheckVersion() {
     GetVersion().then(async function (version) {
-        const currentVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0).split('.').map(Number);
+        if(version == null) return;
+        const currentVersion = GetResourceMetadata(global.resourceName, 'version', 0).split('.').map(Number);
         if (currentVersion.length != 3) {
             return ParseError("Unkown current version structure", [currentVersion]);
         }
@@ -88,8 +90,15 @@ async function CheckVersion() {
             Log(LogTypes.Info, "^6Current version: " + currentVersion.join('.'));
             Log(LogTypes.Info, "^6New version: " + version.join('.'));
             if (Config.AutoUpdate) {
-                Log(LogTypes.Info, "^3Updating resource...");
-                await UpdateScript();
+                updateAvailable = true;
+                Log(LogTypes.Info, "^3There is a new version available, type ^2updateic^3 command to update the resource");
+                RegisterCommand("updateic", async function (source, args, rawCommand) {
+                    if(source != 0) return;
+                    if (updateAvailable) {
+                        Log(LogTypes.Info, "^3Updating resource...");
+                        await UpdateScript();
+                    }
+                });
             }
         }
     });

@@ -28,7 +28,7 @@ async function CheckConnection(credentials) {
 }
 
 async function RegisterConnection(index, credentials) {
-    ScheduleResourceTick(GetCurrentResourceName())
+    ScheduleResourceTick(global.resourceName)
     const start = performance.now();
     const checkConnection = await CheckConnection(credentials);
     if (checkConnection !== true) {

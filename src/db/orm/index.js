@@ -13,7 +13,7 @@ const { DirExist, DeleteDir } = require('../../utils/Files.js');
 async function GenerateModels(credentials, index) {
 	if (!Config.ORM) return;
 	const autoOptions = {
-		directory: GetResourcePath(GetCurrentResourceName()) + "/Models/"+ index,
+		directory: GetResourcePath(global.resourceName) + "/Models/"+ index,
 		lang: 'js',
 		logging: false,
 	};
@@ -51,7 +51,7 @@ async function GenerateModels(credentials, index) {
 
 async function RegisterORMConnection(index, credentials) {
 	if (!Config.ORM) return;
-	ScheduleResourceTick(GetCurrentResourceName())
+	ScheduleResourceTick(global.resourceName)
 	const start = performance.now();
 	const sequelize = await new Sequelize(credentials.database, credentials.user, credentials.password, {
 		host: credentials.host,
@@ -62,7 +62,7 @@ async function RegisterORMConnection(index, credentials) {
 		await sequelize.authenticate();
 		const end = performance.now();
 		poolsORM[index] = sequelize;
-		if (await DirExist(path.join(GetResourcePath(GetCurrentResourceName()) + "/Models/", `${index}`))) {
+		if (await DirExist(path.join(GetResourcePath(global.resourceName) + "/Models/", `${index}`))) {
 			DefineModels(sequelize, index);
 			SetDBORM(index, true)
 			if (Config.LogORMConnections)
@@ -141,7 +141,7 @@ async function ParseOperators(obj) {
 
 async function FindAll(index, model, options, callback) {
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
-	ScheduleResourceTick(GetCurrentResourceName())
+	ScheduleResourceTick(global.resourceName)
 	if (typeof index === "string") {
 		if (typeof options === "function")
 			callback = options;
@@ -446,7 +446,7 @@ async function Decrement(index, model, field, options, callback) {
 
 async function BulkCreate(index, model, values, options, callback) {
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
-	ScheduleResourceTick(GetCurrentResourceName())
+	ScheduleResourceTick(global.resourceName)
 	if (typeof index === "string") {
 		if (typeof options === "function")
 			callback = options;
@@ -493,8 +493,8 @@ RegisterCommand("maporm", async function(source, args, rawCommand){
 
 		const remap = async function(id) {
 			Log(LogTypes.Info, "^3Remaping ORM DB: "+id+"^0");
-			if(await DirExist(GetResourcePath(GetCurrentResourceName()) + "/Models/"+id)) {
-				await DeleteDir(GetResourcePath(GetCurrentResourceName()) + "/Models/" + id);
+			if(await DirExist(GetResourcePath(global.resourceName) + "/Models/"+id)) {
+				await DeleteDir(GetResourcePath(global.resourceName) + "/Models/" + id);
 	
 				Log(LogTypes.Info, "^3" + GetKey("MappingProgrammed")+"^0");
 				if (Config.SendDatabaseMapped)

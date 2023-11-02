@@ -12,7 +12,7 @@ function ParseValues(values) {
 }
 
 async function AwaitTransaction(dbId, queries, params) {
-    ScheduleResourceTick(GetCurrentResourceName())
+    ScheduleResourceTick(global.resourceName)
     if(typeof dbId !== "number") {
         params = queries;
         queries = dbId;
@@ -37,7 +37,7 @@ async function AwaitTransaction(dbId, queries, params) {
 
 
 function Transaction(dbId, queries, params, callback) {
-    ScheduleResourceTick(GetCurrentResourceName())
+    ScheduleResourceTick(global.resourceName)
     if(typeof dbId !== "number") {
         callback = params;
         params = queries;
