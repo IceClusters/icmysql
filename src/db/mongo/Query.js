@@ -4,6 +4,7 @@ const { Log, LogTypes } = require('../../utils/Logger.js');
 const { PrepareObject } = require('./utils.js');
 
 async function MongoMiddleware(dbId, params) {
+    ScheduleResourceTick(global.resourceName);
     if (dbId == null) return ParseError('^1Invalid params to make mongoquery^0');
     if (typeof dbId === "object") {
         params = dbId;

@@ -163,6 +163,7 @@ async function FindAll(index, model, options, callback) {
 }
 
 async function FindOne(index, model, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -184,6 +185,7 @@ async function FindOne(index, model, options, callback) {
 	}
 }
 async function FindById(index, model, id, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof id === "function")
@@ -203,6 +205,7 @@ async function FindById(index, model, id, callback) {
 	}
 }
 async function FindAndCountAll(index, model, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -225,6 +228,7 @@ async function FindAndCountAll(index, model, options, callback) {
 }
 
 async function FindOrCreate(index, model, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -248,6 +252,7 @@ async function FindOrCreate(index, model, options, callback) {
 }
 
 async function Create(index, model, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -269,6 +274,7 @@ async function Create(index, model, options, callback) {
 	}
 }
 async function Modify(index, model, values, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -291,6 +297,7 @@ async function Modify(index, model, values, options, callback) {
 	}
 }
 async function Destroy(index, model, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -312,6 +319,7 @@ async function Destroy(index, model, options, callback) {
 	}
 }
 async function Count(index, model, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -333,6 +341,7 @@ async function Count(index, model, options, callback) {
 	}
 }
 async function Max(index, model, field, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -356,6 +365,7 @@ async function Max(index, model, field, options, callback) {
 }
 
 async function Min(index, model, field, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -378,6 +388,7 @@ async function Min(index, model, field, options, callback) {
 	}
 }
 async function Sum(index, model, field, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -400,6 +411,7 @@ async function Sum(index, model, field, options, callback) {
 	}
 }
 async function Increment(index, model, field, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -422,6 +434,7 @@ async function Increment(index, model, field, options, callback) {
 	}
 }
 async function Decrement(index, model, field, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	if (typeof index === "string") {
 		if (typeof options === "function")
@@ -445,6 +458,7 @@ async function Decrement(index, model, field, options, callback) {
 }
 
 async function BulkCreate(index, model, values, options, callback) {
+	ScheduleResourceTick(global.resourceName)
 	if (!Config.ORM) return ParseError("You're trying to execute a ORM query without ORM enabled in the config.js.")
 	ScheduleResourceTick(global.resourceName)
 	if (typeof index === "string") {

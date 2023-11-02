@@ -30,6 +30,7 @@ setTimeout(async () => {
 
 
 global.exports('RedisGet', async (key, callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const data = await client.get(key);
         return callback ? callback(data) : data;
@@ -39,6 +40,7 @@ global.exports('RedisGet', async (key, callback) => {
 });
 
 global.exports('RedisSet', async (key, value, callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const result = await client.set(key, value);
         return callback ? callback(result) : result;
@@ -48,6 +50,7 @@ global.exports('RedisSet', async (key, value, callback) => {
 });
 
 global.exports('RedisDel', async (key, callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const result = await client.del(key);
         return callback ? callback(result) : result;
@@ -57,6 +60,7 @@ global.exports('RedisDel', async (key, callback) => {
 });
 
 global.exports('RedisExists', async (key, callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const result = await client.exists(key);
         return callback ? callback(result) : result;
@@ -66,6 +70,7 @@ global.exports('RedisExists', async (key, callback) => {
 });
 
 global.exports('RedisExpire', async (key, seconds, callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const result = await client.expire(key, seconds);
         return callback ? callback(result) : result;
@@ -75,6 +80,7 @@ global.exports('RedisExpire', async (key, seconds, callback) => {
 });
 
 global.exports('RedisUpdate', async (key, value, callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const result = await client.update(key, value, "XX");
         return callback ? callback(result) : result;
@@ -84,6 +90,7 @@ global.exports('RedisUpdate', async (key, value, callback) => {
 });
 
 global.exports('RedisFlush', async (callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const result = await client.flush();
         return callback ? callback(result) : result;
@@ -93,6 +100,7 @@ global.exports('RedisFlush', async (callback) => {
 });
 
 global.exports('RedisKeys', async (pattern, callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const data = await client.keys(pattern);
         return callback ? callback(data) : data;
@@ -102,6 +110,7 @@ global.exports('RedisKeys', async (pattern, callback) => {
 });
 
 global.exports('RedisMGet', async (keys, callback) => {
+    ScheduleResourceTick(global.resourceName)
     try {
         const data = await client.mget(keys);
         return callback ? callback(data) : data;
