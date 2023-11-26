@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="./styles/cache.css">
     <link rel="stylesheet" href="./styles/backup.css">
     <link rel="stylesheet" href="./styles/intercept.css">
+    <link rel="stylesheet" href="./styles/tabs.css">
+    <link rel="stylesheet" href="./styles/traffic-light.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://kit.fontawesome.com/1c4b4851e0.js" crossorigin="anonymous"></script>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -23,13 +25,25 @@
 </head>
 
 <body id="body">
-    <section class="container" id="main-container" style="display: none;">
-        <div class="menu animate__animated" style="display: none;">
+    <section class="container" id="main-container">
+        <div class="menu animate__animated">
             <video src="./assets/bg.mp4" autoplay muted loop></video>
             <main class="main">
                 <!-- HOME -->
                 <section class="section__buttons" id="section__buttons">
                     <div class="grid">
+                        <div class="profile__section">
+                            <h1 class="title">Debuger</h1>
+                            <div class="container--profile">
+                                <div class="profile--content">
+                                    <h1 class="profile__name">kdex</h1>
+                                    <div class="profile__image">
+                                        <img src="./assets/user.png">
+                                    </div>
+                                </div>
+                                            
+                            </div>
+                        </div>
                         <div class="resources__section button__style" onclick="OpenSection('section__resources')">
                             <i class="fa-solid fa-scroll"></i>
                             <p>Resources</p>
@@ -246,7 +260,7 @@
                                 <i onclick="CloseResourceModal()" class="icon--modal fa-solid fa-times"></i>
                             </div>
                             <div class="container__content --modal">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -258,18 +272,67 @@
 
                             <div class="container__title">
                                 <h1>Interceptor</h1>
-                                
-                                <!-- <div class="inputBox_container">
-                                    <lord-icon class="search_icon" src="https://cdn.lordicon.com/rlizirgt.json"
-                                        trigger="hover" colors="primary:#494a4d">
-                                    </lord-icon>
-                                    <input class="inputBox" id="inputBox" type="text" placeholder="Find Resources">
-                                </div> -->
-                                <div class="tags intercept" id="enableIntercept">Intercept is off</div>
                             </div>
                             <div class="container__content">
-                                <div class="scroll" id="resources-content">
-                                    <textarea id="codigo">asd</textarea>
+                                <div class="container__intercepting hidden">
+                                    <div class="wrap">
+                                        <div class="back">
+                                            <div class="layers">
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>
+                                                <div class="layer"></div>   
+                                              </div>
+                                            <div class="traffic-light">
+                                                <label class="switch">
+                                                    <input name="value-radio" type="radio">
+                                                    <div class="button">
+                                                        <div class="light"></div>
+                                                        <div class="dots"></div>
+                                                    </div>
+                                                </label>
+                                                <label class="switch1">
+                                                    <input name="value-radio" checked="" type="radio">
+                                                    <div class="button">
+                                                        <div class="light"></div>
+                                                        <div class="dots"></div>
+                                                    </div>
+                                                </label>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <h1 class="titleInt">Intercept is off</h1>
+
+                                    <span class="wrap-text">
+                                        <p>When enabled, request sent by icmysql are held here so that you can analyze and modify them before forwarding them to the target server.</p>
+                                    </span>
+                                </div>
+
+                                <div class="container__tabs">
+                                    <div data-ui-tablist="navigation" class="tabs">
+                                        <div class="tabs-marker"></div>
+                                        <button data-ui-tablist-tab="rawc" class="tabs-tab">Raw</button>
+                                        <button data-ui-tablist-tab="paramc" class="tabs-tab">Params</button>
+                                        <button data-ui-tablist-tab="headerc" class="tabs-tab">Headers</button>
+                                        <button data-ui-tablist-tab="hexc" class="tabs-tab">Hex</button>
+                                    
+                                      </div>
+                                      <div class="tabpanels">
+                                        <div id="rawc" class="tabpanel">
+                                            Raw content
+                                        </div>
+                                        <div id="paramc" class="tabpanel" hidden>Param content</div>
+                                        <div id="headerc" class="tabpanel" hidden>Header content</div>
+                                        <div id="hexc" class="tabpanel" hidden>Hex content</div>
+                                      </div>
                                 </div>
                             </div>
                         </div>
@@ -280,16 +343,13 @@
                                 </div>
                                 <div class="container__content --stats">
                                     <div class="rs--grid">
-                                        <div class="tags--wrapper">
-                                            <div class="tags" id="statsQueries">Intercept is off</div>
-                                            <!-- <div class="tags" id="statsSlowQueries">Slow queries: 120</div>
-                                            <div class="tags" id="statsAverageQueries">Average queries: 10</div>
-                                            <div class="tags" id="statsTimeQuerying">Time querying: 10</div>
-                                            <div class="tags" id="statsScripts">Scripts: 10</div>
-                                            <div class="tags" id="statsDBCount">Databases used: 10</div>
-                                            <div class="tags" id="statsFailedQueries">Failed queries: 100</div> -->
+                                        <div class="intercept--wrapper">
+                                            <button class="button_intercept--style" id="btnforward">Forward</button>
+                                            <button class="button_intercept--style" id="btndrop">Drop</button>
+                                            <button class="button_intercept--style active" id="btnIntercept">Intercept
+                                                is on</button>
+
                                         </div>
-                                        <div class="container__content --graphic"></div>
                                     </div>
                                 </div>
                             </div>
@@ -304,6 +364,8 @@
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./js/app.js"></script>
+    <script src="./js/tabs.js" type="module"></script>
+    
 </body>
 
 </html>

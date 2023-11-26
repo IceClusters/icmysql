@@ -1,0 +1,302 @@
+
+.wrap {
+    --black: #000000;
+    --ch-black: #141414;
+    --eer-black: #1b1b1b;
+    --night-rider: #2e2e2e;
+    --tz: 0px;
+    --white: #ffffff;
+    --af-white: #f3f3f3;
+    --ch-white: #e1e1e1;
+    --af-green: #91ff6c;
+    --af-red: #ff6c6c;
+    --ch-green: #6cff6c;
+    --ch-red: #ff6c6c;
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  .back {
+    position: relative;
+    width: auto-fit;
+    height: max-content;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+    background-color: #171717;
+    /* transform: rotateY(20deg) rotateX(-8deg);
+  transform-style: preserve-3d; */
+
+    .layers {
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        transform-style: preserve-3d;
+        z-index: -1;
+      }
+      
+      .layer {
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        border-radius: 1em;
+        transform: translateZ(var(--tz));
+        box-shadow: 0 0 0.9em #000d inset;
+
+        &:nth-child(1) {
+            --tz: 0px;
+        }
+
+        &:nth-child(2) {
+            --tz: -4px;
+        
+        }
+
+        &:nth-child(3) {
+            --tz: -8px;
+        }
+
+        &:nth-child(4) {
+            --tz: -12px;
+        }
+
+        &:nth-child(5) {
+            --tz: -16px;
+        }
+
+        &:nth-child(6) {
+            --tz: -20px;
+        }
+
+        &:nth-child(7) {
+            --tz: -24px;
+        }
+
+        &:nth-child(8) {
+            --tz: -28px;
+        }
+
+        &:nth-child(9) {
+            --tz: -32px;
+        }
+
+        &:nth-child(10) {
+            --tz: -36px;
+        }
+      }
+    
+
+    
+    &:last-child {
+      box-shadow: 0 0 0.5em #000d inset, 0 0 5px #000;
+    }
+  }
+  
+  .traffic-light {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  .switch {
+    display: block;
+    position: relative;
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2), 0 0 1px 2px  var(--black), inset 0 2px 2px -2px  var(--white), inset 0 0 2px 5px var(--night-rider), inset 0 0 2px 22px  var(--black);
+    border-radius: 50%;
+    padding: 20px;
+    margin: 5px;
+  }
+  
+  .switch input {
+    display: none;
+  }
+  
+  .switch input:checked + .button .light {
+    animation: flicker 0.2s infinite 0.3s;
+  }
+  
+  .switch input:checked + .button .shine {
+    opacity: 1;
+  }
+  
+  .switch input:checked + .button .shadow {
+    opacity: 0;
+  }
+  
+  .switch .button {
+    transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+    background-color: var(--night-rider);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: relative;
+    left: -0.78em;
+    top: -0.79em;
+    cursor: pointer;
+  }
+  
+  .switch .light {
+    opacity: 0;
+    animation: light-off 1s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--ch-red), var(--af-red) 70%, transparent 72%);
+  }
+  
+  .switch .dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(transparent 30%, var(--black) 70%);
+    background-size: 10px 10px;
+    border-radius: 50%;
+  }
+  
+  @keyframes flicker {
+    0% {
+      opacity: 1;
+    }
+  
+    80% {
+      opacity: 0.8;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes light-off {
+    0% {
+      opacity: 1;
+    }
+  
+    80% {
+      opacity: 0;
+    }
+  }
+  
+  .switch1 {
+    display: block;
+    position: relative;
+    background-color: var(--black);
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2), 0 0 1px 2px  var(--black), inset 0 2px 2px -2px  var(--white), inset 0 0 2px 5px var(--night-rider), inset 0 0 2px 22px  var(--black);
+    border-radius: 50%;
+    padding: 20px;
+    margin: 5px;
+  }
+  
+  .switch1 input {
+    display: none;
+  }
+  
+  .switch1 input:checked + .button .light {
+    animation: flicker 0.2s infinite 0.3s;
+  }
+  
+  .switch1 input:checked + .button .shine {
+    opacity: 1;
+  }
+  
+  .switch1 input:checked + .button .shadow {
+    opacity: 0;
+  }
+  
+  .switch1 .button {
+    transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+    background-color: var(--night-rider);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: relative;
+    left: -0.75em;
+    top: -0.79em;
+    cursor: pointer;
+  }
+  
+  .switch1 .light {
+    opacity: 0;
+    animation: light-off 1s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--ch-green), var(--af-green) 70%, transparent 72%);
+  }
+  
+  .switch1 .dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(transparent 30%, var(--black) 70%);
+    background-size: 10px 10px;
+    border-radius: 50%;
+  }
+  
+  .switch2 {
+    display: block;
+    position: relative;
+    background-color: var(--black);
+    width: 70px;
+    height: 70px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2), 0 0 1px 2px  var(--black), inset 0 2px 2px -2px  var(--white), inset 0 0 2px 5px var(--night-rider), inset 0 0 2px 22px  var(--black);
+    border-radius: 50%;
+    padding: 20px;
+    margin: 5px;
+  }
+  
+  .switch2 input {
+    display: none;
+  }
+  
+  .switch2 input:checked + .button .light {
+    animation: flicker 0.2s infinite 0.3s;
+  }
+  
+  .switch2 input:checked + .button .shine {
+    opacity: 1;
+  }
+  
+  .switch2 input:checked + .button .shadow {
+    opacity: 0;
+  }
+  
+  .switch2 .button {
+    transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+    background-color: var(--night-rider);
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    position: relative;
+    left: -0.75em;
+    top: -0.79em;
+    cursor: pointer;
+  }
+  
+  .switch2 .light {
+    opacity: 0;
+    animation: light-off 1s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--ch-white), var(--white) 70%, transparent 72%);
+  }
+  
+  .switch2 .dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(transparent 30%, var(--black) 70%);
+    background-size: 10px 10px;
+    border-radius: 50%;
+  }
