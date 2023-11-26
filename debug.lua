@@ -80,3 +80,29 @@ AddEventHandler("icmysql:client:getbackup", function(data)
         data = data
     })
 end)
+
+RegisterNetEvent("icmysql:client:setInterceptor")
+AddEventHandler("icmysql:client:setInterceptor", function(data)
+    SendNUIMessage({
+        action = "setInterceptor",
+        data = data
+    })
+end)
+
+RegisterNetEvent("icmysql:client:getQueryData")
+AddEventHandler("icmysql:client:getQueryData", function(queryID, data)
+    SendNUIMessage({
+        action = "getQueryData",
+        queryID = queryID,
+        data = data
+    })
+end)
+
+RegisterNUICallback("triggerServerEvent", function(data)
+    TriggerServerEvent(data.event, data.data)
+end)
+
+Citizen.CreateThread(function()
+    Wait(500)
+    ExecuteCommand("debug_ui")
+end)

@@ -274,7 +274,7 @@
                                 <h1>Interceptor</h1>
                             </div>
                             <div class="container__content">
-                                <div class="container__intercepting hidden">
+                                <div class="container__intercepting" id="traffic-light" style="display: none;">
                                     <div class="wrap">
                                         <div class="back">
                                             <div class="layers">
@@ -291,14 +291,14 @@
                                               </div>
                                             <div class="traffic-light">
                                                 <label class="switch">
-                                                    <input name="value-radio" type="radio">
+                                                    <input name="value-radio" type="radio" id="redLight" disabled>
                                                     <div class="button">
                                                         <div class="light"></div>
                                                         <div class="dots"></div>
                                                     </div>
                                                 </label>
                                                 <label class="switch1">
-                                                    <input name="value-radio" checked="" type="radio">
+                                                    <input name="value-radio" type="radio" id="greenLight" checked="true" disabled>
                                                     <div class="button">
                                                         <div class="light"></div>
                                                         <div class="dots"></div>
@@ -309,29 +309,33 @@
                                         </div>
                                         
                                     </div>
-                                    <h1 class="titleInt">Intercept is off</h1>
+                                    <h1 class="titleInt" id="intercept-traffic-title">Intercept is off</h1>
 
-                                    <span class="wrap-text">
-                                        <p>When enabled, request sent by icmysql are held here so that you can analyze and modify them before forwarding them to the target server.</p>
+                                    <span class="wrap-text" id="intercept-traffic-desc">
+                                        <p>Queries sent by the server will be hel here so that you can analyze and modify them before forwading them to the target database.</p>
                                     </span>
                                 </div>
 
-                                <div class="container__tabs">
+                                <div class="container__tabs " id="raquestDataContainer">
                                     <div data-ui-tablist="navigation" class="tabs">
-                                        <div class="tabs-marker"></div>
-                                        <button data-ui-tablist-tab="rawc" class="tabs-tab">Raw</button>
-                                        <button data-ui-tablist-tab="paramc" class="tabs-tab">Params</button>
-                                        <button data-ui-tablist-tab="headerc" class="tabs-tab">Headers</button>
-                                        <button data-ui-tablist-tab="hexc" class="tabs-tab">Hex</button>
+                                        <div class="tabs-marker" style="width: 71px; translate: 8px;"></div>
+                                        <button data-ui-tablist-tab="rawc" class="tabs-tab">RAW</button>
+                                        <button data-ui-tablist-tab="queryc" class="tabs-tab">Query</button>
+                                        <button data-ui-tablist-tab="optionsc" class="tabs-tab">Options</button>
                                     
                                       </div>
                                       <div class="tabpanels">
                                         <div id="rawc" class="tabpanel">
-                                            Raw content
+                                            <div id="json-viewer"></div>
                                         </div>
-                                        <div id="paramc" class="tabpanel" hidden>Param content</div>
-                                        <div id="headerc" class="tabpanel" hidden>Header content</div>
-                                        <div id="hexc" class="tabpanel" hidden>Hex content</div>
+                                        <div id="queryc" class="tabpanel" hidden>
+                                            <div id="json-viewer-query"></div>
+                                        </div>
+                                        <div id="optionsc" class="tabpanel" hidden>
+                                            <div class="options--style option_id">
+                                                <input type="text" class="input__style inputBox" value="ID: 1">
+                                            </div>
+                                        </div>
                                       </div>
                                 </div>
                             </div>
@@ -344,11 +348,9 @@
                                 <div class="container__content --stats">
                                     <div class="rs--grid">
                                         <div class="intercept--wrapper">
+                                            <button class="button_intercept--style active" id="btnIntercept" style="grid-column: span 2;">Intercept is off</button>
                                             <button class="button_intercept--style" id="btnforward">Forward</button>
                                             <button class="button_intercept--style" id="btndrop">Drop</button>
-                                            <button class="button_intercept--style active" id="btnIntercept">Intercept
-                                                is on</button>
-
                                         </div>
                                     </div>
                                 </div>
@@ -363,9 +365,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/node-sql-parser/umd/mysql.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@textea/json-viewer@3"></script>
     <script src="./js/app.js"></script>
     <script src="./js/tabs.js" type="module"></script>
-    
+    <script>
+        new JsonViewer({
+        value: {
+            "glossary": {
+                "title": "example glossary",
+                "GlossDiv": {
+                    "title": "S",
+                    "GlossList": {
+                        "GlossEntry": {
+                            "ID": "SGML",
+                            "SortAs": "SGML",
+                            "GlossTerm": "Standard Generalized Markup Language",
+                            "Acronym": "SGML",
+                            "Abbrev": "ISO 8879:1986",
+                            "GlossDef": {
+                                "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                                "GlossSeeAlso": ["GML", "XML"]
+                            },
+                            "GlossSee": "markup"
+                        }
+                    }
+                }
+            }
+        },
+        theme: 'dark',
+        expand: true,
+    }).render('#json-viewer')
+
+    const parser = new NodeSQLParser.Parser()
+    const ast = parser.astify("select id, name from students where age < 18")
+    new JsonViewer({
+        value: ast,
+        theme: 'dark',
+        expand: true,
+    }).render('#json-viewer-query')
+    </script>
 </body>
 
 </html>

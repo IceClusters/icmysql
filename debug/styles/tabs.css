@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 
-
-
 [hidden] {
-  display: none !important;
+    display: none !important;
 }
 
 .tabs {
@@ -19,25 +17,27 @@
     /* &:has(:focus-visible) {
       outline: 3px solid rgb(17 21 36 / 50%);
     } */
-  }
-  .tabs-marker {
+}
+
+.tabs-marker {
     position: absolute;
     z-index: -1;
     /* background: rgba(106, 247, 231, 0.7); */
     background: linear-gradient(
-      90deg,
-      rgba(157, 255, 244, 0.7) 0%,
-      rgba(0, 255, 255, 0.7) 100%
+        90deg,
+        rgba(157, 255, 244, 0.7) 0%,
+        rgba(0, 255, 255, 0.7) 100%
     );
     top: 0.4rem;
     bottom: 0.4rem;
     left: 0;
     border-radius: 0.2rem;
     transition: 0.55s;
-  }
-  .tabs-tab {
+}
+
+.tabs-tab {
     display: inline-flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     appearance: none;
     transition: all 150ms;
@@ -55,39 +55,51 @@
     font-family: inherit;
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.95rem;
-    &:hover {
-      color: rgba(255, 255, 255, 1);
-    }
-  
-    &.ui-active {
-      pointer-events: none;
-      color: rgba(255, 255, 255, 1);
-    }
-  }
-  .tabpanels {
-    background-color: var(--border-top);
+}
+
+.tabs-tab:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.tabs-tab.ui-active {
+    pointer-events: none;
+    color: rgba(255, 255, 255, 1);
+}
+
+.tabpanels {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: rgb(24, 24, 24);
     border-radius: 0.5rem;
     width: 100%;
     height: 100%;
     border: 2px dashed var(--border-top);
-  }
-  .tabpanel {
+    max-height: 327px;
+    overflow-y: auto;
+}
+
+.tabpanel {
     padding: 1rem 1.25rem;
-    text-align: center;
+    /* text-align: center; */
     min-height: 5rem;
-    display: grid;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     place-content: center;
     border-radius: 0.5rem;
-    &:focus-visible {
-      outline: 3px solid rgb(17 21 36 / 50%);
-    }
-    &.ui-enter-active {
-      transition: all 200ms;
-      transform-origin: center top;
-    }
-    &.ui-enter-from {
-      opacity: 0;
-      transform: scale(0.98);
-    }
-  }
-  
+}
+
+.tabpanel:focus-visible {
+    outline: 3px solid rgb(17 21 36 / 50%);
+}
+
+.tabpanel.ui-enter-active {
+    transition: all 200ms;
+    transform-origin: center top;
+}
+
+.tabpanel.ui-enter-from {
+    opacity: 0;
+    transform: scale(0.98);
+}

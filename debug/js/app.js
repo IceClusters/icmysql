@@ -17,10 +17,15 @@ const sections = [
 var queries = [];
 
 var resources = [];
+var intercepting = false;
 
 function ReduceText(text, max) {
     if (text.length <= max) return text;
     return text.substr(0, max) + "...";
+}
+
+function TriggerServerEvent(event, data) {
+    $.post("https://icmysql/triggerServerEvent", JSON.stringify({ "event": event, "data": data }));
 }
 
 function LoadStats() {
@@ -245,6 +250,9 @@ function GoBack() {
 }
 
 function OpenSection(sec) {
+    if(sec == "section__interceptor") {
+        TriggerServerEvent("icmysql:server:subscribeInterceptor", {})
+    };
     $(`#${mainSection}`).css("display", "none");
     $(`#${sec}`).css("display", "flex");
 }
@@ -281,7 +289,42 @@ function OpenUI(state) {
 //     }
 // ]);
 
+function HeldNewInterceptedQuery(id, data) {
+    console.log(id)
+    console.log(data)
+    $("#traffic-light").addClass("hidden");
+    $("#raquestDataContainer").removeClass("hidden");
+
+    new JsonViewer({
+        value: {
+            "glossary": {
+                "title": "example glossary",
+                "GlossDiv": {
+                    "title": "S",
+                    "GlossList": {
+                        "GlossEntry": {
+                            "ID": "SGML",
+                            "SortAs": "SGML",
+                            "GlossTerm": "Standard Generalized Markup Language",
+                            "Acronym": "SGML",
+                            "Abbrev": "ISO 8879:1986",
+                            "GlossDef": {
+                                "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                                "GlossSeeAlso": ["GML", "XML"]
+                            },
+                            "GlossSee": "markup"
+                        }
+                    }
+                }
+            }
+        },
+        theme: 'dark',
+        expand: true,
+    }).render('#json-viewer')
+}
+
 $(document).ready(function () {
+    // OpenSection("section__interceptor")
     ListenSearchInput();
     // LoadStats();
     // LoadDBs();
@@ -316,6 +359,28 @@ $(document).ready(function () {
                     LoadBackups(event.data.data)
                 }
                 break;
+            case "setInterceptor":
+                console.log("Set interceptor: " + event.data.data);
+                intercepting = event.data.data;
+                if(intercepting) {
+                    $("#btnIntercept").addClass("enabled");
+                    $("#btnIntercept").text("Intercept is on");
+                    $("#redLight").prop('checked', true);
+                    $("#greenLight").prop('checked', false);
+                    $("#intercept-traffic-title").text("Intercept is on")
+                    $("#intercept-traffic-desc").text("When enabled, queries sent by the server are held here so that you can analyze and modify them before forwading them to the target database.")
+                } else {
+                    $("#btnIntercept").removeClass("enabled");
+                    $("#btnIntercept").text("Intercept is off");
+                    $("#redLight").prop('checked', false);
+                    $("#greenLight").prop('checked', true);
+                    $("#intercept-traffic-title").text("Intercept is off")
+                    $("#intercept-traffic-desc").text("Queries sent by the server will be hel here so that you can analyze and modify them before forwading them to the target database.")
+                }
+                break;
+            case "getQueryData":
+                HeldNewInterceptedQuery(event.data.queryID, event.data.data);
+                break;
         }
     })
     window.addEventListener("keydown", function (event) {
@@ -323,4 +388,8 @@ $(document).ready(function () {
             OpenUI(false);
         }
     })
+
+    $("#btnIntercept").click(function () {
+        TriggerServerEvent("icmysql:server:setInterceptor", !intercepting );
+    });
 })
