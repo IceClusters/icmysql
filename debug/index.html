@@ -25,8 +25,8 @@
 </head>
 
 <body id="body">
-    <section class="container" id="main-container">
-        <div class="menu animate__animated">
+    <section class="container" id="main-container" style="display: none;">
+        <div class="menu animate__animated"  style="display: none;">
             <video src="./assets/bg.mp4" autoplay muted loop></video>
             <main class="main">
                 <!-- HOME -->
@@ -327,13 +327,13 @@
 
                                     </div>
                                     <div class="tabpanels">
-                                        <div id="rawc" class="tabpanel">
+                                        <div id="rawc" class="tabpanel ui-active" style="justify-content: flex-start;">
                                             <div id="json-viewer"></div>
                                         </div>
-                                        <div id="queryc" class="tabpanel" hidden>
+                                        <div id="queryc" class="tabpanel hidden" style="justify-content: flex-start;">
                                             <div id="json-viewer-query"></div>
                                         </div>
-                                        <div id="optionsc" class="tabpanel --options ui-active" role="tabpanel"
+                                        <div id="optionsc" class="tabpanel --options hidden" role="tabpanel"
                                             aria-labelledby="ui-g866gvihbj" tabindex="0">
                                             <div style="grid-column: span 2;display: flex;gap: 0.5vh;">
                                                 <div class="options--style option_id" style="width: 20%;max-height: 0.5vh;">
@@ -347,7 +347,7 @@
                                             </div>
 
                                             <div class="options--style option_id" style="grid-row: span 4;grid-column: span 2;height: 100%;justify-content: flex-start;text-align: start;align-items: flex-start;">
-                                                <textarea type="text" class="input__style inputBox" value="[&quot;UTYF8274&quot;]" style="resize: none;">["UTYF8274"]</textarea>
+                                                <textarea type="text" class="input__style inputBox" value="[&quot;UTYF8274&quot;]" style="resize: none;height: 100%;">["UTYF8274"]</textarea>
                                             </div>
 
                                             <div class="options--style option_id" style="max-height: 0.5vh;">

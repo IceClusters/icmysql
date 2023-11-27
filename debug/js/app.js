@@ -392,4 +392,8 @@ $(document).ready(function () {
     $("#btnIntercept").click(function () {
         TriggerServerEvent("icmysql:server:setInterceptor", !intercepting );
     });
+
+    if(window.location == window.parent.location) {
+        OpenUI(true);
+    }
 })
