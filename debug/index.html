@@ -41,7 +41,7 @@
                                         <img src="./assets/user.png">
                                     </div>
                                 </div>
-                                            
+
                             </div>
                         </div>
                         <div class="resources__section button__style" onclick="OpenSection('section__resources')">
@@ -287,8 +287,8 @@
                                                 <div class="layer"></div>
                                                 <div class="layer"></div>
                                                 <div class="layer"></div>
-                                                <div class="layer"></div>   
-                                              </div>
+                                                <div class="layer"></div>
+                                            </div>
                                             <div class="traffic-light">
                                                 <label class="switch">
                                                     <input name="value-radio" type="radio" id="redLight" disabled>
@@ -298,21 +298,23 @@
                                                     </div>
                                                 </label>
                                                 <label class="switch1">
-                                                    <input name="value-radio" type="radio" id="greenLight" checked="true" disabled>
+                                                    <input name="value-radio" type="radio" id="greenLight"
+                                                        checked="true" disabled>
                                                     <div class="button">
                                                         <div class="light"></div>
                                                         <div class="dots"></div>
                                                     </div>
                                                 </label>
-                                                
+
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <h1 class="titleInt" id="intercept-traffic-title">Intercept is off</h1>
 
                                     <span class="wrap-text" id="intercept-traffic-desc">
-                                        <p>Queries sent by the server will be hel here so that you can analyze and modify them before forwading them to the target database.</p>
+                                        <p>Queries sent by the server will be hel here so that you can analyze and
+                                            modify them before forwading them to the target database.</p>
                                     </span>
                                 </div>
 
@@ -322,43 +324,48 @@
                                         <button data-ui-tablist-tab="rawc" class="tabs-tab">RAW</button>
                                         <button data-ui-tablist-tab="queryc" class="tabs-tab">Query</button>
                                         <button data-ui-tablist-tab="optionsc" class="tabs-tab">Options</button>
-                                    
-                                      </div>
-                                      <div class="tabpanels">
+
+                                    </div>
+                                    <div class="tabpanels">
                                         <div id="rawc" class="tabpanel">
                                             <div id="json-viewer"></div>
                                         </div>
                                         <div id="queryc" class="tabpanel" hidden>
                                             <div id="json-viewer-query"></div>
                                         </div>
-                                        <div id="optionsc" class="tabpanel --options" hidden>
-                                            <div class="options--style option_id">
-                                                <input type="text" class="input__style inputBox" value="ID: 1">
+                                        <div id="optionsc" class="tabpanel --options ui-active" role="tabpanel"
+                                            aria-labelledby="ui-g866gvihbj" tabindex="0">
+                                            <div style="grid-column: span 2;display: flex;gap: 0.5vh;">
+                                                <div class="options--style option_id" style="width: 20%;max-height: 0.5vh;">
+                                                    <h3 style="margin-left: 1.5vh;color: #a6a6a6;">ID:</h3>
+                                                    <input type="text" class="input__style inputBox" value="1">
+                                                </div>
+
+                                                <div class="options--style option_id" style="width: 100%;">
+                                                    <input type="text" class="input__style inputBox" value="SELECT * FROM players WHERE id = ?">
+                                                </div>
                                             </div>
 
-                                            <div class="options--style option_id">
-                                                <input type="text" class="input__style inputBox" value="ID: 1">
+                                            <div class="options--style option_id" style="grid-row: span 4;grid-column: span 2;height: 100%;justify-content: flex-start;text-align: start;align-items: flex-start;">
+                                                <textarea type="text" class="input__style inputBox" value="[&quot;UTYF8274&quot;]" style="resize: none;">["UTYF8274"]</textarea>
                                             </div>
 
-                                            <div class="options--style option_id">
-                                                <input type="text" class="input__style inputBox" value="ID: 1">
+                                            <div class="options--style option_id" style="max-height: 0.5vh;">
+                                                <h3 style="margin-left: 1.5vh;color: #a6a6a6;">Script:</h3>
+                                                <input type="text" class="input__style inputBox" value="ic_gym">
                                             </div>
 
-                                            <div class="options--style option_id">
-                                                <input type="text" class="input__style inputBox" value="ID: 1">
+                                            <div class="options--style option_id" style="max-height: 0.5vh;">
+                                                <h3 style="margin-left: 1.5vh;color: #a6a6a6;">Type:</h3>
+                                                <input type="text" class="input__style inputBox" value="Prepare">
                                             </div>
 
-                                            <div class="options--style option_id">
-                                                <input type="text" class="input__style inputBox" value="ID: 1">
+                                            <div class="options--style option_id" style="grid-column: span 2;max-height: 0.5vh;">
+                                                <h3 style="margin-left: 1.5vh;color: #a6a6a6;">Hash:</h3>
+                                                <input type="text" class="input__style inputBox" value="hash_82fuuw7d934hf2">
                                             </div>
-
-                                            <div class="options--style option_id">
-                                                <input type="text" class="input__style inputBox" value="ID: 1">
-                                            </div>
-                                            
-                                            
                                         </div>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -370,7 +377,8 @@
                                 <div class="container__content --stats">
                                     <div class="rs--grid">
                                         <div class="intercept--wrapper">
-                                            <button class="button_intercept--style active" id="btnIntercept" style="grid-column: span 2;">Intercept is off</button>
+                                            <button class="button_intercept--style active" id="btnIntercept"
+                                                style="grid-column: span 2;">Intercept is off</button>
                                             <button class="button_intercept--style" id="btnforward">Forward</button>
                                             <button class="button_intercept--style" id="btndrop">Drop</button>
                                         </div>
@@ -393,39 +401,39 @@
     <script src="./js/tabs.js" type="module"></script>
     <script>
         new JsonViewer({
-        value: {
-            "glossary": {
-                "title": "example glossary",
-                "GlossDiv": {
-                    "title": "S",
-                    "GlossList": {
-                        "GlossEntry": {
-                            "ID": "SGML",
-                            "SortAs": "SGML",
-                            "GlossTerm": "Standard Generalized Markup Language",
-                            "Acronym": "SGML",
-                            "Abbrev": "ISO 8879:1986",
-                            "GlossDef": {
-                                "para": "A meta-markup language, used to create markup languages such as DocBook.",
-                                "GlossSeeAlso": ["GML", "XML"]
-                            },
-                            "GlossSee": "markup"
+            value: {
+                "glossary": {
+                    "title": "example glossary",
+                    "GlossDiv": {
+                        "title": "S",
+                        "GlossList": {
+                            "GlossEntry": {
+                                "ID": "SGML",
+                                "SortAs": "SGML",
+                                "GlossTerm": "Standard Generalized Markup Language",
+                                "Acronym": "SGML",
+                                "Abbrev": "ISO 8879:1986",
+                                "GlossDef": {
+                                    "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                                    "GlossSeeAlso": ["GML", "XML"]
+                                },
+                                "GlossSee": "markup"
+                            }
                         }
                     }
                 }
-            }
-        },
-        theme: 'dark',
-        expand: true,
-    }).render('#json-viewer')
+            },
+            theme: 'dark',
+            expand: true,
+        }).render('#json-viewer')
 
-    const parser = new NodeSQLParser.Parser()
-    const ast = parser.astify("select id, name from students where age < 18")
-    new JsonViewer({
-        value: ast,
-        theme: 'dark',
-        expand: true,
-    }).render('#json-viewer-query')
+        const parser = new NodeSQLParser.Parser()
+        const ast = parser.astify("select id, name from students where age < 18")
+        new JsonViewer({
+            value: ast,
+            theme: 'dark',
+            expand: true,
+        }).render('#json-viewer-query')
     </script>
 </body>
 

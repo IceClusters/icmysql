@@ -25,8 +25,8 @@
     /* background: rgba(106, 247, 231, 0.7); */
     background: linear-gradient(
         90deg,
-        rgba(157, 255, 244, 0.7) 0%,
-        rgba(0, 255, 255, 0.7) 100%
+        rgba(124, 124, 124, 0.7) 0%,
+        rgba(148, 148, 148, 0.7) 100%
     );
     top: 0.4rem;
     bottom: 0.4rem;
