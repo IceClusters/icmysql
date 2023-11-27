@@ -88,6 +88,15 @@
     justify-content: flex-start;
     place-content: center;
     border-radius: 0.5rem;
+    width: 100%;
+    height: 100%;
+}
+
+.--options{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(7, 0.2fr);
+    gap: 0.5vh;
 }
 
 .tabpanel:focus-visible {

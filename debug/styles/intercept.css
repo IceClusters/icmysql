@@ -106,7 +106,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 2vh;
+    min-height: 5vh;
     text-align: center;
     background-color: var(--border-top);
     border: 2px dashed var(--border-top);
