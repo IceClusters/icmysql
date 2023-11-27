@@ -17,7 +17,9 @@ const sections = [
 var queries = [];
 
 var resources = [];
+
 var intercepting = false;
+var interceptedQueryID = null;
 
 function ReduceText(text, max) {
     if (text.length <= max) return text;
@@ -290,37 +292,34 @@ function OpenUI(state) {
 // ]);
 
 function HeldNewInterceptedQuery(id, data) {
-    console.log(id)
-    console.log(data)
     $("#traffic-light").addClass("hidden");
-    $("#raquestDataContainer").removeClass("hidden");
+    $("#requestDataContainer").removeClass("hidden");
+
+    $("#btnforward").addClass("active");
+    $("#btndrop").addClass("active");
 
     new JsonViewer({
-        value: {
-            "glossary": {
-                "title": "example glossary",
-                "GlossDiv": {
-                    "title": "S",
-                    "GlossList": {
-                        "GlossEntry": {
-                            "ID": "SGML",
-                            "SortAs": "SGML",
-                            "GlossTerm": "Standard Generalized Markup Language",
-                            "Acronym": "SGML",
-                            "Abbrev": "ISO 8879:1986",
-                            "GlossDef": {
-                                "para": "A meta-markup language, used to create markup languages such as DocBook.",
-                                "GlossSeeAlso": ["GML", "XML"]
-                            },
-                            "GlossSee": "markup"
-                        }
-                    }
-                }
-            }
-        },
+        value: data,
         theme: 'dark',
         expand: true,
     }).render('#json-viewer')
+
+    const parser = new NodeSQLParser.Parser()
+    const ast = parser.astify(data.query)
+    new JsonViewer({
+        value: ast,
+        theme: 'dark',
+        expand: true,
+    }).render('#json-viewer-query')
+
+    $("#dbIntercQuery").val(data.dbId);
+    $("#queryIntercQuery").val(data.query);
+    $("#valuesIntercQuery").val(JSON.stringify(data.values));
+    $("#scriptIntercQuery").val(data.resourceName);
+    $("#typeIntercQuery").val(data.type);
+    $("#hashIntercQuery").val("DISABLED");
+
+    interceptedQueryID = id;
 }
 
 $(document).ready(function () {
@@ -360,7 +359,6 @@ $(document).ready(function () {
                 }
                 break;
             case "setInterceptor":
-                console.log("Set interceptor: " + event.data.data);
                 intercepting = event.data.data;
                 if(intercepting) {
                     $("#btnIntercept").addClass("enabled");
@@ -370,6 +368,12 @@ $(document).ready(function () {
                     $("#intercept-traffic-title").text("Intercept is on")
                     $("#intercept-traffic-desc").text("When enabled, queries sent by the server are held here so that you can analyze and modify them before forwading them to the target database.")
                 } else {
+                    $("#traffic-light").removeClass("hidden");
+                    $("#requestDataContainer").addClass("hidden");
+
+                    $("#btnforward").removeClass("active");
+                    $("#btndrop").removeClass("active");
+
                     $("#btnIntercept").removeClass("enabled");
                     $("#btnIntercept").text("Intercept is off");
                     $("#redLight").prop('checked', false);
@@ -391,6 +395,35 @@ $(document).ready(function () {
 
     $("#btnIntercept").click(function () {
         TriggerServerEvent("icmysql:server:setInterceptor", !intercepting );
+    });
+
+    $("#btnforward").click(function () {
+        const forwardData = {
+            dbId: $("#dbIntercQuery").val(),
+            query: $("#queryIntercQuery").val(),
+            values: JSON.parse($("#valuesIntercQuery").val()),
+            resourceName: $("#scriptIntercQuery").val(),
+            type: $("#typeIntercQuery").val(),
+            hash: $("#hashIntercQuery").val(),
+            cache: false
+        }
+        TriggerServerEvent("icmysql:server:forwardQuery", {queryID: interceptedQueryID, data: forwardData});
+
+        $("#traffic-light").removeClass("hidden");
+        $("#requestDataContainer").addClass("hidden");
+
+        $("#btnforward").removeClass("active");
+        $("#btndrop").removeClass("active");
+    });
+
+    $("#btndrop").click(function () {
+        TriggerServerEvent("icmysql:server:dropQuery", interceptedQueryID);
+
+        $("#traffic-light").removeClass("hidden");
+        $("#requestDataContainer").addClass("hidden");
+
+        $("#btnforward").removeClass("active");
+        $("#btndrop").removeClass("active");
     });
 
     if(window.location == window.parent.location) {

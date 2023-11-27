@@ -70,6 +70,7 @@ var connectionCache = {};
 async function GetConnection(index) {
     if (!connectionCache[index] || connectionCache[index].length === 0) {
         connectionCache[index] = [];
+        if (global.pools[index] == null) return ParseError("Invalid DB ID for getconnection.");
         const connection = await global.pools[index].getConnection();
         connectionCache[index].push(connection);
         return connection;

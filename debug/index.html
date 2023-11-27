@@ -274,7 +274,7 @@
                                 <h1>Interceptor</h1>
                             </div>
                             <div class="container__content">
-                                <div class="container__intercepting" id="traffic-light" style="display: none;">
+                                <div class="container__intercepting" id="traffic-light">
                                     <div class="wrap">
                                         <div class="back">
                                             <div class="layers">
@@ -318,7 +318,7 @@
                                     </span>
                                 </div>
 
-                                <div class="container__tabs " id="raquestDataContainer">
+                                <div class="container__tabs hidden" id="requestDataContainer">
                                     <div data-ui-tablist="navigation" class="tabs">
                                         <div class="tabs-marker" style="width: 71px; translate: 8px;"></div>
                                         <button data-ui-tablist-tab="rawc" class="tabs-tab">RAW</button>
@@ -338,31 +338,31 @@
                                             <div style="grid-column: span 2;display: flex;gap: 0.5vh;">
                                                 <div class="options--style option_id" style="width: 20%;max-height: 0.5vh;">
                                                     <h3 style="margin-left: 1.5vh;color: #a6a6a6;">ID:</h3>
-                                                    <input type="text" class="input__style inputBox" value="1">
+                                                    <input type="text" class="input__style inputBox" id="dbIntercQuery">
                                                 </div>
 
                                                 <div class="options--style option_id" style="width: 100%;">
-                                                    <input type="text" class="input__style inputBox" value="SELECT * FROM players WHERE id = ?">
+                                                    <input type="text" class="input__style inputBox" id="queryIntercQuery">
                                                 </div>
                                             </div>
 
                                             <div class="options--style option_id" style="grid-row: span 4;grid-column: span 2;height: 100%;justify-content: flex-start;text-align: start;align-items: flex-start;">
-                                                <textarea type="text" class="input__style inputBox" value="[&quot;UTYF8274&quot;]" style="resize: none;height: 100%;">["UTYF8274"]</textarea>
+                                                <textarea type="text" class="input__style inputBox" style="resize: none;height: 100%;" id="valuesIntercQuery"></textarea>
                                             </div>
 
                                             <div class="options--style option_id" style="max-height: 0.5vh;">
                                                 <h3 style="margin-left: 1.5vh;color: #a6a6a6;">Script:</h3>
-                                                <input type="text" class="input__style inputBox" value="ic_gym">
+                                                <input type="text" class="input__style inputBox" id="scriptIntercQuery">
                                             </div>
 
                                             <div class="options--style option_id" style="max-height: 0.5vh;">
                                                 <h3 style="margin-left: 1.5vh;color: #a6a6a6;">Type:</h3>
-                                                <input type="text" class="input__style inputBox" value="Prepare">
+                                                <input type="text" class="input__style inputBox" id="typeIntercQuery">
                                             </div>
 
                                             <div class="options--style option_id" style="grid-column: span 2;max-height: 0.5vh;">
                                                 <h3 style="margin-left: 1.5vh;color: #a6a6a6;">Hash:</h3>
-                                                <input type="text" class="input__style inputBox" value="hash_82fuuw7d934hf2">
+                                                <input type="text" class="input__style inputBox" id="hashIntercQuery">
                                             </div>
                                         </div>
                                     </div>
@@ -399,7 +399,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@textea/json-viewer@3"></script>
     <script src="./js/app.js"></script>
     <script src="./js/tabs.js" type="module"></script>
-    <script>
+    <!-- <script>
         new JsonViewer({
             value: {
                 "glossary": {
@@ -434,7 +434,7 @@
             theme: 'dark',
             expand: true,
         }).render('#json-viewer-query')
-    </script>
+    </script> -->
 </body>
 
 </html>

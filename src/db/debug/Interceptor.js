@@ -1,5 +1,6 @@
 const { CheckPermission } = require("./Debug.js")
-let interceptor = false;
+const { performance } = require("perf_hooks");
+global.interceptor = false;
 let queue = [];
 let interceptorSuscribers = [];
 
@@ -7,10 +8,10 @@ function SetInterceptor(value) {
     interceptor = typeof value === "boolean" ? value : false;
 }
 
-function ForwardQuery(queryId, result) {
+function ForwardQuery(queryId, data) {
     if(!interceptor || !queue[queryId]) return;
-    queue[queryId].canfollow = true;
-    queue[queryId].result = result;
+    data.canfollow = true;
+    queue[queryId] = data;
 }
 
 function DropQuery(queryId) {
@@ -19,19 +20,19 @@ function DropQuery(queryId) {
     queue[queryId].result = null;
 }
 
-async function Middleware(result, data) {
-    if(!interceptor) return result;
+async function Middleware(data) {
     const randomId = Math.floor(Math.random() * 100000);
-    const queryId = `${data.time}-${randomId}`;
-    queue[queryId] = { result: result, data: data, canfollow: false };
+    const queryId = `${performance.now()}-${randomId}`;
+    queue[queryId] = { resourceName: data.resourceName, type: data.type, dbId: data.dbId, query: data.query, values: data.values, callback: data.callback, cache: data.cache, canfollow: false };
     for(let i = 0; i < interceptorSuscribers.length; i++) {
         TriggerClientEvent("icmysql:client:getQueryData", interceptorSuscribers[i], queryId, data);
     }
     
-    while(queue[queryId].canfollow === false) {
+    while(queue[queryId].canfollow === false && global.interceptor) {
         await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-    result = queue[queryId].result;
+    if(queue[queryId].canfollow === -1) return null;
+    const result = queue[queryId];
     delete queue[queryId];
     return result;
 }
@@ -43,11 +44,11 @@ function SendEventToSuscribers(eventName, ...args) {
 }
 
 RegisterNetEvent("icmysql:server:forwardQuery");
-AddEventHandler("icmysql:server:forwardQuery", async function (queryID, result) {
+AddEventHandler("icmysql:server:forwardQuery", async function (data) {
     const src = source;
     if (!CheckPermission(src)) return;
-    if(!queryID) return;
-    ForwardQuery(queryID, result);
+    if(!data.queryID) return;
+    ForwardQuery(data.queryID, data.data);
 });
 
 RegisterNetEvent("icmysql:server:dropQuery");

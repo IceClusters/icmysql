@@ -21,9 +21,23 @@ global.queryTypes = Object.freeze({
 });
 
 async function ExecuteQuery(resourceName, type, dbId, query, values, callback, cache) {
-    const start = performance.now();
-    const connection = await GetConnection(dbId);
+    let start = performance.now();
+    let connection = await GetConnection(dbId);
     try {
+        if(global.interceptor) {
+            const resultMiddleware = await QueryInterceptor({ resourceName: resourceName, type: type, dbId: dbId, query: query, values: values, callback: callback, cache: cache });
+            if(resultMiddleware == null) return callback ? callback(null) : null;
+            resourceName = resultMiddleware.resourceName;
+            type = resultMiddleware.type;
+            dbId = resultMiddleware.dbId;
+            query = resultMiddleware.query;
+            values = resultMiddleware.values;
+            callback = resultMiddleware.callback;
+            cache = resultMiddleware.cache;
+            start = performance.now();
+            connection = await GetConnection(dbId);
+        }
+        
         if (values) {
             if(typeof(values) === "string")
                 values = [values];
@@ -45,13 +59,8 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         if (time >= Config.SlowQueryWarn) {
             Log(LogTypes.Warning, `Slow query detected: ${query} - ${time}ms`)
         }
-        const queryData = {
-            resourceName: resourceName, 
-            type: type, dbId: dbId, query: query, 
-            values: values, callback: callback, 
-            cache: cache, time: performance.now()
-        }
-        return callback ? callback(await QueryInterceptor(ParseResponse(type, rows), queryData)) : await QueryInterceptor(ParseResponse(type, rows), queryData);
+
+        return callback ? callback(ParseResponse(type, rows)) : ParseResponse(type, rows);
     } catch (err) {
         ParseError(`Error while executing query: ${err} , query: ${query}, values: ${values}`, null, true);
     } finally {
