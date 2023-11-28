@@ -6,7 +6,7 @@ body {
 	height: 100vh;
 	padding: 0;
 	margin: 0;
-	background-color: #00000074;
+	/* background-color: #00000074; */
 	overflow: hidden;
 }
 
@@ -34,6 +34,7 @@ body {
 	background-color: var(--bg__color);
 	border-radius: 7px;
 	overflow: hidden;
+	border: 6px solid var(--border-top);
 }
 
 .menu video {
