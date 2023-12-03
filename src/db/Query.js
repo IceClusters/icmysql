@@ -8,6 +8,7 @@ const { AddDebugCache, DeleteCache, AddQuery } = require('./debug/Debug.js');
 const { Log, LogTypes } = require('../utils/Logger.js');
 const { ParseArgs, ParseResponse } = require('../utils/Parser.js');
 const QueryInterceptor = require('./debug/Interceptor.js').Middleware;
+const AddExport = require('./exports/main.js');
 
 global.queryTypes = Object.freeze({
     "Query": "Query",
@@ -112,21 +113,23 @@ async function ExecuteTransaction(dbId, queries, params, callback) {
 }
 
 function AddMethod(type) {
-    global.exports(type, async function(dbId, query, values, callback, cache) {
+    const method = async function(dbId, query, values, callback, cache) {
         ScheduleResourceTick(global.resourceName)
         const data = await ParseArgs(dbId, query, values, callback, cache);
         if (data == null) return null;
         const invokingResource = GetInvokingResource();
         return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, data.callback, data.cache);
-    });
+    }
+    AddExport(type, method);
 
-    global.exports(`Await${type}`, async function(dbId, query, values, cache) {
+    const awaitMethod = async function(dbId, query, values, cache) {
         ScheduleResourceTick(global.resourceName)
         const data = await ParseArgs(dbId, query, values, null, cache);
         if (data == null) return null;
         const invokingResource = GetInvokingResource();
         return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, null, data.cache);
-    });
+    }
+    AddExport(`Await${type}`, awaitMethod);
 }
 
 for(type in queryTypes) {

@@ -1,4 +1,5 @@
 const { IsConnecting } = require('../db/Connections.js');
+const { ParseError } = require('../errors/Parser.js');
 
 async function ParseArgs(dbId, query, values, callback, cache) {
     while (IsConnecting()) {

@@ -6,11 +6,11 @@ node_modules
 **/.vs
 *.dll
 *.pdb
-*.json
 *.props
 *.cache
 **/dist
 **/bin
 **/obj
 *.exe
+package-lock.json
 **/models/*/
