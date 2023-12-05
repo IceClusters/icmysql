@@ -3,7 +3,7 @@ game 'common'
 
 author 'Ice Cluster'
 description 'Advanced database system for FiveM with MySQL, ORM, Mongo and Redis support.'
-version '1.0.0'
+version '3.0.0'
 
 client_scripts {
     'debug.lua'

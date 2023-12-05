@@ -38,6 +38,7 @@ Config.Hour = "23:00" // The hour in 24h format that the backup will be executed
 
 // DATABASE
 Config.MySQL = true; // Enable the MySQL support
+Config.ConnectionTimeout = 40000; // The time in milliseconds that the MySQL will wait for a connection to be available in the pool, if the time is exceeded a error will be thrown
 Config.MaxDB = 10; // The max count of databases that can be readed in the server.cfg file
 Config.MaxConnectionLimit = 15; // The max count of connections that can be created per database(recomend to not alter this value too much)
 Config.QueueLimit = 100; // The max count of queries that can be queued per database(recomend to not alter this value too much)

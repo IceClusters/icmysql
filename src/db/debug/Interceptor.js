@@ -65,7 +65,6 @@ AddEventHandler("icmysql:server:setInterceptor", async function (value) {
     if (!CheckPermission(src)) return;
     SetInterceptor(value);
     SendEventToSuscribers("icmysql:client:setInterceptor", value);
-    console.log("The interceptor was set to: " + value);
 });
 
 RegisterNetEvent("icmysql:server:subscribeInterceptor");
@@ -73,7 +72,6 @@ AddEventHandler("icmysql:server:subscribeInterceptor", async function () {
     const src = source;
     if (!CheckPermission(src)) return;
     interceptorSuscribers.push(src);
-    console.log("Suscribed to the interceptor with the id: " + src);
 });
 
 RegisterNetEvent("icmysql:server:unsubscribeInterceptor");
@@ -84,7 +82,6 @@ AddEventHandler("icmysql:server:unsubscribeInterceptor", async function () {
     if(index > -1) {
         interceptorSuscribers.splice(index, 1);
     }
-    console.log("Unsuscribed from the interceptor with the id: " + src);
 });
 
 module.exports = { Middleware }

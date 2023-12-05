@@ -37,7 +37,16 @@ async function RegisterConnection(index, credentials) {
     }
     credentials.multipleStatements = true;
     credentials.namedPlaceholders = true;
-    const pool = mysql.createPool(credentials, { connectionLimit: Config.ConnectionLimit, queueLimit: Config.QueueLimit });
+    credentials.connectionLimit = Config.ConnectionTimeout;
+    credentials.trace = false;
+    credentials.supportBigNumbers = true;
+    credentials.typeCast = require('../utils/TypeCast.js');
+    credentials.flags = ["CONNECT_WITH_DB"];
+
+    const pool = mysql.createPool(credentials);
+    pool.on('connection', function (connection) {
+        connection.query("SET TRANSACTION ISOLATION LEVEL READ COMMITTED");
+    });
     const end = performance.now();
     global.pools[index] = pool;
     AddDB(index, "mysql", (end - start).toFixed(4));

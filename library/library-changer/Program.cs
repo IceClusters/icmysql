@@ -24,6 +24,11 @@ namespace LibChanger
             "csproj"
         };
 
+        public static string[] ignoreResources = new string[]
+        {
+            "icmysql"
+        };
+
         static void Main(string[] args)
         {
             if (args.Length > 0)
@@ -67,6 +72,14 @@ namespace LibChanger
                     foreach (string extension in ignoreExtensions)
                     {
                         if (file.Contains(extension))
+                        {
+                            ignore = true;
+                            break;
+                        }
+                    }
+                    foreach(string resource in ignoreResources)
+                    {
+                        if (file.Contains(resource))
                         {
                             ignore = true;
                             break;

@@ -50,7 +50,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             values = null;
         }
         var [rows] = [null, null];
-        if(type == "Raw") {
+        if(type == "Raw" || type == "Scalar" || type == "Single" || type == "Update" || type == "Insert" || type == "Query") {
             [rows] = await connection.query(query, values);
         } else {
             [rows] = await connection.execute(query, values);
@@ -60,8 +60,9 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         if (time >= Config.SlowQueryWarn) {
             Log(LogTypes.Warning, `Slow query detected: ${query} - ${time}ms`)
         }
+        let result = ParseResponse(type, rows);
 
-        return callback ? callback(ParseResponse(type, rows)) : ParseResponse(type, rows);
+        return callback ? callback(result) : result;
     } catch (err) {
         ParseError(`Error while executing query: ${err} , query: ${query}, values: ${values}`, null, true);
     } finally {
