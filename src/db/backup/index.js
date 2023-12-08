@@ -70,9 +70,9 @@ async function MakeBackup() {
         const backupName = `${pendingBackup[i].database}_${GetDate().replace("/", "-").replace("/", "-")}_${new Date().getHours()}-${new Date().getMinutes()}-${new Date().getSeconds()}`;
         var passwordString = "";
         if (pendingBackup[i].password) {
-            passwordString = `-p${pendingBackup[i].password}`;
+            passwordString = `-p ${pendingBackup[i].password}`;
         }
-        const command = `"${Config.MysqlDumpPath}" -h ${pendingBackup[i].host} ${passwordString} -u ${pendingBackup[i].user} ${pendingBackup[i].database} > ${Config.BackupDirPath}/${backupName}.sql`;
+        const command = `"${Config.MysqlDumpPath}" --skip-ssl -h ${pendingBackup[i].host} ${passwordString} -u ${pendingBackup[i].user} ${pendingBackup[i].database} > ${Config.BackupDirPath}/${backupName}.sql`;
         process.env.MYSQL_PWD = pendingBackup[i].password;
         Log(LogTypes.Info, "^3" + GetKey("BackupStart"))
         try {

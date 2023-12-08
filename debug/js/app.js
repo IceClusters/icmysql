@@ -428,5 +428,7 @@ $(document).ready(function () {
 
     if(window.location == window.parent.location) {
         OpenUI(true);
+    } else {
+        OpenUI(false);
     }
 })

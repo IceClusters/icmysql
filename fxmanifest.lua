@@ -23,6 +23,14 @@ files {
     'debug/assets/*.*'
 }
 
+convar_category 'IcMySQL' {
+	'IcMySQL Configuration',
+	{
+		{ 'Connection String', 'mysql_connection_string', 'CV_STRING', 'mysql://user:password@localhost/database' },
+		{ 'Debug', 'mysql_debug', 'CV_BOOL', 'false' }
+	}
+}
+
 provide 'ghmattimysql'
 provide 'mysql-async'
 provide 'oxmysql'

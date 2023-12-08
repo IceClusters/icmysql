@@ -1,0 +1,9 @@
+{
+    "name": "ghmattimysql",
+    "functions": {
+        "AwaitRaw": "execute",
+        "Raw": "executeSync",
+        "Scalar": "scalar",
+        "AwaitScalar": "scalarSync"
+    }
+}

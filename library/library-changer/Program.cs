@@ -1,9 +1,4 @@
-﻿using library_changer;
-using System;
-using System.IO;
-using System.Text.RegularExpressions;
-
-namespace LibChanger
+﻿namespace LibChanger
 {
     class Program
     {
@@ -33,68 +28,100 @@ namespace LibChanger
         {
             if (args.Length > 0)
             {
-                bool isRooted = Path.IsPathRooted(args[0]);
-                if (!isRooted)
-                {
-                    Console.WriteLine("You have inserted a bad path");
-                    return;
-                }
-                Console.WriteLine("¿Have you maded a resources backup? (Y/N): ");
-                char respuesta = Console.ReadKey().KeyChar;
-                bool canContinue = false;
-                if (respuesta == 'Y' || respuesta == 'y')
-                {
-                    canContinue = true;
-                    Console.WriteLine("\nConverting functions...");
-                }
-                else if (respuesta == 'N' || respuesta == 'n')
-                {
-                    Console.WriteLine("\nPlease first make a backup of your resources folder and then try this tool.");
-                }
-                if (!canContinue) return;
-                IEnumerable<string> Files = Directory.EnumerateFiles(args[0], "*", SearchOption.AllDirectories);
-                foreach (string file in Files)
-                {
-                    bool ignore = false;
-                    foreach (string keyword in ignoreFiles)
-                    {
-                        if (file.Contains(keyword))
-                        {
-                            ignore = true;
-                            break;
-                        }
-                    }
-                    bool handled = false;
-                    foreach (string extension in handledExtensions)
-                    {
-                        if (file.Contains(extension)) { handled = true; break; }
-                    }
-                    foreach (string extension in ignoreExtensions)
-                    {
-                        if (file.Contains(extension))
-                        {
-                            ignore = true;
-                            break;
-                        }
-                    }
-                    foreach(string resource in ignoreResources)
-                    {
-                        if (file.Contains(resource))
-                        {
-                            ignore = true;
-                            break;
-                        }
-                    }
-                    if (handled && !ignore)
-                    {
-                        if (file.Contains("fxmanifest.lua"))
-                            HandleManifetst(file);
-                    }
-                }
+                ParseResourcesFolder(args[0]);
             }
             else
             {
-                Console.WriteLine("You need to specify the path of the resource folder.");
+                string currentPath = Environment.CurrentDirectory;
+                bool resourceFolderFound = false;
+                try
+                {
+                    while (!resourceFolderFound)
+                    {
+                        string[] directories = Directory.GetDirectories(currentPath);
+                        foreach (string directory in directories)
+                        {
+                            string[] parts = directory.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                            string folderName = parts[parts.Length - 1];
+                            if (folderName == "resources")
+                            {
+                                resourceFolderFound = true;
+                                Console.WriteLine("Resource folder found at " + directory);
+                                ParseResourcesFolder(directory);
+                                break;
+                            }
+                        }
+                        if (!resourceFolderFound)
+                        {
+                            currentPath = Path.GetDirectoryName(currentPath);
+                        }
+                    }
+                } catch(Exception err)
+                {
+                    Console.WriteLine("Couldn't find resources folder. Please insert the path manually by passing the path as a param to the exe, example: library-changer.exe C:\\FiveM\\Servers\\MyServer\\resources");
+                }
+            }
+        }
+
+        static void ParseResourcesFolder(string path)
+        {
+            bool isRooted = Path.IsPathRooted(path);
+            if (!isRooted)
+            {
+                Console.WriteLine("You have inserted a bad path");
+                return;
+            }
+            Console.WriteLine("¿Have you maded a resources backup? (Y/N): ");
+            char respuesta = Console.ReadKey().KeyChar;
+            bool canContinue = false;
+            if (respuesta == 'Y' || respuesta == 'y')
+            {
+                canContinue = true;
+                Console.WriteLine("\nConverting functions...");
+            }
+            else if (respuesta == 'N' || respuesta == 'n')
+            {
+                Console.WriteLine("\nPlease first make a backup of your resources folder and then try this tool.");
+            }
+            if (!canContinue) return;
+            IEnumerable<string> Files = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories);
+            foreach (string file in Files)
+            {
+                bool ignore = false;
+                foreach (string keyword in ignoreFiles)
+                {
+                    if (file.Contains(keyword))
+                    {
+                        ignore = true;
+                        break;
+                    }
+                }
+                bool handled = false;
+                foreach (string extension in handledExtensions)
+                {
+                    if (file.Contains(extension)) { handled = true; break; }
+                }
+                foreach (string extension in ignoreExtensions)
+                {
+                    if (file.Contains(extension))
+                    {
+                        ignore = true;
+                        break;
+                    }
+                }
+                foreach (string resource in ignoreResources)
+                {
+                    if (file.Contains(resource))
+                    {
+                        ignore = true;
+                        break;
+                    }
+                }
+                if (handled && !ignore)
+                {
+                    if (file.Contains("fxmanifest.lua"))
+                        HandleManifetst(file);
+                }
             }
         }
 

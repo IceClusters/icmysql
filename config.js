@@ -25,16 +25,16 @@ Config.SendDatabaseMapped = true; // Send the database mapped event when a datab
 Config.SendDatabaseDisconnect = true; // Send the database disconnect event when a database is disconnected
 
 // BACKUP
-Config.BackupEnabled = false; // Enable the backup system
-Config.MysqlDumpPath = "C:/Program Files/MariaDB 11.1/bin/mysqldump.exe"; // The path of the mysqldump.exe file, in this case is the path of the xampp mysql dump 
+Config.BackupEnabled = true; // Enable the backup system
+Config.MysqlDumpPath = "C:/Program Files/MariaDB 11.3/bin/mysqldump.exe"; // The path of the mysqldump.exe file, in this case is the path of the xampp mysql dump 
 // MOST USED PATHS
 // XAMPP: C:/xampp/mysql/bin/mysqldump.exe
 // WAMP: C:/wamp/bin/mysql/mysql5.7.26/bin/mysqldump.exe
 // MariaDB: C:/Program Files/MariaDB 11.1/bin/mysqldump.exe
 Config.BackupDirPath = "IcMysql/Backups"; // Path respective to the FXServer.exe file
 Config.MaxBackups = 4; // The max count of backups that will be saved, the oldest will be deleted
-Config.Days = [5, 14, 23, 29]; // The days that the backup will be executed, if the array is empty the backup will be executed every day
-Config.Hour = "23:00" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
+Config.Days = [8, 14, 23, 29]; // The days that the backup will be executed, if the array is empty the backup will be executed every day
+Config.Hour = "00:56" // The hour in 24h format that the backup will be executed, in this example the backup will be executed at 4:30 AM
 
 // DATABASE
 Config.MySQL = true; // Enable the MySQL support

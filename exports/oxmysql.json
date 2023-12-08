@@ -1,0 +1,21 @@
+{
+    "name": "oxmysql",
+    "functions": {
+        "AwaitInsert": "insert_async",
+        "Insert": "insert",
+        "AwaitPrepare": "prepare_async",
+        "Prepare": "prepare",
+        "AwaitQuery": "query_async",
+        "Query": "query",
+        "AwaitRaw": "rawExecute_async",
+        "Raw": "rawExecute",
+        "AwaitScalar": "scalar_async",
+        "Scalar": "scalar",
+        "AwaitSingle": "single_async",
+        "Single": "single",
+        "AwaitTransaction": "transaction_async",
+        "Transaction": "transaction",
+        "AwaitUpdate": "update_async",
+        "Update": "update"
+    }
+}

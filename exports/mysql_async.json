@@ -1,0 +1,13 @@
+{
+    "name": "mysql-async",
+    "functions": {
+        "Insert": "mysql_insert",
+        "Prepare": "prepare",
+        "Query": "mysql_fetch_all",
+        "Raw": "mysql_execute",
+        "Scalar": "mysql_fetch_scalar",
+        "Single": "single",
+        "Transaction": "mysql_transaction",
+        "Update": "update"
+    }
+}
