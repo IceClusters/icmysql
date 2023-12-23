@@ -54,7 +54,7 @@ Config.ConnectiTimout = 5000; // The time in milliseconds that the MongoDB will 
 
 // Debug UI
 Config.Enabled = true; // Enable the debug UI
-Config.DebugLicenses = ["license:0ca0dfbead8e22c4235769d9380d1fb9d6f32d5a"] // The licenses of the players that will be able to use the debug UI.
+Config.DebugLicenses = ["license:357eb9ff6db060eb292e8e4f71b66a9efb2adcbe"] // The licenses of the players that will be able to use the debug UI.
 
 // ORM
 Config.ORM = false; // Enable the ORM queries, this depend of the MySQL support
