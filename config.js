@@ -1,5 +1,5 @@
 Config = {};
-Config.Language = "en"; // en, es, fr
+Config.Language = "en"; // en, es, fr, pt-BR
 
 // DataMemSave(TEMPORALY DISABLED UNTIL I FIND A WAY TO FIX PERFORMANCE ISSUES)
 Config.SaveDirPath = "IcMysql/Data/"; // Path respective to the FXServer.exe file
