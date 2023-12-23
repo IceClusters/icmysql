@@ -1,7 +1,7 @@
 const { ParseError } = require('../errors/Parser.js');
 const Translations = require('./List.js');
 
-const supportedLanguages = ["en", "es", "fr"];
+const supportedLanguages = ["en", "es", "fr", "pt-BR"];
 const defaultLanguage = "en";
 
 function ParseLocalisations() {
