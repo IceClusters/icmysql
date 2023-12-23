@@ -1,5 +1,4 @@
 const { ParseError } = require('../errors/Parser.js');
-const crypto = require("crypto");
 const { ReplaceNamedParams, ReplaceDotParams, ConvertNilParams } = require('./Params.js');
 const { QueryTypes } = require('sequelize');
 const { GetConnection, ReleaseConnection } = require('./Connections.js');

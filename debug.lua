@@ -101,8 +101,3 @@ end)
 RegisterNUICallback("triggerServerEvent", function(data)
     TriggerServerEvent(data.event, data.data)
 end)
-
-Citizen.CreateThread(function()
-    Wait(500)
-    ExecuteCommand("debug_ui")
-end)

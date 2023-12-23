@@ -26,8 +26,7 @@ files {
 convar_category 'IcMySQL' {
 	'IcMySQL Configuration',
 	{
-		{ 'Connection String', 'mysql_connection_string', 'CV_STRING', 'mysql://user:password@localhost/database' },
-		{ 'Debug', 'mysql_debug', 'CV_BOOL', 'false' }
+		{ 'Connection Data', 'mysqlCredentials_1', 'CV_STRING', 'host=127.0.0.1;user=root; password=1234; database=fxserver; port=3306' },
 	}
 }
 
