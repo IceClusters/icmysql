@@ -12,7 +12,6 @@ module.exports = async function(name, func){
                 for(let k = 0; k < Object.keys(scFunc).length; k++){
                     const icFunc = Object.keys(scriptReplacement.functions)[i];
                     if(icFunc == name) {
-                        console.log(name)
                         AddEventHandler(`__cfx_export_${scriptReplacement.name}_${scFunc[i]}`, async function(cb){
                             return cb(await func);
                         });
@@ -22,7 +21,6 @@ module.exports = async function(name, func){
             }else{
                 const icFunc = Object.keys(scriptReplacement.functions)[i];
                 if(icFunc == name) {
-                    console.log(name)
                     AddEventHandler(`__cfx_export_${scriptReplacement.name}_${scFunc}`, async function(cb){
                         return cb(await func);
                     });
