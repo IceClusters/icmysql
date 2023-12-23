@@ -357,12 +357,23 @@
 
                                             <div class="options--style option_id" style="max-height: 0.5vh;">
                                                 <h3 style="margin-left: 1.5vh;color: #a6a6a6;">Type:</h3>
-                                                <input type="text" class="input__style inputBox" id="typeIntercQuery">
+                                                <!-- <input type="text" class="input__style inputBox" id="typeIntercQuery"> -->
+                                                <select class="input__style inputBox" id="typeIntercQuery">
+                                                    <option value="query">Query</option>
+                                                    <option value="prepare">Prepare</option>
+                                                    <option value="insert">Insert</option>
+                                                    <option value="updater">Updater</option>
+                                                    <option value="delete">Delete</option>
+                                                    <option value="scalar">Scalar</option>
+                                                    <option value="single">Single</option>
+                                                    <option value="raw">Raw</option>
+                                                </select>
                                             </div>
 
                                             <div class="options--style option_id" style="grid-column: span 2;max-height: 0.5vh;">
                                                 <h3 style="margin-left: 1.5vh;color: #a6a6a6;">Hash:</h3>
                                                 <input type="text" class="input__style inputBox" id="hashIntercQuery">
+                                                
                                             </div>
                                         </div>
                                     </div>
