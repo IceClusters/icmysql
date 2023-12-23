@@ -5,7 +5,7 @@
         "Insert": "insert",
         "AwaitPrepare": "prepare_async",
         "Prepare": "prepare",
-        "AwaitQuery": "query_async",
+        "AwaitQuery": ["query_async", "executeSync"],
         "Query": "query",
         "AwaitRaw": "rawExecute_async",
         "Raw": "rawExecute",
