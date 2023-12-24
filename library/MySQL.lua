@@ -10,7 +10,7 @@ MySQLData.__call = function(self, ...)
 end
 
 local ORMFunctions = {"FindAll", "FindOne", "FindById", "Modify", "FindAndCountAll", "Create", "Destroy", "Count", "Max", "Min", "Sum", "Increment", "Decrement", "BulkCreate"}
-local QueryFunctions = {"Query", "AwaitQuery", "Select", "AwaitSelect", "Insert", "AwaitInsert", "Update", "AwaitUpdate", "Delete", "AwaitDelete", "Transaction", "AwaitTransaction", "Unique", "AwaitUnique", "Single", "AwaitSingle"}
+local QueryFunctions = {"Query", "AwaitQuery", "Prepare", "AwaitPrepare", "Insert", "AwaitInsert", "Update", "AwaitUpdate", "Delete", "AwaitDelete", "Transaction", "AwaitTransaction", "Single", "AwaitSingle"}
 local MongoFunctions = {"MongoInsertOne", "MongoInsertMany", "MongoFindOne", "MongoFindMany", "MongoUpdateOne", "MongoUpdateMany", "MongoCount", "MongoDeleteOne", "MongoDeleteMany", "MongoCreateIndex", "MongoStartTransactionSession", "MongoWithTransaction", "MongoBulkWrite", "MongoReplaceOne", "MongoReplaceMany", "MongoIsConnected"}
 local RedisFunctions = {"RedisGet", "RedisSet", "RedisDel", "RedisExists", "RedisExpire", "RedisUpdate", "RedisFlush", "RedisKeys", "RedisMGet", "CloseRedis", "OpenRedis", "ReloadRedis" }
 
@@ -26,7 +26,7 @@ MySQL = {
             return icmysql.AwaitQuery(nil, ...)
         end,
         fetchSingle = function(...) 
-            return icmysql.AwaitSelect(nil, ...)
+            return icmysql.AwaitSingle(nil, ...)
         end,
         fetchScalar = function(...) 
             return icmysql.AwaitScalar(nil, ...)

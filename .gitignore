@@ -14,3 +14,4 @@ node_modules
 *.exe
 package-lock.json
 **/models/*/
+.DS_Store
