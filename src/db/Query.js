@@ -5,7 +5,7 @@ const { GetConnection, ReleaseConnection } = require('./Connections.js');
 const { performance } = require('perf_hooks');
 const { AddDebugCache, DeleteCache, AddQuery } = require('./debug/Debug.js');
 const { Log, LogTypes } = require('../utils/Logger.js');
-const { ParseArgs, ParseResponse } = require('../utils/Parser.js');
+const { ParseArgs, ParseResponse, ParseNilArgs } = require('../utils/Parser.js');
 const QueryInterceptor = require('./debug/Interceptor.js').Middleware;
 const AddExport = require('./exports/main.js');
 
@@ -44,6 +44,7 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
         } else {
             values = null;
         }
+        values = ParseNilArgs(query, values)
         if (query.includes("@")) {
             query = ReplaceNamedParams(query, values)
             values = null;

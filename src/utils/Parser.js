@@ -46,6 +46,16 @@ async function ParseArgs(dbId, query, values, callback, cache) {
     return { dbId: dbId, query: query, values: values, callback: callback, cache: cache };
 }
 
+function ParseNilArgs(query, values) {
+    if(query.includes("@")) return values;
+    for(let i = 1; i < query.match(/\?(?!\?)/g).length; i++) {
+        if(values[i] == undefined) {
+            values[i] = null;
+        }
+    }
+    return Object.values(values);
+}
+
 function ParseResponse(type, rows) {
     switch (type) {
         case 'Prepare':
@@ -67,4 +77,4 @@ function ParseResponse(type, rows) {
       }
 }
 
-module.exports = { ParseArgs, ParseResponse }
+module.exports = { ParseArgs, ParseResponse, ParseNilArgs }
