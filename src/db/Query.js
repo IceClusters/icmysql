@@ -61,8 +61,11 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             Log(LogTypes.Warning, `Slow query detected: ${query} - ${time}ms`)
         }
         let result = ParseResponse(type, rows);
-
-        return callback ? callback(result) : result;
+        try {
+            return callback ? callback(result) : result;
+        } catch(err) {
+            return result;
+        }
     } catch (err) {
         ParseError(`Error while executing query: ${err} , query: ${query}, values: ${values}`, null, true);
     } finally {
