@@ -123,21 +123,22 @@ global.exports("IsReady", function(){
 })
 
 RegisterCommand("disconnectdb", async function(source, args, rawCommand){
-	if(Number(source) == 0) {
-		if (!Config.MySQL) return Log(LogTypes.Warning, "^3" + GetKey("TryMySQLWithoutEnabled")+"^0");
-        if (!Config.AllowDBDisconnection) return Log(LogTypes.Warning, "^3" + GetKey("TryDisconnectWithoutEnabled")+"^0");
-        const dbId = args[0].length > 0 ? args[0] == "*" ? "*" : Number(args[0]) : Config.DefaultDB;
-		if(!pools[dbId] && dbId != "*") return ParseError(`^1Can't find DB with ID: ${dbId} ^0`, null);
-        
-        if(dbId == "*") {
-            const keys = Object.keys(pools[i])[0]
-            for(let i = 0; i < keys; i++) {
-                DisconnectDB(keys[i]);
-            }
-            return;
+    if(Number(source) != 0) return;
+
+    if (!Config.MySQL) return Log(LogTypes.Warning, "^3" + GetKey("TryMySQLWithoutEnabled")+"^0");
+    if (!Config.AllowDBDisconnection) return Log(LogTypes.Warning, "^3" + GetKey("TryDisconnectWithoutEnabled")+"^0");
+    const dbId = args[0].length > 0 ? args[0] == "*" ? "*" : Number(args[0]) : Config.DefaultDB;
+    if(!pools[dbId] && dbId != "*") return ParseError(`^1Can't find DB with ID: ${dbId} ^0`, null);
+    
+    if(dbId == "*") {
+        const keys = Object.keys(pools[i])[0]
+        for(let i = 0; i < keys; i++) {
+            DisconnectDB(keys[i]);
         }
-        DisconnectDB(dbId);
-	}
+        return;
+    }
+    DisconnectDB(dbId);
+	
 }, false)
 
 module.exports = { GetORMPools, RegisterConnection, IsConnecting, GetConnection, ReleaseConnection }

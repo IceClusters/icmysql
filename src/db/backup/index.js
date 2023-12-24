@@ -123,14 +123,15 @@ async function GetBackupHistory() {
     return result;
 }
 
-RegisterCommand("backupdb", async function(source, args, rawCommand){
-	if(Number(source) == 0) {
-		if (!Config.MySQL) return Log(LogTypes.Warning, "^3" + GetKey("TryMySQLWithoutEnabled")+"^0");
-        if (!Config.BackupEnabled) return Log(LogTypes.Warning, "^3" + GetKey("TryBackupWithoutEnabled")+"^0");
-        if(lastBackupTime + 60000 > new Date().getTime()) return Log(LogTypes.Warning, "^3" + GetKey("BackupTimeRate")+"^0");
-        backupMaded = false;
-		MakeBackup()
-	}
+RegisterCommand("backupdb", async function(source, args, rawCommand) {
+    if(Number(source) != 0) return;
+
+    if (!Config.MySQL) return Log(LogTypes.Warning, "^3" + GetKey("TryMySQLWithoutEnabled")+"^0");
+    if (!Config.BackupEnabled) return Log(LogTypes.Warning, "^3" + GetKey("TryBackupWithoutEnabled")+"^0");
+    if(lastBackupTime + 60000 > new Date().getTime()) return Log(LogTypes.Warning, "^3" + GetKey("BackupTimeRate")+"^0");
+    backupMaded = false;
+    MakeBackup()
+    
 }, false)
 
 module.exports = { PrepareBackup, GetBackupHistory }

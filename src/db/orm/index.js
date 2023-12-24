@@ -500,46 +500,46 @@ if (Config.ORM) {
 }
 
 RegisterCommand("maporm", async function(source, args, rawCommand){
-	if(Number(source) == 0) {
-		if (!Config.ORM) return Log(LogTypes.Warning, "^3" + GetKey("TryOrmWithoutEnabled")+"^0");
-		const dbId = args[0].length > 0 ? args[0] == "*" ? "*" : Number(args[0]) : Config.DefaultORMDB;
-		if(!poolsORM[dbId] && dbId != "*") return ParseError(`^1Can't find ORM DB with ID: ${dbId} ^0`);
+	if(Number(source) != 0) return;
 
-		const remap = async function(id) {
-			Log(LogTypes.Info, "^3Remaping ORM DB: "+id+"^0");
-			if(await DirExist(GetResourcePath(global.resourceName) + "/Models/"+id)) {
-				await DeleteDir(GetResourcePath(global.resourceName) + "/Models/" + id);
-	
-				Log(LogTypes.Info, "^3" + GetKey("MappingProgrammed")+"^0");
-				if (Config.SendDatabaseMapped)
-					SendDiscordLog({
-						"content": null,
-						"embeds": [
-							{
-								"title": "ORM Map Programed",
-								"description": "The database #"+id+" will be mapped in the next server restart",
-								"color": 8912728
-							}
-						],
-						"attachments": []
-					})
-			} else {
-				Log(LogTypes.Info, "^3" + GetKey("AlreadyMapedProgrammed")+"^0");
-			}
-		}
-		if(dbId != "*") {
-			return await remap(dbId);
-		}
-		for(let i = 1; i < Object.keys(poolsORM) + 1; i++) {
-			const connection = poolsORM[i];
-			if(connection) {
-				await remap(i);
-			} else {
-				break;
-			}
+	if (!Config.ORM) return Log(LogTypes.Warning, "^3" + GetKey("TryOrmWithoutEnabled")+"^0");
+	const dbId = args[0].length > 0 ? args[0] == "*" ? "*" : Number(args[0]) : Config.DefaultORMDB;
+	if(!poolsORM[dbId] && dbId != "*") return ParseError(`^1Can't find ORM DB with ID: ${dbId} ^0`);
+
+	const remap = async function(id) {
+		Log(LogTypes.Info, "^3Remaping ORM DB: "+id+"^0");
+		if(await DirExist(GetResourcePath(global.resourceName) + "/Models/"+id)) {
+			await DeleteDir(GetResourcePath(global.resourceName) + "/Models/" + id);
+
+			Log(LogTypes.Info, "^3" + GetKey("MappingProgrammed")+"^0");
+			if (Config.SendDatabaseMapped)
+				SendDiscordLog({
+					"content": null,
+					"embeds": [
+						{
+							"title": "ORM Map Programed",
+							"description": "The database #"+id+" will be mapped in the next server restart",
+							"color": 8912728
+						}
+					],
+					"attachments": []
+				})
+		} else {
+			Log(LogTypes.Info, "^3" + GetKey("AlreadyMapedProgrammed")+"^0");
 		}
 	}
-
+	if(dbId != "*") {
+		return await remap(dbId);
+	}
+	for(let i = 1; i < Object.keys(poolsORM) + 1; i++) {
+		const connection = poolsORM[i];
+		if(connection) {
+			await remap(i);
+		} else {
+			break;
+		}
+	}
+	
 }, false)
 
 module.exports = {
