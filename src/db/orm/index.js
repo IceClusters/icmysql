@@ -3,7 +3,6 @@ const { ParseError } = require('../../errors/Parser.js');
 const SequelizeAuto = require('sequelize-auto');
 const { Sequelize, Op } = require('sequelize');
 const { performance } = require('perf_hooks');
-const { GetORMPools } = require('../Connections.js')
 const { DefineModels } = require('../orm/models/index.js')
 const { Log, LogTypes } = require('../../utils/Logger.js')
 const { GetKey } = require('../../language/localisation.js');

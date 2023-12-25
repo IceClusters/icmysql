@@ -1,10 +1,10 @@
-const mysql = require('mysql2')
+const { escape } = require('mysql2')
 
 function ReplaceNamedParams(query, params) {
     for (var [key, value] of Object.entries(params)) {
         key = key.replace("@", "");
         const regex = new RegExp(`@${key}\\b`, 'g');
-        const escapedValue = value === null ? 'NULL' : mysql.escape(value);
+        const escapedValue = value === null ? 'NULL' : escape(value);
         query = query.replace(regex, escapedValue);
     }
     return query;
@@ -14,7 +14,7 @@ function ReplaceDotParams(query, params) {
     for (var [key, value] of Object.entries(params)) {
         key = key.replace(":", "");
         const regex = new RegExp(`\\:${key}\\b`, 'g');
-        const escapedValue = value === null ? 'NULL' : mysql.escape(value);
+        const escapedValue = value === null ? 'NULL' : escape(value);
         query = query.replace(regex, escapedValue);
     }
     return query;
@@ -32,7 +32,7 @@ function ConvertNilParams(params) {
     }
     var newParams = [];
     for (let i = 0; i < GetMaxIndex(params); i++) {
-        newParams[i] = params[i + 1] === null ? mysql.escape("NULL") : mysql.escape(params[i + 1]);
+        newParams[i] = params[i + 1] === null ? escape("NULL") : escape(params[i + 1]);
     }
     return newParams;
 }

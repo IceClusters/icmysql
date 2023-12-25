@@ -1,5 +1,4 @@
 const { MongoClient } = require('mongodb');
-const { ParseError } = require('../../errors/Parser.js');
 const { Log, LogTypes } = require('../../utils/Logger.js');
 const { performance } = require('perf_hooks');
 require('./Query.js')

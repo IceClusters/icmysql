@@ -6,7 +6,7 @@ const { CreateDirRecursive, GetOldestFiles, DeleteFile } = require('../../utils/
 const { Log, LogTypes } = require('../../utils/Logger.js');
 const { GetDate } = require('../../utils/Time.js')
 const { GetKey } = require('../../language/localisation.js')
-const { ReadDir, GetFileCreationDate, GetFileSize } = require('../../utils/Files.js')
+const { ReadDir, GetFileSize } = require('../../utils/Files.js')
 
 var pendingBackup = [];
 var backupMaded = false;

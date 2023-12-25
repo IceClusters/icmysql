@@ -1,9 +1,7 @@
 const { ParseError } = require('../errors/Parser.js');
-const { ReplaceNamedParams, ReplaceDotParams, ConvertNilParams } = require('./Params.js');
-const { QueryTypes } = require('sequelize');
+const { ReplaceNamedParams } = require('./Params.js');
 const { GetConnection, ReleaseConnection } = require('./Connections.js');
 const { performance } = require('perf_hooks');
-const { AddDebugCache, DeleteCache, AddQuery } = require('./debug/Debug.js');
 const { Log, LogTypes } = require('../utils/Logger.js');
 const { ParseArgs, ParseResponse } = require('../utils/Parser.js');
 const QueryInterceptor = require('./debug/Interceptor.js').Middleware;
