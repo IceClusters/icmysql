@@ -14,4 +14,4 @@ end, false)
 ```
 ### Files
 This is the list of the involved files in this feature to help any developer to understand how it works:
-- ```src/db/Query.lua```
+- ```src/db/Query.js```
