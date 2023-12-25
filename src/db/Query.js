@@ -19,23 +19,17 @@ global.queryTypes = Object.freeze({
 });
 
 async function ExecuteQuery(resourceName, type, dbId, query, values, callback, cache) {
-    let start = performance.now();
-    let connection = await GetConnection(dbId);
+    const start = performance.now();
+    let connection = null;
     try {
-        if(global.interceptor) {
-            const resultMiddleware = await QueryInterceptor({ resourceName: resourceName, type: type, dbId: dbId, query: query, values: values, callback: callback, cache: cache });
-            if(resultMiddleware == null) return callback ? callback(null) : null;
-            resourceName = resultMiddleware.resourceName;
-            type = resultMiddleware.type;
-            dbId = resultMiddleware.dbId;
-            query = resultMiddleware.query;
-            values = resultMiddleware.values;
-            callback = resultMiddleware.callback;
-            cache = resultMiddleware.cache;
-            start = performance.now();
-            connection = await GetConnection(dbId);
+        if (global.interceptor) {
+            const resultMiddleware = await QueryInterceptor({ resourceName, type, dbId, query, values, callback, cache });
+            if (resultMiddleware === null) return callback ? callback(null) : null;
+            ({ resourceName, type, dbId, query, values, callback, cache } = resultMiddleware);
         }
-        
+
+        connection = await GetConnection(dbId);
+
         if (values) {
             if(typeof(values) === "string")
                 values = [values];
@@ -43,21 +37,20 @@ async function ExecuteQuery(resourceName, type, dbId, query, values, callback, c
             values = null;
         }
         values = ParseNilArgs(query, values)
+
         if (query.includes("@")) {
             query = ReplaceNamedParams(query, values)
             values = null;
         }
-        var [rows] = [null, null];
-        if(type == "Raw" || type == "Scalar" || type == "Single" || type == "Update" || type == "Insert" || type == "Query") {
-            [rows] = await connection.query(query, values);
-        } else {
-            [rows] = await connection.execute(query, values);
-        }
+        const [rows] = (type == "Raw" || type == "Scalar" || type == "Single" || type == "Update" || type == "Insert" || type == "Query") 
+            ? await connection.query(query, values) : await connection.execute(query, values);
         const end = performance.now();
         const time = (end - start).toFixed(3);
+
         if (time >= Config.SlowQueryWarn) {
             Log(LogTypes.Warning, `Slow query detected: ${query} - ${time}ms`)
         }
+
         let result = ParseResponse(type, rows);
         try {
             return callback ? callback(result) : result;
@@ -119,17 +112,16 @@ function AddMethod(type) {
         ScheduleResourceTick(global.resourceName)
         const data = await ParseArgs(dbId, query, values, callback, cache);
         if (data == null) return null;
-        const invokingResource = GetInvokingResource();
+        // const invokingResource = GetInvokingResource();
         return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, data.callback, data.cache);
     }
     const awaitMethod = async function(dbId, query, values, cache) {
         ScheduleResourceTick(global.resourceName)
         const data = await ParseArgs(dbId, query, values, null, cache);
         if (data == null) return null;
-        const invokingResource = GetInvokingResource();
-        return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, null, data.cache);
+        // const invokingResource = GetInvokingResource();
+        return await ExecuteQuery(invokingResource, data.dbId, data.query, data.values, data.cache);
     }
-    if(!Config.ReplaceExports) return;
     AddExport(type, method);
     AddExport(`Await${type}`, awaitMethod);
 }

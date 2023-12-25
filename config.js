@@ -53,7 +53,7 @@ Config.DefaultMongoDB = 1;
 Config.ConnectiTimout = 5000; // The time in milliseconds that the MongoDB will wait for a connection to be available in the pool, if the time is exceeded a error will be thrown
 
 // Debug UI
-Config.Enabled = true; // Enable the debug UI
+Config.Enabled = false; // Enable the debug UI
 Config.DebugLicenses = ["license:357eb9ff6db060eb292e8e4f71b66a9efb2adcbe"] // The licenses of the players that will be able to use the debug UI.
 
 // ORM

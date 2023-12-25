@@ -1,6 +1,6 @@
 const { ParseError } = require('../errors/Parser.js');
 const { performance } = require('perf_hooks');
-const mysql = require('mysql2/promise.js')
+const { createPool } = require('mysql2/promise.js')
 const { DirExist } = require('../utils/Files.js')
 const { RegisterORMConnection, GenerateModels } = require('./orm/index.js')
 const { Log, LogTypes } = require('../utils/Logger.js')
@@ -18,7 +18,7 @@ async function CheckConnection(credentials) {
     try {
         credentials.multipleStatements = true;
         credentials.namedPlaceholders = true;
-        const pool = mysql.createPool(credentials);
+        const pool = createPool(credentials);
         const connection = await pool.getConnection();
         connection.release();
         return true;
@@ -37,13 +37,13 @@ async function RegisterConnection(index, credentials) {
     }
     credentials.multipleStatements = true;
     credentials.namedPlaceholders = true;
-    credentials.connectionLimit = Config.ConnectionTimeout;
+    credentials.connectTimeout = Config.ConnectionTimeout;
     credentials.trace = false;
     credentials.supportBigNumbers = true;
     credentials.typeCast = require('../utils/TypeCast.js');
     credentials.flags = ["CONNECT_WITH_DB"];
 
-    const pool = mysql.createPool(credentials);
+    const pool = createPool(credentials);
     pool.on('connection', function (connection) {
         connection.query("SET TRANSACTION ISOLATION LEVEL READ COMMITTED");
     });
@@ -84,7 +84,9 @@ async function GetConnection(index) {
         connectionCache[index].push(connection);
         return connection;
     }
-    return connectionCache[index][0];
+    const conn = connectionCache[index][0];
+    connectionCache[index].splice(0, 1);
+    return conn;
 }
 
 function ReleaseConnection(index, connection) {

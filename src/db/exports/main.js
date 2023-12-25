@@ -1,6 +1,8 @@
 const { ReadDir } = require('../../utils/Files.js');
 
 module.exports = async function(name, func){
+    global.exports(name, func);
+    if(!Config.ReplaceExports) return;
     const exportsPath = GetResourcePath(GetCurrentResourceName()) + "/exports";
     const exportsFiles = await ReadDir(exportsPath);
     exportsFiles.forEach(script => {
@@ -28,6 +30,4 @@ module.exports = async function(name, func){
             }
         }
     });
-
-    global.exports(name, func);
 }
