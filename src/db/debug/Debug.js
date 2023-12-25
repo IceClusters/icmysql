@@ -1,5 +1,4 @@
-const { GetErrors } = require('../../errors/Parser.js');
-const { ReadDir, DirExist } = require('../../utils/Files.js')
+const { DirExist } = require('../../utils/Files.js')
 const { GetLogs } = require('../../utils/Logger.js');
 const { GetBackupHistory } = require('../backup/index.js');
 var queries = [];

@@ -1,4 +1,4 @@
-const redis = require('redis');
+const { createClient } = require('redis');
 const { Log, LogTypes } = require('../../utils/Logger.js');
 const { performance } = require('perf_hooks');
 const { ParseError } = require('../../errors/Parser.js');
@@ -9,7 +9,7 @@ var start = 0;
 
 async function ConnectToRedis() {
     if (credentials === "null") return ParseError("Unknown Redis credentials. Please set the redisCredentials convar in your server.cfg file.");
-    client = redis.createClient({
+    client = createClient({
         url: credentials
     });
     start = performance.now();

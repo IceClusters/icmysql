@@ -1,5 +1,4 @@
 const { ReadDir } = require('../../utils/Files.js');
-const { ParseArgs, ParseResponse } = require('../../utils/Parser.js');
 
 module.exports = async function(name, func){
     const exportsPath = GetResourcePath(GetCurrentResourceName()) + "/exports";

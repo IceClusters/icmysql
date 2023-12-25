@@ -1,6 +1,4 @@
-const { MongoClient } = require('mongodb');
 const { ParseError } = require('../../errors/Parser.js');
-const { Log, LogTypes } = require('../../utils/Logger.js');
 const { PrepareObject } = require('./utils.js');
 
 async function MongoMiddleware(dbId, params) {

@@ -1,8 +1,4 @@
-const SequelizeAuto = require('sequelize-auto');
-const { Sequelize, Op } = require('sequelize');
 const { ParseError } = require('../../errors/Parser.js');
-const { Log, LogTypes } = require('../../utils/Logger.js');
-const { performance } = require('perf_hooks');
 const { RegisterORMConnection } = require('./index.js');
 
 function ParseCredentials(credentials) {
