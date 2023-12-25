@@ -67,6 +67,9 @@ Config.LogORMConnections = true; // Show in the console when a connection is cre
 // Redis
 Config.Redis = false; // Enable the Redis support
 
+// Exports
+Config.ReplaceExports = true; // Replace the other mysql systems exports with the exports of this resource
+
 // Update
 Config.CheckForUpdates = true; // Check for updates when the server starts
 Config.AutoUpdate = false; // If there is a new version, the resource will ask you to type a command if you want to update it

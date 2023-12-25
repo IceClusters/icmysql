@@ -122,8 +122,6 @@ function AddMethod(type) {
         const invokingResource = GetInvokingResource();
         return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, data.callback, data.cache);
     }
-    AddExport(type, method);
-
     const awaitMethod = async function(dbId, query, values, cache) {
         ScheduleResourceTick(global.resourceName)
         const data = await ParseArgs(dbId, query, values, null, cache);
@@ -131,6 +129,8 @@ function AddMethod(type) {
         const invokingResource = GetInvokingResource();
         return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, null, data.cache);
     }
+    if(!Config.ReplaceExports) return;
+    AddExport(type, method);
     AddExport(`Await${type}`, awaitMethod);
 }
 
