@@ -120,7 +120,7 @@ function AddMethod(type) {
         const data = await ParseArgs(dbId, query, values, null, cache);
         if (data == null) return null;
         // const invokingResource = GetInvokingResource();
-        return await ExecuteQuery(invokingResource, data.dbId, data.query, data.values, data.cache);
+        return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, data.cache);
     }
     AddExport(type, method);
     AddExport(`Await${type}`, awaitMethod);
