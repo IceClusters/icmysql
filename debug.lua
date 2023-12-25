@@ -98,6 +98,18 @@ AddEventHandler("icmysql:client:getQueryData", function(queryID, data)
     })
 end)
 
-RegisterNUICallback("triggerServerEvent", function(data)
-    TriggerServerEvent(data.event, data.data)
+RegisterNUICallback("suscribeInterceptor", function()
+    TriggerServerEvent("icmysql:server:subscribeInterceptor")
+end)
+
+RegisterNUICallback("setInterceptor", function(data)
+    TriggerServerEvent("icmysql:server:setInterceptor", data)
+end)
+
+RegisterNUICallback("forwardQuery", function(data)
+    TriggerServerEvent("icmysql:server:forwardQuery", data)
+end)
+
+RegisterNUICallback("dropQuery", function(data)
+    TriggerServerEvent("icmysql:server:dropQuery", data)
 end)

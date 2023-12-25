@@ -26,10 +26,6 @@ function ReduceText(text, max) {
     return text.substr(0, max) + "...";
 }
 
-function TriggerServerEvent(event, data) {
-    $.post("https://icmysql/triggerServerEvent", JSON.stringify({ "event": event, "data": data }));
-}
-
 function LoadStats() {
     var data = {
         queries: 700,
@@ -253,7 +249,7 @@ function GoBack() {
 
 function OpenSection(sec) {
     if(sec == "section__interceptor") {
-        TriggerServerEvent("icmysql:server:subscribeInterceptor", {})
+        $.post("https://icmysql/suscribeInterceptor", {});
     };
     $(`#${mainSection}`).css("display", "none");
     $(`#${sec}`).css("display", "flex");
@@ -394,7 +390,7 @@ $(document).ready(function () {
     })
 
     $("#btnIntercept").click(function () {
-        TriggerServerEvent("icmysql:server:setInterceptor", !intercepting );
+        $.post("https://icmysql/setInterceptor", !intercepting);
     });
 
     $("#btnforward").click(function () {
@@ -407,7 +403,7 @@ $(document).ready(function () {
             hash: $("#hashIntercQuery").val(),
             cache: false
         }
-        TriggerServerEvent("icmysql:server:forwardQuery", {queryID: interceptedQueryID, data: forwardData});
+        $.post("https://icmysql/forwardQuery", {queryID: interceptedQueryID, data: forwardData});
 
         $("#traffic-light").removeClass("hidden");
         $("#requestDataContainer").addClass("hidden");
@@ -417,7 +413,7 @@ $(document).ready(function () {
     });
 
     $("#btndrop").click(function () {
-        TriggerServerEvent("icmysql:server:dropQuery", interceptedQueryID);
+        $.post("https://icmysql/dropQuery", interceptedQueryID);
 
         $("#traffic-light").removeClass("hidden");
         $("#requestDataContainer").addClass("hidden");
