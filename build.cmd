@@ -22,11 +22,11 @@ if errorlevel 2 (
 )
 
 echo Installing dependencies
-npm install | more
+pnpm install
 echo ------------------------------------------------
 echo Building main nodejs project...
 echo ------------------------------------------------
-npm run build | more
+pnpm run build | more
 
 pause
 
