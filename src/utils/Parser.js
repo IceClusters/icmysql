@@ -47,8 +47,9 @@ async function ParseArgs(dbId, query, values, callback, cache) {
 }
 
 function ParseNilArgs(query, values) {
-    if(query.includes("@")) return values;
-    for(let i = 1; i < query.match(/\?(?!\?)/g).length; i++) {
+    const match = query.match(/\?(?!\?)/g);
+    if(query.includes("@") || match == null) return values;
+    for(let i = 1; i < match.length; i++) {
         if(values[i] == undefined) {
             values[i] = null;
         }

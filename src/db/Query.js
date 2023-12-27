@@ -18,11 +18,12 @@ global.queryTypes = Object.freeze({
     "Raw": "Raw"
 });
 
-async function ExecuteQuery(resourceName, type, dbId, query, values, callback, cache) {
+async function ExecuteQuery(type, dbId, query, values, callback, cache) {
     const start = performance.now();
     let connection = null;
     try {
         if (global.interceptor) {
+            let resourceName = GetInvokingResource();
             const resultMiddleware = await QueryInterceptor({ resourceName, type, dbId, query, values, callback, cache });
             if (resultMiddleware === null) return callback ? callback(null) : null;
             ({ resourceName, type, dbId, query, values, callback, cache } = resultMiddleware);
@@ -112,15 +113,14 @@ function AddMethod(type) {
         ScheduleResourceTick(global.resourceName)
         const data = await ParseArgs(dbId, query, values, callback, cache);
         if (data == null) return null;
-        // const invokingResource = GetInvokingResource();
-        return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, data.callback, data.cache);
+        ExecuteQuery(type, data.dbId, data.query, data.values, data.callback, data.cache);
     }
     const awaitMethod = async function(dbId, query, values, cache) {
         ScheduleResourceTick(global.resourceName)
         const data = await ParseArgs(dbId, query, values, null, cache);
         if (data == null) return null;
         // const invokingResource = GetInvokingResource();
-        return await ExecuteQuery(invokingResource, type, data.dbId, data.query, data.values, data.cache);
+        return await ExecuteQuery(type, data.dbId, data.query, data.values, data.cache);
     }
     AddExport(type, method);
     AddExport(`Await${type}`, awaitMethod);
