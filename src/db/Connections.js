@@ -74,30 +74,13 @@ function IsConnecting() {
     return connecting;
 }
 
-var connectionCache = {};
-
 async function GetConnection(index) {
-    if (!connectionCache[index] || connectionCache[index].length === 0) {
-        connectionCache[index] = [];
-        if (global.pools[index] == null) return ParseError("Invalid DB ID for getconnection.");
-        const connection = await global.pools[index].getConnection();
-        connectionCache[index].push(connection);
-        return connection;
-    }
-    const conn = connectionCache[index][0];
-    connectionCache[index].splice(0, 1);
-    return conn;
+    const connection = await global.pools[index].getConnection();
+    return connection;
 }
 
 function ReleaseConnection(index, connection) {
-    if (!connectionCache[index]) return;
-
-    if (connectionCache[index].length >= Config.MaxConnectionLimit) {
-        connection.release();
-        return;
-    }
-
-    connectionCache[index].push(connection);
+    connection.release();
 }
 
 function DisconnectDB(index) {
